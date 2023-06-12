@@ -1,0 +1,14 @@
+<page
+  navigationBarTitleText="Paff Editor"
+  navigationBarBackgroundColor="#fff"
+  background="#f5f6f8"
+  loaded
+  refresher-enabled
+  refresher-background="white"
+  refresher-triggered="{{refresherTriggered}}"
+  scroll-top="{{scrollTop}}"
+  support-sticky
+>
+  New Page
+</page>
+
