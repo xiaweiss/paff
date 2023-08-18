@@ -1,4 +1,6 @@
-import { isSkyline } from '../../utils/index'
+import { isSkyline, isCustomNavigation } from '../../utils/index'
+
+const app = getApp<AppData>()
 
 Component({
   options: {
@@ -22,10 +24,15 @@ Component({
     overlayStyle: { type: String, value: '' },
     /** 自定义弹出层样式 */
     customStyle: { type: String, value: '' },
+    /** 系统主题 light、dark */
+    theme: { type: String, value: 'light' },
+    /** 是否使用最大高度 */
+    useMaxHeight: Boolean
   },
   data: {
     _inited: false,
     isSkyline: false,
+    navBarHeight: 0,
     /** 组件是否展示 */
     isShow: false,
     /** 进入 */
@@ -54,8 +61,10 @@ Component({
   },
   lifetimes: {
     attached() {
+      const systemInfo = wx.getSystemInfoSync()
       this.setData({
-        isSkyline: isSkyline()
+        isSkyline: isSkyline(),
+        navBarHeight: isCustomNavigation(systemInfo, app) ? app.globalData.navBarHeight : 0,
       })
     },
     ready () {

@@ -6,9 +6,10 @@
   overlayClose="{{overlayClose}}"
   customStyle="margin-top: -{{keyboardHeight / 2}}px;{{isIOS ? 'transition-property: all;' : ''}}"
   position="center"
+  theme="{{theme}}"
   bind:afterleave="afterClose"
 >
-  <view class="modal">
+  <view class="modal theme-{{theme}}">
     <view wx:if="{{title}}" class="title">{{title}}</view>
     <view wx:if="{{editable}}" class="input-container">
       <input
@@ -35,21 +36,21 @@
     </block>
 
     <view class="button-container">
-      <view
+      <hover-view
         wx:if="{{showCancel}}"
         class="cancel"
         style="{{'color: ' + cancelColor}}"
         bind:tap="cancel"
       >
         {{cancelText}}
-      </view>
-      <view
+      </hover-view>
+      <hover-view
         class="confirm"
         style="{{'color: ' + confirmColor}}"
         bind:tap="confirm"
       >
         {{confirmText}}
-      </view>
+      </hover-view>
     </view>
   </view>
 </page-container>

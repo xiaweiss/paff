@@ -1,4 +1,4 @@
-/// <reference path="../node_modules/miniprogram-api-typings/index.d.ts" />
+/// <reference path="../node_modules/miniprogram-type/index.d.ts" />
 /// <reference path="./__wxConfig.d.ts" />
 
 // fix: zeed-dom type

@@ -23,7 +23,6 @@ view {
 view,
 input {
   box-sizing: border-box;
-  flex-direction: row
 }
 
 image {
@@ -31,7 +30,7 @@ image {
 }
 
 /** 分享按钮等默认样式重置，使用时需要设置 size="mini" */
-button {
+.app-button {
   display: block!important;
   padding: 0!important;
   /**

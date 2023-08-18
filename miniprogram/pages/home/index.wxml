@@ -1,14 +1,9 @@
 <page
-  navigationBarTitleText="Paff Editor"
   navigationBarBackgroundColor="#fff"
   background="#f5f6f8"
-  loaded
-  refresher-enabled
-  refresher-background="white"
-  refresher-triggered="{{refresherTriggered}}"
   scroll-top="{{scrollTop}}"
-  support-sticky
 >
-  New Page
+  <view class="button" bind:tap="goToSimple">简单版本：editor + view 混合</view>
+  <!-- <view class="button" bind:tap="goToPage">整页版本：canvas/view</view> -->
 </page>
 

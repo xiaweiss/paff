@@ -35,10 +35,14 @@ Component({
       this.calcStyle()
       const pages = getCurrentPages()
       const page = pages[pages.length - 1]
+      const isHome = page.route === 'pages/home/index' ||
+                     page.route === 'pages/wechatUpdate/index'
+
+      if (isHome) wx.hideHomeButton()
 
       this.setData({
         isBack: pages.length > 1,
-        isHome: page.route === 'pages/home/index'
+        isHome
       })
     },
   },
@@ -63,10 +67,6 @@ Component({
 
           const navbarPaddingTop = (bottom + top) / 2 - navbarHeight / 2
           const navbarPaddingRight = windowWidth - left
-
-          if (!isPC()) {
-            app.globalData.systemInfo!.windowHeight = systemInfo.screenHeight - navbarHeight - navbarPaddingTop
-          }
 
           this.setData({
             capsuleHeight,

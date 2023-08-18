@@ -11,7 +11,7 @@ Component({
     loaded: { type: Boolean, value: true },
     lowerThreshold: { type: Number, value: 50 },
     navigationBarBackgroundColor: { type: String, value: 'transparent' },
-    navigationBarTitleText: { type: String, value: '墨问便签' },
+    navigationBarTitleText: { type: String, value: 'Paff Editor' },
     refresherEnabled: { type: Boolean, value: false },
     refresherBackground: { type: String, value: '' }, // 默认值 #fff 表示透明色，如果需要白色，需要设置为 #ffffff、white
     refresherTriggered: { type: Boolean, value: false },
@@ -84,15 +84,6 @@ Component({
       const page = getPage()
       if (typeof page.onPageScroll === 'function') {
         page.onPageScroll(e.detail)
-      }
-
-      /**
-       * @bug: [android] scroll-view 内的 sticky 定位的元素，下拉刷新结束后，有概率无法回顶部
-       * @see: https://github.com/xiaweiss/miniprogram-bug-report/issues/78
-       * @hack: 监听下拉刷新的状态、滚动状态，当触发滚动时，关闭下拉刷新
-       */
-      if (this.data.pageRefresherTriggered) {
-        this.setData({pageRefresherTriggered: false})
       }
     },
     /**

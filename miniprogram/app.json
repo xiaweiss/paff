@@ -1,7 +1,9 @@
 {
   "entryPagePath": "pages/home/index",
   "pages": [
-    "pages/home/index"
+    "pages/home/index",
+    "pages/page/index",
+    "pages/simple/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#fff",
@@ -10,9 +12,6 @@
     "backgroundColor": "#fff"
   },
   "debug": false,
-  "requiredBackgroundModes": [
-    "audio"
-  ],
   "resizable": true,
   "usingComponents": {
     "modal": "components/modal/index",
@@ -21,10 +20,10 @@
   "sitemapLocation": "sitemap.json",
   "style": "v2",
   "lazyCodeLoading": "requiredComponents",
+  "componentFramework": "glass-easel",
   "rendererOptions": {
     "skyline": {
       "defaultDisplayBlock": true
     }
-  },
-  "componentFramework": "glass-easel"
+  }
 }

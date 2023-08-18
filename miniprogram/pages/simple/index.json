@@ -1,8 +1,8 @@
 {
-  "navigationBarTitleText": "Paff Editor",
   "navigationStyle": "custom",
   "disableScroll": true,
   "usingComponents": {
+    "paff": "./paff"
   },
   "renderer": "skyline"
 }

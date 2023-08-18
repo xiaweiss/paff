@@ -1,9 +1,6 @@
 .modal {
   width: 311px;
   padding: 24px 24px 20px;
-  background: #fff;
-  border-radius: 14px;
-  z-index: 1001;
 }
 
 .title {
@@ -88,4 +85,17 @@
   margin-right: 20px;
   background: #F6F7FB;
   color: #888;
+}
+
+/**
+ * 夜间模式配色
+ */
+.theme-dark {
+  .title,
+  .content,
+  .cancel {
+    color: var(--theme-dark-color-primary);
+  }
+  .title + .content { color: var(--theme-dark-color-secondary) }
+  .cancel { background: var(--theme-dark-background-color-tertiary) }
 }

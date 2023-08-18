@@ -8,7 +8,7 @@
     "preinstall": "npx only-allow npm"
   },
   "dependencies": {
-    "miniprogram-api-typings": "^3.10.0",
+    "miniprogram-type": "^1.0.4",
     "miniprogram-zeed-dom": "^1.0.0",
     "mitt": "^3.0.0"
   },

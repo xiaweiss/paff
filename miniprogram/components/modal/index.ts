@@ -25,6 +25,7 @@ Component({
     isIOS: isIOS(),
     modalShow: false,
     keyboardHeight: app.globalData.keyboardHeight || 0,
+    theme: 'light' as WechatMiniprogram.SystemInfo['theme'],
     ...defaultConfig
   },
   lifetimes: {
@@ -54,6 +55,7 @@ Component({
 
     showModal(config: WechatMiniprogram.ShowModalOption) {
       this.setData({
+        theme: app.globalData.systemInfo!.theme,
         modalShow: true,
         ...config,
       })
