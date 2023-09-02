@@ -1,6 +1,0 @@
-<view class="paff" bind:tap="onTap">
-  <view
-    class="cursor"
-    style="left: {{cursorX}}px; top: {{cursorY}}px;"
-  >|</view>
-</view>

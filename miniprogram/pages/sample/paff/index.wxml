@@ -1,0 +1,39 @@
+<view class="paff" bind:tap="onTap">
+  <view>{{content}}</view>
+
+
+
+  <view
+    class="cursor"
+    style="left: {{cursorX}}px; top: {{cursorY}}px;"
+  >
+    <view class="cursor-line" />
+    <view bind:touchstart="noop">
+      <input
+        class="input"
+        value="{{inputValue}}"
+        maxlength="-1"
+        focus="{{focus}}"
+        hold-keyboard
+        bind:input="onInput"
+        bind:compositionstart="onCompositionStart"
+        bind:compositionend="onCompositionEnd"
+      />
+    </view>
+  </view>
+</view>
+
+<!-- <view>input</view>
+<view>
+  <input
+    class="textarea"
+    value="{{textareaValue}}"
+    maxlength="-1"
+    focus="{{focus}}"
+    hold-keyboard
+    bind:input="onInput"
+    bind:compositionStart="onCompositionStart"
+    bind:compositionUpdate="onCompositionUpdate"
+    bind:compositionEnd="onCompositionEnd"
+  />
+</view> -->

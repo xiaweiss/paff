@@ -1,9 +1,7 @@
 {
-  "entryPagePath": "pages/home/index",
+  "entryPagePath": "pages/sample/index",
   "pages": [
-    "pages/home/index",
-    "pages/page/index",
-    "pages/simple/index"
+    "pages/sample/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#fff",
@@ -23,7 +21,14 @@
   "componentFramework": "glass-easel",
   "rendererOptions": {
     "skyline": {
-      "defaultDisplayBlock": true
+      "defaultDisplayBlock": true,
+      "disableABTest": true,
+      "sdkVersionBegin": "3.0.0",
+      "sdkVersionEnd": "15.255.255",
+      "iosVersionBegin": "8.0.40",
+      "iosVersionEnd": "15.255.255",
+      "androidVersionBegin": "8.0.40",
+      "androidVersionEnd": "15.255.255"
     }
   }
 }

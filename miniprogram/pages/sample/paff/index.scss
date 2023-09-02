@@ -1,0 +1,26 @@
+.paff {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  background: pink;
+}
+
+.cursor {
+  position: absolute;
+  display: flex;
+  width: 1px;
+  height: 16px;
+  overflow: hidden;
+}
+
+.cursor-line {
+  flex-shrink: 0;
+  width: 1px;
+  height: 16px;
+  background: #333;
+}
+
+.input {
+  background: skyblue;
+}
+
