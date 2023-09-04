@@ -18,9 +18,24 @@
   width: 1px;
   height: 16px;
   background: #333;
+  animation: blink 1s infinite;
+}
+
+//  光标闪烁动画
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .input {
   background: skyblue;
 }
+
 

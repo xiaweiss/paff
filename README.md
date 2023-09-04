@@ -7,7 +7,7 @@ in development
 🔨 RoadMap
 
 single-line 单行
-🔲 cursor animation 光标动画
+✅ cursor animation 光标动画
 🔲 cursor input 光标输入
 🔲 text width 计算文字宽度
 🔲 text render in one line 单行文字的渲染
