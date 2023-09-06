@@ -1,7 +1,7 @@
 {
-  "entryPagePath": "pages/sample/index",
+  "entryPagePath": "pages/home/index",
   "pages": [
-    "pages/sample/index"
+    "pages/home/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#fff",

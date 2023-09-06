@@ -106,7 +106,9 @@ Component({
       const context = canvas.getContext('2d')
       context.font = '16px system-ui'
       const text = '哈'
-      const textWidth = context.measureText(text).width
+      const result = context.measureText(text)
+      const textWidth = result.width
+      console.log('result', result)
       console.log('textWidth', textWidth)
     }
   }
