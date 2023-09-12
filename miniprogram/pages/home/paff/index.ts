@@ -23,14 +23,18 @@ Component({
   methods: {
     noop () {},
     onTap (e: WechatMiniprogram.TouchEvent) {
-      const {x, y} = e.detail
-      const { navBarHeight } = app.globalData
-
       this.setData({
-        cursorX: x,
-        cursorY: y - navBarHeight,
         focus: true,
       })
+
+      // const {x, y} = e.detail
+      // const { navBarHeight } = app.globalData
+
+      // this.setData({
+      //   cursorX: x,
+      //   cursorY: y - navBarHeight,
+      //   focus: true,
+      // })
     },
     onInput (e: WechatMiniprogram.Input) {
       const { cursor, keyCode } = e.detail
