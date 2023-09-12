@@ -82,6 +82,7 @@ Component({
         }
       }
 
+      this.measureText(content)
 
       this.setData({
         content
@@ -101,7 +102,7 @@ Component({
     onCompositionEnd (e: any) {
       console.log('onCompositionEnd', e)
     },
-    measureText () {
+    measureText (str: string) {
       const canvas = wx.createOffscreenCanvas({
         type: '2d',
         width: 100,
@@ -109,8 +110,7 @@ Component({
       })
       const context = canvas.getContext('2d')
       context.font = '16px system-ui'
-      const text = '哈'
-      const result = context.measureText(text)
+      const result = context.measureText(str)
       const textWidth = result.width
       console.log('result', result)
       console.log('textWidth', textWidth)

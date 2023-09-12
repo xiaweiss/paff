@@ -9,7 +9,7 @@ in development 开发中
 single-line 单行
 1. ✅ cursor animation 光标动画
 1. 🔲 cursor input 光标输入（问题：[#4](https://github.com/xiaweiss/paff/issues/4) [#5](https://github.com/xiaweiss/paff/issues/5))
-1. 🔲 text width 计算文字宽度
+1. ✅  text width 计算文字宽度
 1. 🔲 text render in one line 单行文字的渲染
 1. 🔲 text align 文字对齐方式
 1. 🔲 set cursor in one line 单行光标放置
