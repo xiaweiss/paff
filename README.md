@@ -25,8 +25,13 @@ multi-line 多行
 1. 需要保持住 input 键盘弹出状态 https://github.com/xiaweiss/miniprogram-bug-report/issues/167
 1. 输入中文过程中，需要展示拼音字母 https://github.com/xiaweiss/miniprogram-bug-report/issues/166
 
+扫码备注“编辑器”加群
 
-<img width="467" src="https://github.com/xiaweiss/paff/assets/17960084/907e8fca-de2b-4fc5-ad03-5e600725a18a" />
+<img width="200" src="https://github.com/xiaweiss/paff/assets/17960084/7f225936-4e8e-466d-b884-2e7618b26c1d" />
+
+<br>
+
+<!-- <img width="467" src="https://github.com/xiaweiss/paff/assets/17960084/907e8fca-de2b-4fc5-ad03-5e600725a18a" /> -->
 
 ## License
 
