@@ -82,9 +82,12 @@ Component({
         }
       }
 
-
+      let width = this.textWidth(content)
+      console.log("width: ", width);
+      
       this.setData({
-        content
+        content,
+        cursorX: width
       })
 
       return isPC ? ' ' : ''
@@ -114,6 +117,15 @@ Component({
       const textWidth = result.width
       console.log('result', result)
       console.log('textWidth', textWidth)
-    }
+    },
+    textWidth(text:string): number {
+      const canvas = wx.createOffscreenCanvas({
+        type: '2d'
+      })
+      const context = canvas.getContext('2d')
+      context.font = '16px system-ui'
+      const result = context.measureText(text)
+      return result.width
+  }
   }
 })
