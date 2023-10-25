@@ -11,13 +11,12 @@ Component({
     cursorX: 0,
     cursorY: 0,
     isCustomNavigation: false,
-    textareaValue: '',
+    inputValue: ' ',
     focus: false,
     content: '',
   },
   lifetimes: {
     attached () {
-
     }
   },
   methods: {
@@ -67,6 +66,10 @@ Component({
         case 9: {
 
         }
+        // ios 换行
+        case 10: {
+
+        }
         // Enter
         case 13: {
         }
@@ -84,13 +87,20 @@ Component({
 
       let width = this.textWidth(content)
       console.log("width: ", width);
-      
+
       this.setData({
         content,
         cursorX: width
       })
 
-      return isPC ? ' ' : ''
+      // mobile
+      if (!isPC) {
+        this.setData({
+          inputValue: '',
+        })
+      }
+      // PC
+      return ' '
     },
     onKeyboardHeightChange (e: WechatMiniprogram.InputKeyboardHeightChange) {
       console.log('onKeyboardHeightChange', e)
@@ -118,6 +128,12 @@ Component({
       console.log('result', result)
       console.log('textWidth', textWidth)
     },
+    clearText () {
+      this.setData({
+        content: '',
+        inputValue: '',
+      })
+    },
     textWidth(text:string): number {
       const canvas = wx.createOffscreenCanvas({
         type: '2d'
@@ -126,6 +142,6 @@ Component({
       context.font = '16px system-ui'
       const result = context.measureText(text)
       return result.width
-  }
+    }
   }
 })

@@ -1,16 +1,14 @@
+<view class="intro">编辑器区域：</view>
 <view class="paff" bind:tap="onTap">
   <view>{{content}}</view>
-
-
-
   <view
     class="cursor"
     style="left: {{cursorX}}px; top: {{cursorY}}px;"
   >
     <view wx:if="{{focus}}" class="cursor-line" />
     <view bind:touchstart="noop">
-      <input
-        class="input"
+      <!-- <textarea
+        class="textarea"
         adjust-position="{{false}}"
         hold-keyboard="{{true}}"
         maxlength="-1"
@@ -20,26 +18,47 @@
         bind:keyboardheightchange="onKeyboardHeightChange"
         bind:compositionstart="onCompositionStart"
         bind:compositionend="onCompositionEnd"
-      />
+      /> -->
     </view>
   </view>
 </view>
 
-<view bind:tap="measureText">
-  measureText
-</view>
+<view class="intro">输入框区域：</view>
 
-<!-- <view>input</view>
-<view>
-  <input
-    class="textarea"
-    value="{{textareaValue}}"
-    maxlength="-1"
-    focus="{{focus}}"
-    hold-keyboard
-    bind:input="onInput"
-    bind:compositionStart="onCompositionStart"
-    bind:compositionUpdate="onCompositionUpdate"
-    bind:compositionEnd="onCompositionEnd"
-  />
-</view> -->
+<!-- PC 端使用 input 接收 keyCode -->
+<input
+  wx:if="{{isPC}}"
+  class="input"
+  auto-height
+  adjust-position="{{false}}"
+  confirm-type="return"
+  maxlength="-1"
+  focus="{{focus}}"
+  hold-keyboard
+  value="{{inputValue}}"
+  bind:input="onInput"
+  bind:keyboardheightchange="onKeyboardHeightChange"
+  bind:compositionstart="onCompositionStart"
+  bind:compositionend="onCompositionEnd"
+/>
+<!-- 移动端使用 textarea 来保证有换行按钮 -->
+<textarea
+  wx:else
+  class="input"
+  auto-height
+  adjust-position="{{false}}"
+  confirm-type="return"
+  maxlength="-1"
+  focus="{{focus}}"
+  hold-keyboard
+  value="{{inputValue}}"
+  bind:input="onInput"
+  bind:keyboardheightchange="onKeyboardHeightChange"
+  bind:compositionstart="onCompositionStart"
+  bind:compositionend="onCompositionEnd"
+/>
+
+<view class="button-container">
+  <view class="button" bind:tap="measureText">测量文本宽度</view>
+  <view class="button" bind:tap="clearText">清空</view>
+</view>

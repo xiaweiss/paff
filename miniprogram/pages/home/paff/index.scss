@@ -34,8 +34,26 @@
   }
 }
 
+.intro {
+  font-size: 14px;
+  padding: 10px;
+}
+
 .input {
   background: skyblue;
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.button {
+  padding: 10px;
+  margin: 10px;
+  background: #ececec;
+  border-radius: 3px;
+  font-size: 14px;
 }
 
 

@@ -1,4 +1,5 @@
 export * from './emitter'
+export * from './getPage'
 export * from './isAndroid'
 export * from './isCustomNavigation'
 export * from './isDevelop'
