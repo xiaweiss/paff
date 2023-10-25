@@ -1,4 +1,4 @@
-import { isIOS, isPC } from '../../utils/index'
+import { isIOS, isPC, isWechatDevTools } from '../../utils/index'
 
 const app = getApp<AppData>()
 
@@ -72,6 +72,7 @@ Component({
             capsuleHeight,
             capsuleWidth,
             isPC: isPC(),
+            isWechatDevTools: isWechatDevTools(),
             navbarHeight,
             navbarPaddingRight,
             navbarPaddingTop,

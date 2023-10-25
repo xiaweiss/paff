@@ -1,5 +1,5 @@
 <view
-  wx:if="{{!isPC}}"
+  wx:if="{{!isPC || isWechatDevTools}}"
   id="nav-bar"
   class="nav-bar"
   style="position:{{position}};height:{{navbarHeight + navbarPaddingTop}}px;padding-top:{{navbarPaddingTop}}px;padding-right:{{navbarPaddingRight}}px;background:{{background}};z-index:{{zIndex}};"

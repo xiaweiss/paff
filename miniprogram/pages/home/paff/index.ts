@@ -1,4 +1,4 @@
-import { isPC, isWechatDevTools } from './utils/index'
+import { isPC } from '../../../utils/index'
 
 const app = getApp<AppData>()
 
@@ -7,11 +7,11 @@ Component({
     virtualHost: true,
   },
   data: {
-    isPC: isPC() || isWechatDevTools(),
+    isPC: isPC(),
     cursorX: 0,
     cursorY: 0,
     isCustomNavigation: false,
-    inputValue: ' ',
+    inputValue: isPC() ? ' ' : '',
     focus: false,
     content: '',
   },
@@ -25,15 +25,6 @@ Component({
       this.setData({
         focus: true,
       })
-
-      // const {x, y} = e.detail
-      // const { navBarHeight } = app.globalData
-
-      // this.setData({
-      //   cursorX: x,
-      //   cursorY: y - navBarHeight,
-      //   focus: true,
-      // })
     },
     onInput (e: WechatMiniprogram.Input) {
       const { cursor, keyCode } = e.detail
@@ -51,6 +42,7 @@ Component({
       }
 
       console.log('onInput', value, cursor, keyCode)
+      console.log('onInput value', `[${value}]`)
 
       /**
        * keyCode
@@ -85,6 +77,8 @@ Component({
         }
       }
 
+      console.log('content', `[${content}]`)
+
       let width = this.textWidth(content)
       console.log("width: ", width);
 
@@ -93,14 +87,18 @@ Component({
         cursorX: width
       })
 
+      // PC
+      if (isPC) {
+        return ' '
+
       // mobile
-      if (!isPC) {
+      } else {
         this.setData({
           inputValue: '',
         })
+        return ''
       }
-      // PC
-      return ' '
+
     },
     onKeyboardHeightChange (e: WechatMiniprogram.InputKeyboardHeightChange) {
       console.log('onKeyboardHeightChange', e)
