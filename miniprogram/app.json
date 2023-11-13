@@ -12,7 +12,6 @@
   "debug": false,
   "resizable": true,
   "usingComponents": {
-    "modal": "components/modal/index",
     "page": "components/page/index"
   },
   "sitemapLocation": "sitemap.json",

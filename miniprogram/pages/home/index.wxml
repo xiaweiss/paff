@@ -1,4 +1,6 @@
-<page>
+<page
+  navigationBarTitleText="Paff Editor"
+>
   <view class="container">
     <paff />
   </view>

@@ -1,6 +1,6 @@
 <view class="intro">编辑器区域：</view>
 <view class="paff" bind:tap="onTap">
-  <view>{{content}}</view>
+  <view><span>{{content}}<text class="underline">{{composition}}</text></span></view>
   <view
     class="cursor"
     style="left: {{cursorX}}px; top: {{cursorY}}px;"
@@ -8,16 +8,23 @@
     <view wx:if="{{focus}}" class="cursor-line" />
     <view bind:touchstart="noop">
       <!-- <textarea
-        class="textarea"
-        adjust-position="{{false}}"
-        hold-keyboard="{{true}}"
-        maxlength="-1"
+        class="input"
+        value="{{value}}"
+        maxlength="{{-1}}"
         focus="{{focus}}"
+        auto-height
+        show-confirm-bar
+        adjust-position="{{false}}"
         hold-keyboard
+        confirm-type="return"
+        bind:focus="onFocus"
+        bind:blur="onBlur"
+        bind:linechange="onLineChange"
         bind:input="onInput"
         bind:keyboardheightchange="onKeyboardHeightChange"
-        bind:compositionstart="onCompositionStart"
-        bind:compositionend="onCompositionEnd"
+        bind:keyboardcompositionstart="onKeyboardCompositionStart"
+        bind:keyboardcompositionupdate="onKeyboardCompositionUpdate"
+        bind:keyboardcompositionend="onKeyboardCompositionEnd"
       /> -->
     </view>
   </view>
@@ -25,37 +32,25 @@
 
 <view class="intro">输入框区域：</view>
 
-<!-- PC 端使用 input 接收 keyCode -->
-<input
-  wx:if="{{isPC}}"
-  class="input"
-  auto-height
-  adjust-position="{{false}}"
-  confirm-type="return"
-  maxlength="-1"
-  focus="{{focus}}"
-  hold-keyboard
-  value="{{inputValue}}"
-  bind:input="onInput"
-  bind:keyboardheightchange="onKeyboardHeightChange"
-  bind:compositionstart="onCompositionStart"
-  bind:compositionend="onCompositionEnd"
-/>
 <!-- 移动端使用 textarea 来保证有换行按钮 -->
 <textarea
-  wx:else
   class="input"
-  auto-height
-  adjust-position="{{false}}"
-  confirm-type="return"
-  maxlength="-1"
+  value="{{value}}"
+  maxlength="{{-1}}"
   focus="{{focus}}"
+  auto-height
+  show-confirm-bar
+  adjust-position="{{false}}"
   hold-keyboard
-  value="{{inputValue}}"
+  confirm-type="return"
+  bind:focus="onFocus"
+  bind:blur="onBlur"
+  bind:linechange="onLineChange"
   bind:input="onInput"
   bind:keyboardheightchange="onKeyboardHeightChange"
-  bind:compositionstart="onCompositionStart"
-  bind:compositionend="onCompositionEnd"
+  bind:keyboardcompositionstart="onKeyboardCompositionStart"
+  bind:keyboardcompositionupdate="onKeyboardCompositionUpdate"
+  bind:keyboardcompositionend="onKeyboardCompositionEnd"
 />
 
 <view class="button-container">

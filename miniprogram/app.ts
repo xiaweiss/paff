@@ -1,12 +1,9 @@
 
 import { wxToPromise, isPC, emitter, isIOS, isCustomNavigation } from './utils/index'
-import { showModal } from './components/modal/showModal'
 
 interface AppOption extends AppData {
   getSyetemInfo: () => void
-  registerCommand: () => void
   setSetting: () => void
-  update: () => void
 }
 
 /** 全局数据初始值 */
@@ -23,9 +20,7 @@ const globalData : AppData['globalData'] = {
  */
 App<AppOption>({
   globalData,
-  async onLaunch(option) {
-    this.registerCommand()
-
+  async onLaunch() {
     /**
      * 限制频率的接口，必须在这里调用
      * @see https://developers.weixin.qq.com/miniprogram/dev/framework/performance/api-frequency.html
@@ -33,60 +28,22 @@ App<AppOption>({
     this.getSyetemInfo()
 
     this.setSetting()
-
-    this.update()
   },
-  async onShow(option) {
-
+  async onShow() {
     // 小程序保持常亮状态
     if (!isPC(this)) {
       await wxToPromise(wx.setKeepScreenOn, {keepScreenOn: true})
     }
   },
   /**
-   * 小程序版本更新
-   */
-  update () {
-    const updateManager = wx.getUpdateManager()
-    updateManager.onCheckForUpdate((res) => {
-      // 请求完新版本信息的回调
-      if (res.hasUpdate) {
-        updateManager.onUpdateReady(() => {
-          wx.showModal({
-            title: '更新提示',
-            content: '新版本已经准备好，是否重启应用？',
-            cancelColor: '#B2B2B2',
-            confirmColor: '#CC5656',
-            success: async  (res) => {
-              if (res.confirm) {
-                const pages = getCurrentPages()
-                if (pages.length > 1) {
-                  await wxToPromise(wx.navigateBack, {delta: pages.length - 1})
-                }
-                // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
-                setTimeout(() => {
-                  updateManager.applyUpdate()
-                }, 400)
-              }
-            }
-          })
-        })
-      }
-    })
-  },
-  /**
-   * 注册全局的便利函数
-   */
-  registerCommand () {
-    this.showModal = showModal.bind(this)
-  },
-  showModal () {},
-  /**
    * 获取系统信息
    */
   getSyetemInfo () {
     const systemInfo = wx.getSystemInfoSync()
     this.globalData.systemInfo = systemInfo
+
+    // 默认浅色主题
+    this.globalData.systemInfo.theme = 'light'
 
     // 计算底部安全区高度
     this.globalData.safeAreaBottom = isPC(this) ? 0 : (systemInfo.screenHeight - systemInfo.safeArea.bottom)
@@ -113,12 +70,6 @@ App<AppOption>({
    * 设置小程序配置
    */
   async setSetting () {
-    // 转发设置，重置分享参数
-    wx.updateShareMenu({
-      withShareTicket: false,
-      isPrivateMessage: false
-    })
-
     // 键盘高度变化事件
     wx.onKeyboardHeightChange((res) => {
       this.globalData.keyboardHeight = res.height

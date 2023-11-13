@@ -1,17 +1,16 @@
-import { isPC } from '../../../utils/index'
-
 const app = getApp<AppData>()
 
 Component({
   options: {
+    pureDataPattern: /^_/,
     virtualHost: true,
   },
   data: {
-    isPC: isPC(),
+    composition: '',
     cursorX: 0,
     cursorY: 0,
     isCustomNavigation: false,
-    inputValue: isPC() ? ' ' : '',
+    value: ' ',
     focus: false,
     content: '',
   },
@@ -26,91 +25,65 @@ Component({
         focus: true,
       })
     },
+    onFocus (e: WechatMiniprogram.TextareaFocus) {
+
+    },
+    onBlur (e: WechatMiniprogram.TextareaBlur) {
+
+    },
+    onLineChange (e: WechatMiniprogram.TextareaLineChange) {
+
+    },
     onInput (e: WechatMiniprogram.Input) {
-      const { cursor, keyCode } = e.detail
-      const { isPC } = this.data
-      let { value } = e.detail
+      const { value } = e.detail
       let { content } = this.data
 
-      /**
-       * @bug: [mac] input 框无内容时，按 Backspace 键时，无法触发 input 事件
-       * @see: https://github.com/xiaweiss/miniprogram-bug-report/issues/164
-       * @hack: hack: 如果不需要 placeholder 时，输入框里始终保留一个空格
-       */
-      if (isPC) {
-        value = value.slice(1)
+      console.log('onInput', value)
+
+
+      // Backspace
+      if (value.length === 0) {
+        content = content.slice(0, -1)
+      } else {
+        content += value.slice(1)
       }
-
-      console.log('onInput', value, cursor, keyCode)
-      console.log('onInput value', `[${value}]`)
-
-      /**
-       * keyCode
-       * @see https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent/keyCode
-       */
-      switch (keyCode) {
-        // Backspace
-        case 8: {
-          content = content.slice(0, -1)
-          break
-        }
-        // Tab
-        case 9: {
-
-        }
-        // ios 换行
-        case 10: {
-
-        }
-        // Enter
-        case 13: {
-        }
-        // Space
-        case 32: {
-        }
-        // Delete
-        case 64: {
-
-        }
-        default: {
-          content += value
-        }
-      }
-
-      console.log('content', `[${content}]`)
-
-      let width = this.textWidth(content)
-      console.log("width: ", width);
 
       this.setData({
         content,
-        cursorX: width
+        composition: '',
+        cursorX: this.textWidth(content)
       })
 
-      // PC
-      if (isPC) {
-        return ' '
-
-      // mobile
-      } else {
-        this.setData({
-          inputValue: '',
-        })
-        return ''
-      }
-
+      return ' '
     },
     onKeyboardHeightChange (e: WechatMiniprogram.InputKeyboardHeightChange) {
-      console.log('onKeyboardHeightChange', e)
     },
-    onCompositionStart (e: any) {
-      console.log('onCompositionStart', e)
+    onKeyboardCompositionStart (e: any) {
+      const { data } = e.detail
+      const { content } = this.data
+
+      this.setData({
+        composition: data.slice(1),
+        cursorX: this.textWidth(content + data.slice(1))
+      })
     },
-    onCompositionUpdate (e: any) {
-      console.log('onCompositionUpdate', e)
+    onKeyboardCompositionUpdate (e: any) {
+      const { data } = e.detail
+      const { content } = this.data
+
+      this.setData({
+        composition: data.slice(1),
+        cursorX: this.textWidth(content + data.slice(1))
+      })
     },
-    onCompositionEnd (e: any) {
-      console.log('onCompositionEnd', e)
+    onKeyboardCompositionEnd (e: any) {
+      const { data } = e.detail
+      const { content } = this.data
+
+      this.setData({
+        composition: data.slice(1),
+        cursorX: this.textWidth(content + data.slice(1))
+      })
     },
     measureText () {
       const canvas = wx.createOffscreenCanvas({
@@ -129,7 +102,7 @@ Component({
     clearText () {
       this.setData({
         content: '',
-        inputValue: '',
+        value: '',
       })
     },
     textWidth(text:string): number {

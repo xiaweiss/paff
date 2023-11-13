@@ -46,7 +46,7 @@
     "useApiHostProcess": true,
     "showES6CompileOption": false,
     "condition": false,
-    "skylineRenderEnable": false
+    "skylineRenderEnable": true
   },
   "libVersion": "3.1.4",
   "appid": "wx06b82492baf0d5ef",

@@ -15,10 +15,14 @@
 
 .cursor-line {
   flex-shrink: 0;
-  width: 1px;
+  width: 2px;
   height: 16px;
   background: #333;
   animation: blink 1s infinite;
+}
+
+.underline {
+  text-decoration-line: underline;
 }
 
 //  光标闪烁动画
