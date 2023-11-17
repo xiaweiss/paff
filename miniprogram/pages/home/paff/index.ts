@@ -6,6 +6,8 @@ Component({
     virtualHost: true,
   },
   data: {
+    width: 0,
+    canvas: wx.createOffscreenCanvas({type: '2d'}),
     composition: '',
     cursorX: 0,
     cursorY: 0,
@@ -16,24 +18,51 @@ Component({
   },
   lifetimes: {
     attached () {
+      // 获取窗口尺寸信息
+      const windowInfo = wx.getWindowInfo()
+      this.setData({
+        width: windowInfo.windowWidth,
+      })
     }
   },
   methods: {
     noop () {},
+    /** 点击 */
     onTap (e: WechatMiniprogram.TouchEvent) {
-      this.setData({
-        focus: true,
-      })
+      console.log('onTap', e)
+
+      const { x } = e.detail
+
+
+
+      if (!this.data.focus) {
+        this.setData({focus: true})
+      }
     },
+
+    /**
+     * 聚焦
+     */
     onFocus (e: WechatMiniprogram.TextareaFocus) {
-
+      this.data.focus = true
     },
+
+    /**
+     * 失焦
+     */
     onBlur (e: WechatMiniprogram.TextareaBlur) {
-
+      this.data.focus = false
     },
+
+    /**
+     * 行数变化
+     */
     onLineChange (e: WechatMiniprogram.TextareaLineChange) {
 
     },
+    /**
+     * 输入
+     */
     onInput (e: WechatMiniprogram.Input) {
       const { value } = e.detail
       let { content } = this.data
@@ -56,8 +85,16 @@ Component({
 
       return ' '
     },
+    /**
+     * 键盘高度变化
+     */
     onKeyboardHeightChange (e: WechatMiniprogram.InputKeyboardHeightChange) {
+
     },
+
+    /**
+     * 输入过程开始
+     */
     onKeyboardCompositionStart (e: any) {
       const { data } = e.detail
       const { content } = this.data
@@ -67,6 +104,10 @@ Component({
         cursorX: this.textWidth(content + data.slice(1))
       })
     },
+
+    /**
+     * 输入过程更新
+     */
     onKeyboardCompositionUpdate (e: any) {
       const { data } = e.detail
       const { content } = this.data
@@ -76,6 +117,10 @@ Component({
         cursorX: this.textWidth(content + data.slice(1))
       })
     },
+
+    /**
+     * 输入过程结束
+     */
     onKeyboardCompositionEnd (e: any) {
       const { data } = e.detail
       const { content } = this.data
@@ -85,34 +130,32 @@ Component({
         cursorX: this.textWidth(content + data.slice(1))
       })
     },
-    measureText () {
-      const canvas = wx.createOffscreenCanvas({
-        type: '2d',
-        width: 100,
-        height: 100
-      })
-      const context = canvas.getContext('2d')
-      context.font = '16px system-ui'
-      const text = '哈'
-      const result = context.measureText(text)
-      const textWidth = result.width
-      console.log('result', result)
-      console.log('textWidth', textWidth)
-    },
+
+    /**
+     * 清空文字
+     */
     clearText () {
       this.setData({
         content: '',
         value: '',
       })
     },
+
+    /**
+     * 测量文字宽度
+     */
     textWidth(text:string): number {
-      const canvas = wx.createOffscreenCanvas({
-        type: '2d'
-      })
+      const { canvas } = this.data
       const context = canvas.getContext('2d')
       context.font = '16px system-ui'
       const result = context.measureText(text)
       return result.width
+    },
+
+    fillText() {
+      this.setData({
+        content: '哈哈哈'
+      })
     }
   }
 })

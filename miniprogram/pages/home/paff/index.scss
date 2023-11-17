@@ -3,20 +3,23 @@
   width: 100%;
   height: 150px;
   background: pink;
+  font-size: 16px;
+  line-height: 25.6px;
+  color: #222;
 }
 
 .cursor {
   position: absolute;
   display: flex;
-  width: 1px;
-  height: 16px;
+  width: 1.5px;
+  padding-top: 4px;
   overflow: hidden;
 }
 
 .cursor-line {
   flex-shrink: 0;
-  width: 2px;
-  height: 16px;
+  width: 1.5px;
+  height: 18px;
   background: #333;
   animation: blink 1s infinite;
 }
