@@ -11,16 +11,22 @@
 .cursor {
   position: absolute;
   display: flex;
-  width: 1.5px;
+  width: 2px;
   padding-top: 4px;
+  transform: translateX(-50%);
   overflow: hidden;
+}
+
+.cursor-composition {
+  width: 1px;
+  transform: none;
 }
 
 .cursor-line {
   flex-shrink: 0;
-  width: 1.5px;
+  width: 2px;
   height: 18px;
-  background: #333;
+  background: #1456f0;
   animation: blink 1s infinite;
 }
 

@@ -33,7 +33,22 @@ Component({
 
       const { x } = e.detail
 
+      const { content } = this.data
 
+      let cursorX = 0
+
+      // 从头循环本行，来计算光标 X 位置
+      for (const item of content) {
+        const textWidth = this.textWidth(item)
+        if (x < cursorX + textWidth / 2) {
+          break
+        }
+        cursorX += textWidth
+      }
+
+      this.setData({
+        cursorX
+      })
 
       if (!this.data.focus) {
         this.setData({focus: true})

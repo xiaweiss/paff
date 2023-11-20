@@ -4,22 +4,7 @@ wechat miniprogram editor 小程序编辑器
 
 in development 开发中
 
-🔨 RoadMap
-
-single-line 单行
-1. ✅ cursor animation 光标动画
-1. ✅ cursor input 光标输入（问题：[#5](https://github.com/xiaweiss/paff/issues/5)[#9](https://github.com/xiaweiss/paff/issues/9))
-1. ✅ text width 计算文字宽度
-1. 🔲 把光标插入文字中间
-1. 🔲 text render in one line 单行文字的渲染
-1. 🔲 text align 文字对齐方式
-1. 🔲 set cursor in one line 单行光标放置
-1. 🔲 get cursor position 获取光标位置
-1. 🔲 get selection 获取选中范围
-1. 🔲 cursor selection style 光标选中样式
-
-multi-line 多行
-1. 🔲 text line wrap 文本换行
+🔨 [RoadMap](https://github.com/xiaweiss/paff/issues/10)
 
 扫码备注“编辑器”加群
 

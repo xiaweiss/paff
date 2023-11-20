@@ -2,7 +2,7 @@
 <view class="paff" bind:tap="onTap">
   <view><span>{{content}}<text class="underline">{{composition}}</text></span></view>
   <view
-    class="cursor"
+    class="cursor {{composition ? 'cursor-composition' : ''}}"
     style="left: {{cursorX}}px; top: {{cursorY}}px;"
   >
     <view wx:if="{{focus}}" class="cursor-line" />
