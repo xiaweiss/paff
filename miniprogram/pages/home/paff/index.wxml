@@ -7,7 +7,8 @@
   >
     <view wx:if="{{focus}}" class="cursor-line" />
     <view bind:touchstart="noop">
-      <!-- <textarea
+      <!-- 移动端使用 textarea 来保证有换行按钮 -->
+      <textarea
         class="input"
         value="{{value}}"
         maxlength="{{-1}}"
@@ -25,14 +26,13 @@
         bind:keyboardcompositionstart="onKeyboardCompositionStart"
         bind:keyboardcompositionupdate="onKeyboardCompositionUpdate"
         bind:keyboardcompositionend="onKeyboardCompositionEnd"
-      /> -->
+      />
     </view>
   </view>
 </view>
 
-<view class="intro">输入框区域：</view>
+<!-- <view class="intro">输入框区域：</view>
 
-<!-- 移动端使用 textarea 来保证有换行按钮 -->
 <textarea
   class="input"
   value="{{value}}"
@@ -51,7 +51,7 @@
   bind:keyboardcompositionstart="onKeyboardCompositionStart"
   bind:keyboardcompositionupdate="onKeyboardCompositionUpdate"
   bind:keyboardcompositionend="onKeyboardCompositionEnd"
-/>
+/> -->
 
 <view class="button-container">
   <view class="button" bind:tap="textWidth">测量文本宽度</view>

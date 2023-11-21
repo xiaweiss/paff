@@ -33,12 +33,12 @@ Component({
 
       const { x } = e.detail
 
-      const { content } = this.data
+      const { content, composition } = this.data
 
       let cursorX = 0
 
       // 从头循环本行，来计算光标 X 位置
-      for (const item of content) {
+      for (const item of (content + composition)) {
         const textWidth = this.textWidth(item)
         if (x < cursorX + textWidth / 2) {
           break
@@ -162,14 +162,18 @@ Component({
     textWidth(text:string): number {
       const { canvas } = this.data
       const context = canvas.getContext('2d')
-      context.font = '16px system-ui'
+      context.font = '16px Menlo,system-ui'
       const result = context.measureText(text)
       return result.width
     },
 
     fillText() {
+      let { content } = this.data
+      content += '哈哈哈'
       this.setData({
-        content: '哈哈哈'
+        content,
+        composition: '',
+        cursorX: this.textWidth(content)
       })
     }
   }

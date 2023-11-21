@@ -4,6 +4,7 @@
   height: 150px;
   background: pink;
   font-size: 16px;
+  font-family: Menlo,system-ui;
   line-height: 25.6px;
   color: #222;
 }
@@ -19,7 +20,7 @@
 
 .cursor-composition {
   width: 1px;
-  transform: none;
+  transform: translateX(-50%);
 }
 
 .cursor-line {
@@ -52,9 +53,9 @@
   padding: 10px;
 }
 
-.input {
-  background: skyblue;
-}
+// .input {
+//   background: skyblue;
+// }
 
 .button-container {
   display: flex;
