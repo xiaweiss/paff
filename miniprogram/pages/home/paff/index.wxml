@@ -54,7 +54,7 @@
 /> -->
 
 <view class="button-container">
-  <view class="button" bind:tap="textWidth">测量文本宽度</view>
+  <view class="button" bind:tap="showTextWidth">测量文本宽度</view>
   <view class="button" bind:tap="clearText">清空</view>
   <view class="button" bind:tap="fillText">填入文字"哈哈哈"</view>
 </view>

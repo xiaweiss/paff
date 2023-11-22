@@ -162,9 +162,22 @@ Component({
     textWidth(text:string): number {
       const { canvas } = this.data
       const context = canvas.getContext('2d')
-      context.font = '16px Menlo,system-ui'
+      /**
+       * @bug: [skyline] 离屏 canvas 中默认字体与系统字体不同，设置 system-ui 无效，导致测量的文字宽度较小
+       * @see: https://github.com/xiaweiss/paff/issues/12
+       */
+      context.font = '16px MiSans,"Helvetica Neue","Segoe UI",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji",system-ui'
       const result = context.measureText(text)
       return result.width
+    },
+
+    showTextWidth () {
+      const { content, composition } = this.data
+      const width = this.textWidth(content + composition)
+      wx.showToast({
+        title: `width：${width}`,
+        icon: 'none'
+      })
     },
 
     fillText() {
