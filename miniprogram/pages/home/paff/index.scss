@@ -3,10 +3,7 @@
   width: 100%;
   height: 150px;
   background: pink;
-  font-size: 16px;
-  font-family: MiSans,"Helvetica Neue","Segoe UI",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji",system-ui;
-  line-height: 25.6px;
-  color: #222;
+
 }
 
 .cursor {
@@ -46,6 +43,27 @@
   100% {
     opacity: 1;
   }
+}
+
+.hidden {
+  height: 0;
+  overflow: hidden;
+}
+
+.measure-text-container {
+  display: flex;
+}
+
+.measure-text {
+  white-space: nowrap;
+}
+
+.paragraph {
+  min-height: 25.6px;
+  font-size: 16px;
+  font-family: system-ui;
+  line-height: 25.6px;
+  color: #222;
 }
 
 .intro {

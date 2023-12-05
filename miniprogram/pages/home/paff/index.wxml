@@ -1,13 +1,19 @@
-<view class="intro">编辑器区域：</view>
+<!-- <view class="intro">编辑器区域：</view> -->
 <view class="paff" bind:tap="onTap">
-  <view><span>{{content}}<text class="underline">{{composition}}</text></span></view>
+  <view class="paragraph"><span>{{content}}<text class="underline">{{composition}}</text></span></view>
   <view
     class="cursor {{composition ? 'cursor-composition' : ''}}"
     style="left: {{cursorX}}px; top: {{cursorY}}px;"
   >
     <view wx:if="{{focus}}" class="cursor-line" />
+  </view>
+
+  <view class="hidden">
+    <view class="measure-text-container">
+      <view id="measure-text" class="measure-text paragraph">{{measureText}}</view>
+    </view>
+
     <view bind:touchstart="noop">
-      <!-- 移动端使用 textarea 来保证有换行按钮 -->
       <textarea
         class="input"
         value="{{value}}"
@@ -30,28 +36,6 @@
     </view>
   </view>
 </view>
-
-<!-- <view class="intro">输入框区域：</view>
-
-<textarea
-  class="input"
-  value="{{value}}"
-  maxlength="{{-1}}"
-  focus="{{focus}}"
-  auto-height
-  show-confirm-bar
-  adjust-position="{{false}}"
-  hold-keyboard
-  confirm-type="return"
-  bind:focus="onFocus"
-  bind:blur="onBlur"
-  bind:linechange="onLineChange"
-  bind:input="onInput"
-  bind:keyboardheightchange="onKeyboardHeightChange"
-  bind:keyboardcompositionstart="onKeyboardCompositionStart"
-  bind:keyboardcompositionupdate="onKeyboardCompositionUpdate"
-  bind:keyboardcompositionend="onKeyboardCompositionEnd"
-/> -->
 
 <view class="button-container">
   <view class="button" bind:tap="showTextWidth">测量文本宽度</view>

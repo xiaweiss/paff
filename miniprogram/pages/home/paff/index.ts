@@ -15,6 +15,7 @@ Component({
     value: ' ',
     focus: false,
     content: '',
+    measureText: '',
   },
   lifetimes: {
     attached () {
@@ -28,7 +29,7 @@ Component({
   methods: {
     noop () {},
     /** 点击 */
-    onTap (e: WechatMiniprogram.TouchEvent) {
+    async onTap (e: WechatMiniprogram.TouchEvent) {
       console.log('onTap', e)
 
       const { x } = e.detail
@@ -39,7 +40,7 @@ Component({
 
       // 从头循环本行，来计算光标 X 位置
       for (const item of (content + composition)) {
-        const textWidth = this.textWidth(item)
+        const textWidth = await this.textWidth(item)
         if (x < cursorX + textWidth / 2) {
           break
         }
@@ -84,7 +85,6 @@ Component({
 
       console.log('onInput', value)
 
-
       // Backspace
       if (value.length === 0) {
         content = content.slice(0, -1)
@@ -95,11 +95,18 @@ Component({
       this.setData({
         content,
         composition: '',
-        cursorX: this.textWidth(content)
+      })
+
+      this.textWidth(content).then((width) => {
+        console.log('width', width)
+        this.setData({
+          cursorX: width
+        })
       })
 
       return ' '
     },
+
     /**
      * 键盘高度变化
      */
@@ -110,39 +117,39 @@ Component({
     /**
      * 输入过程开始
      */
-    onKeyboardCompositionStart (e: any) {
+    async onKeyboardCompositionStart (e: any) {
       const { data } = e.detail
       const { content } = this.data
 
       this.setData({
         composition: data.slice(1),
-        cursorX: this.textWidth(content + data.slice(1))
+        cursorX: await this.textWidth(content + data.slice(1))
       })
     },
 
     /**
      * 输入过程更新
      */
-    onKeyboardCompositionUpdate (e: any) {
+    async onKeyboardCompositionUpdate (e: any) {
       const { data } = e.detail
       const { content } = this.data
 
       this.setData({
         composition: data.slice(1),
-        cursorX: this.textWidth(content + data.slice(1))
+        cursorX: await this.textWidth(content + data.slice(1))
       })
     },
 
     /**
      * 输入过程结束
      */
-    onKeyboardCompositionEnd (e: any) {
+    async onKeyboardCompositionEnd (e: any) {
       const { data } = e.detail
       const { content } = this.data
 
       this.setData({
         composition: data.slice(1),
-        cursorX: this.textWidth(content + data.slice(1))
+        cursorX: await this.textWidth(content + data.slice(1))
       })
     },
 
@@ -153,40 +160,44 @@ Component({
       this.setData({
         content: '',
         value: '',
+        cursorX: 0,
       })
     },
 
     /**
      * 测量文字宽度
      */
-    textWidth(text:string): number {
-      const { canvas } = this.data
-      const context = canvas.getContext('2d')
-      /**
-       * @bug: [skyline] 离屏 canvas 中默认字体与系统字体不同，设置 system-ui 无效，导致测量的文字宽度较小
-       * @see: https://github.com/xiaweiss/paff/issues/12
-       */
-      context.font = '16px MiSans,"Helvetica Neue","Segoe UI",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji",system-ui'
-      const result = context.measureText(text)
-      return result.width
+    async textWidth (text:string) {
+      this.setData({
+        measureText: text || ''
+      })
+
+      const query = this.createSelectorQuery()
+      const width = await new Promise<number>((resolve) => {
+        query.select('#measure-text')!.boundingClientRect((rect) => {
+          resolve(rect.width)
+        }).exec()
+      })
+
+      return Promise.resolve(width)
     },
 
-    showTextWidth () {
+    async showTextWidth () {
       const { content, composition } = this.data
-      const width = this.textWidth(content + composition)
+      const width = await this.textWidth(content + composition)
       wx.showToast({
         title: `width：${width}`,
         icon: 'none'
       })
     },
 
-    fillText() {
+    async fillText() {
       let { content } = this.data
       content += '哈哈哈'
       this.setData({
         content,
         composition: '',
-        cursorX: this.textWidth(content)
+        cursorX: await this.textWidth(content)
       })
     }
   }
