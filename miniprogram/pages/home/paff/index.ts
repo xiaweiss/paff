@@ -16,6 +16,7 @@ Component({
     focus: false,
     content: '',
     measureText: '',
+    _measureTextNode: null as WechatMiniprogram.NodesRef | null,
   },
   lifetimes: {
     attached () {
@@ -24,7 +25,11 @@ Component({
       this.setData({
         width: windowInfo.windowWidth,
       })
-    }
+    },
+    ready() {
+      const query = this.createSelectorQuery()
+      this.data._measureTextNode = query.select('#measure-text')
+    },
   },
   methods: {
     noop () {},
@@ -37,14 +42,19 @@ Component({
       const { content, composition } = this.data
 
       let cursorX = 0
+      let line = ''
 
-      // 从头循环本行，来计算光标 X 位置
+      // 从头逐个字渲染本行，来计算光标 X 位置
+      // TODO: 需要优化下算法，来减少循环的次数
       for (const item of (content + composition)) {
-        const textWidth = await this.textWidth(item)
-        if (x < cursorX + textWidth / 2) {
+        line += item
+        const left = cursorX
+        const right = await this.textWidth(line)
+        if (x < left + (right - left) / 2) {
+          cursorX = left
           break
         }
-        cursorX += textWidth
+        cursorX = right
       }
 
       this.setData({
@@ -92,14 +102,10 @@ Component({
         content += value.slice(1)
       }
 
-      this.setData({
-        content,
-        composition: '',
-      })
-
       this.textWidth(content).then((width) => {
-        console.log('width', width)
         this.setData({
+          content,
+          composition: '',
           cursorX: width
         })
       })
@@ -172,9 +178,8 @@ Component({
         measureText: text || ''
       })
 
-      const query = this.createSelectorQuery()
       const width = await new Promise<number>((resolve) => {
-        query.select('#measure-text')!.boundingClientRect((rect) => {
+        this.data._measureTextNode!.boundingClientRect((rect) => {
           resolve(rect.width)
         }).exec()
       })
@@ -199,6 +204,10 @@ Component({
         composition: '',
         cursorX: await this.textWidth(content)
       })
+    },
+
+    log () {
+
     }
   }
 })

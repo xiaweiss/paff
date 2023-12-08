@@ -9,6 +9,7 @@
   </view>
 
   <view class="hidden">
+  <!-- <view> -->
     <view class="measure-text-container">
       <view id="measure-text" class="measure-text paragraph">{{measureText}}</view>
     </view>
@@ -41,4 +42,5 @@
   <view class="button" bind:tap="showTextWidth">测量文本宽度</view>
   <view class="button" bind:tap="clearText">清空</view>
   <view class="button" bind:tap="fillText">填入文字"哈哈哈"</view>
+  <view class="button" bind:tap="log">log</view>
 </view>
