@@ -11,12 +11,18 @@ Component({
     /**
      * 问题: [skyline] scroll-view 的内容不足时，依然可以上下拉动回弹（不是问题，仅需要注意下）
      * @see: https://github.com/xiaweiss/miniprogram-bug-report/issues/142
+     *
+     * @bug: [ios] scroll-view 开启 enhanced 时，textarea 无法自动聚焦
+     * @see: https://github.com/xiaweiss/miniprogram-bug-report/issues/198
+     *
+     * @hack：通过设置 scrollY 来控制是否回弹
      */
+    scrollY: { type: Boolean, value: true },
     bounces: { type: Boolean, value: true },
     loaded: { type: Boolean, value: true },
     lowerThreshold: { type: Number, value: 50 },
     navigationBarBackgroundColor: { type: String, value: 'transparent' },
-    navigationBarTitleText: { type: String, value: '' },
+    navigationBarTitleText: { type: String, value: '墨问便签' },
     navigationBarFrontColor: { type: String, value: '#000000' },
     refresherEnabled: { type: Boolean, value: false },
     refresherBackground: { type: String, value: '' }, // 默认值 #fff 表示透明色，如果需要白色，需要设置为 #ffffff、white
@@ -29,6 +35,8 @@ Component({
     scrollWithAnimation: { type: Boolean, value: false },
     /** 是否启用 bottom slot */
     enableBottom: { type: Boolean, value: false },
+    /** 上边内边距 */
+    paddingTop: { type: Number, value: 0 },
   },
   data: {
     /** 是否需要下拉刷新 */

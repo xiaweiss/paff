@@ -9,7 +9,7 @@ Component({
   properties: {
     position: { type: String, value: 'relative' },
     /** 标题 */
-    title: { type: String, value: '' },
+    title: { type: String, value: '墨问便签' },
     /** 背景颜色 */
     background: { type: String, value: 'transparent' },
     /** 前景颜色值，包括按钮、标题、状态栏的颜色，仅支持 #ffffff 和 #000000 */

@@ -1,3 +1,5 @@
+export {}
+
 const app = getApp<AppData>()
 
 Component({
@@ -6,208 +8,53 @@ Component({
     virtualHost: true,
   },
   data: {
-    width: 0,
-    canvas: wx.createOffscreenCanvas({type: '2d'}),
-    composition: '',
-    cursorX: 0,
-    cursorY: 0,
-    isCustomNavigation: false,
-    value: ' ',
-    focus: false,
-    content: '',
-    measureText: '',
-    _measureTextNode: null as WechatMiniprogram.NodesRef | null,
+    ctx: null as null | WechatMiniprogram.RenderingContext,
   },
   lifetimes: {
     attached () {
-      // 获取窗口尺寸信息
-      const windowInfo = wx.getWindowInfo()
-      this.setData({
-        width: windowInfo.windowWidth,
-      })
+      console.log('attached')
+      this.createCanvas()
     },
-    ready() {
-      const query = this.createSelectorQuery()
-      this.data._measureTextNode = query.select('#measure-text')
+    async ready() {
+      await this.createCanvas()
     },
   },
   methods: {
     noop () {},
-    /** 点击 */
-    async onTap (e: WechatMiniprogram.TouchEvent) {
-      console.log('onTap', e)
+    async createCanvas () {
+      const { pixelRatio: dpr } = app.globalData.systemInfo!
 
-      const { x } = e.detail
+      /**
+       * canvas 画布尺寸（逻辑尺寸不能大于画布尺寸 * dpr）
+       * ios           1365x1365
+       * ipad mini 6   2046x2046
+       * mac           8190x8190
+       * android       5828x5828（最大渲染尺寸，但小程序会 crash）
+       *
+       * 安卓尺寸限制在 ios 范围内
+       */
 
-      const { content, composition } = this.data
+      // 创建 2D canvas 实例（画布尺寸越大，越消耗性能）
+      await new Promise<void>((resolve) => {
+        this.createSelectorQuery()
+          .select('#canvas')
+          .fields({
+            node: true,
+            size: true,
+          })
+          .exec((res) => {
+            const canvas = res[0].node
 
-      let cursorX = 0
-      let line = ''
+            canvas.width = res[0].width * dpr
+            canvas.height = res[0].height * dpr
 
-      // 从头逐个字渲染本行，来计算光标 X 位置
-      // TODO: 需要优化下算法，来减少循环的次数
-      for (const item of (content + composition)) {
-        line += item
-        const left = cursorX
-        const right = await this.textWidth(line)
-        if (x < left + (right - left) / 2) {
-          cursorX = left
-          break
-        }
-        cursorX = right
-      }
+            const ctx = canvas.getContext('2d')
+            ctx.scale(dpr, dpr)
 
-      this.setData({
-        cursorX
+            this.data.ctx = ctx
+            resolve()
+          })
       })
-
-      if (!this.data.focus) {
-        this.setData({focus: true})
-      }
-    },
-
-    /**
-     * 聚焦
-     */
-    onFocus (e: WechatMiniprogram.TextareaFocus) {
-      this.data.focus = true
-    },
-
-    /**
-     * 失焦
-     */
-    onBlur (e: WechatMiniprogram.TextareaBlur) {
-      this.data.focus = false
-    },
-
-    /**
-     * 行数变化
-     */
-    onLineChange (e: WechatMiniprogram.TextareaLineChange) {
-
-    },
-    /**
-     * 输入
-     */
-    onInput (e: WechatMiniprogram.Input) {
-      const { value } = e.detail
-      let { content } = this.data
-
-      console.log('onInput', value)
-
-      // Backspace
-      if (value.length === 0) {
-        content = content.slice(0, -1)
-      } else {
-        content += value.slice(1)
-      }
-
-      this.textWidth(content).then((width) => {
-        this.setData({
-          content,
-          composition: '',
-          cursorX: width
-        })
-      })
-
-      return ' '
-    },
-
-    /**
-     * 键盘高度变化
-     */
-    onKeyboardHeightChange (e: WechatMiniprogram.InputKeyboardHeightChange) {
-
-    },
-
-    /**
-     * 输入过程开始
-     */
-    async onKeyboardCompositionStart (e: any) {
-      const { data } = e.detail
-      const { content } = this.data
-
-      this.setData({
-        composition: data.slice(1),
-        cursorX: await this.textWidth(content + data.slice(1))
-      })
-    },
-
-    /**
-     * 输入过程更新
-     */
-    async onKeyboardCompositionUpdate (e: any) {
-      const { data } = e.detail
-      const { content } = this.data
-
-      this.setData({
-        composition: data.slice(1),
-        cursorX: await this.textWidth(content + data.slice(1))
-      })
-    },
-
-    /**
-     * 输入过程结束
-     */
-    async onKeyboardCompositionEnd (e: any) {
-      const { data } = e.detail
-      const { content } = this.data
-
-      this.setData({
-        composition: data.slice(1),
-        cursorX: await this.textWidth(content + data.slice(1))
-      })
-    },
-
-    /**
-     * 清空文字
-     */
-    clearText () {
-      this.setData({
-        content: '',
-        value: '',
-        cursorX: 0,
-      })
-    },
-
-    /**
-     * 测量文字宽度
-     */
-    async textWidth (text:string) {
-      this.setData({
-        measureText: text || ''
-      })
-
-      const width = await new Promise<number>((resolve) => {
-        this.data._measureTextNode!.boundingClientRect((rect) => {
-          resolve(rect.width)
-        }).exec()
-      })
-
-      return Promise.resolve(width)
-    },
-
-    async showTextWidth () {
-      const { content, composition } = this.data
-      const width = await this.textWidth(content + composition)
-      wx.showToast({
-        title: `width：${width}`,
-        icon: 'none'
-      })
-    },
-
-    async fillText() {
-      let { content } = this.data
-      content += '哈哈哈'
-      this.setData({
-        content,
-        composition: '',
-        cursorX: await this.textWidth(content)
-      })
-    },
-
-    log () {
-
     }
   }
 })

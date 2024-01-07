@@ -48,16 +48,11 @@
     "condition": false,
     "skylineRenderEnable": true
   },
-  "libVersion": "3.1.4",
+  "libVersion": "3.3.1",
   "appid": "wx06b82492baf0d5ef",
   "projectname": "paff",
   "packOptions": {
-    "ignore": [
-      {
-        "value": "scripts",
-        "type": "folder"
-      }
-    ],
+    "ignore": [],
     "include": []
   },
   "srcMiniprogramRoot": "miniprogram/",
