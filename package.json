@@ -3,18 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "changelog": "conventional-changelog -i CHANGELOG.md -s",
-    "lint": "tsc --noEmit",
     "preinstall": "npx only-allow npm"
   },
   "dependencies": {
-    "miniprogram-zeed-dom": "^1.0.0",
-    "mitt": "^3.0.0"
-  },
-  "devDependencies": {
-    "conventional-changelog-cli": "^2.2.2",
-    "miniprogram-type": "^1.0.4",
-    "tsx": "^3.12.7",
-    "typescript": "^5.1.3"
+    "mitt": "^3.0.1"
   }
 }

@@ -1,8 +1,9 @@
 {
   "description": "项目配置文件，详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "miniprogramRoot": "miniprogram/",
+  "miniprogramRoot": "",
   "compileType": "miniprogram",
   "setting": {
+    "condition": false,
     "es6": true,
     "enhance": true,
     "postcss": true,
@@ -16,26 +17,20 @@
     "compileHotReLoad": true,
     "preloadBackgroundData": false,
     "lazyloadPlaceholderEnable": false,
-    "useStaticServer": true,
+    "useStaticServer": false,
     "bigPackageSizeSupport": false,
+    "skylineRenderEnable": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
     "useCompilerPlugins": [
-      "typescript",
       "sass"
     ],
     "disableUseStrict": false,
     "uploadWithSourceMap": true,
-    "packNpmManually": true,
-    "packNpmRelationList": [
-      {
-        "packageJsonPath": "./package.json",
-        "miniprogramNpmDistDir": "./miniprogram/"
-      }
-    ],
+    "packNpmManually": false,
     "coverView": true,
     "ignoreDevUnusedFiles": true,
     "checkInvalidKey": true,
@@ -45,17 +40,15 @@
     "useApiHook": true,
     "useApiHostProcess": true,
     "showES6CompileOption": false,
-    "condition": false,
-    "skylineRenderEnable": true
+    "compileWorklet": true
   },
-  "libVersion": "3.3.1",
+  "libVersion": "3.3.0",
   "appid": "wx06b82492baf0d5ef",
   "projectname": "paff",
   "packOptions": {
     "ignore": [],
     "include": []
   },
-  "srcMiniprogramRoot": "miniprogram/",
   "condition": {},
   "editorSetting": {
     "tabIndent": "insertSpaces",
