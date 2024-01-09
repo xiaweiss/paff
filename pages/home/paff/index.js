@@ -7,14 +7,30 @@ Component({
   },
   data: {
     ctx: null,
+    doc: [{
+      type: 'paragraph',
+      content: [
+        {
+          type: 'text',
+          text: '正正正正正正正正正正正正正正正正正正正正正正正正 This is a paragraph'
+        },
+        // {
+        //   type: 'text',
+        //   text: ' with a bold',
+        //   marks: [{
+        //     type: 'bold'
+        //   }]
+        // }
+      ]
+    }]
   },
   lifetimes: {
-    attached () {
-      console.log('attached')
-      this.createCanvas()
-    },
+    // attached () {
+    //   this.createCanvas()
+    // },
     async ready() {
       await this.createCanvas()
+      this.render()
     },
   },
   methods: {
@@ -53,6 +69,33 @@ Component({
             resolve()
           })
       })
+    },
+    /**
+     * 全量绘制
+     */
+    render () {
+      const { ctx, doc } = this.data
+
+      for (const node of doc) {
+        if (node.type === 'paragraph') {
+          this.renderParagraph(node)
+        }
+      }
+    },
+
+    /**
+     * 绘制段落
+     */
+    renderParagraph (paragraph) {
+      const { ctx } = this.data
+
+      for (const node of paragraph.content) {
+        if (node.type === 'text') {
+          // line-height: 26;
+          ctx.font = '16px system-ui';
+          ctx.fillText(node.text, 0, 21); // 26 - (26 - 16) / 2 = 21
+        }
+      }
     }
   }
 })
