@@ -1,4 +1,9 @@
+import { doc } from './doc'
+
 const app = getApp()
+
+let rx = 0
+let ry = 0
 
 Component({
   options: {
@@ -6,28 +11,14 @@ Component({
     virtualHost: true,
   },
   data: {
+    _windowInfo: {},
     ctx: null,
-    doc: [{
-      type: 'paragraph',
-      content: [
-        {
-          type: 'text',
-          text: '正正正正正正正正正正正正正正正正正正正正正正正正 This is a paragraph'
-        },
-        // {
-        //   type: 'text',
-        //   text: ' with a bold',
-        //   marks: [{
-        //     type: 'bold'
-        //   }]
-        // }
-      ]
-    }]
+    doc
   },
   lifetimes: {
-    // attached () {
-    //   this.createCanvas()
-    // },
+    attached () {
+      this.data._windowInfo = wx.getWindowInfo()
+    },
     async ready() {
       await this.createCanvas()
       this.render()
@@ -35,8 +26,17 @@ Component({
   },
   methods: {
     noop () {},
+    onTap (e) {
+      // const x = Math.round(e.detail.x)
+      // const y = Math.round(e.detail.y)
+
+      // wx.showToast({
+      //   icon: 'none',
+      //   title: `tap: x=${x}, y=${y}`,
+      // })
+    },
     async createCanvas () {
-      const { pixelRatio: dpr } = app.globalData.systemInfo
+      const { pixelRatio: dpr } = this.data._windowInfo
 
       /**
        * canvas 画布尺寸（逻辑尺寸不能大于画布尺寸 * dpr）
@@ -76,11 +76,15 @@ Component({
     render () {
       const { ctx, doc } = this.data
 
+      const start = Date.now()
+
       for (const node of doc) {
         if (node.type === 'paragraph') {
           this.renderParagraph(node)
         }
       }
+
+      console.log('render time', Date.now() - start)
     },
 
     /**
@@ -88,14 +92,35 @@ Component({
      */
     renderParagraph (paragraph) {
       const { ctx } = this.data
+      const { windowWidth } = this.data._windowInfo
 
       for (const node of paragraph.content) {
         if (node.type === 'text') {
           // line-height: 26;
           ctx.font = '16px system-ui';
-          ctx.fillText(node.text, 0, 21); // 26 - (26 - 16) / 2 = 21
+
+          // 计算文字宽度 // todo: 处理双字符文字，例如 emoji
+          node.textArray = node.text.split('')
+          node.textWidth = node.textArray.map(str => ctx.measureText(str).width)
+          node.total = node.textArray.length
+
+          // 绘制文字 // todo: 获取段落开始的 y 坐标
+          for (let i = 0; i < node.total; i += 1) {
+            if (rx + node.textWidth[i] > windowWidth) {
+              rx = 0
+              ry += 26
+            }
+
+            // console.log('fillText', node.textArray[i], rx, ry + 21); // 26 - (26 - 16) / 2 = 21
+            ctx.fillText(node.textArray[i], rx, ry + 21); // 26 - (26 - 16) / 2 = 21
+
+            rx += node.textWidth[i]
+          }
         }
       }
+
+      rx = 0
+      ry += 26
     }
   }
 })
