@@ -1,9 +1,12 @@
 import { doc } from './doc'
+import { touchstart, touchmove, touchend } from './touch'
 
 const app = getApp()
 
 let rx = 0
 let ry = 0
+let scrolling = false
+let scrollY = 0
 
 Component({
   options: {
@@ -12,6 +15,9 @@ Component({
   },
   data: {
     _windowInfo: {},
+    width: 0,
+    height: 0,
+    canvas: null,
     ctx: null,
     doc
   },
@@ -26,6 +32,15 @@ Component({
   },
   methods: {
     noop () {},
+    touchstart (e) {
+      touchstart(e)
+    },
+    touchmove (e) {
+      touchmove(e)
+    },
+    touchend (e) {
+      touchend(e)
+    },
     onTap (e) {
       // const x = Math.round(e.detail.x)
       // const y = Math.round(e.detail.y)
@@ -34,6 +49,20 @@ Component({
       //   icon: 'none',
       //   title: `tap: x=${x}, y=${y}`,
       // })
+      // const { canvas, ctx, width, height } = this.data
+      // let y = 0
+      // const scroll = () => {
+      //   scrolling = true
+      //   y -= 1
+      //   rx = 0
+      //   ry = y
+
+      //   ctx.clearRect(0, 0, width, height)
+      //   this.render()
+      //   canvas.requestAnimationFrame(scroll)
+      // }
+
+      // canvas.requestAnimationFrame(scroll)
     },
     async createCanvas () {
       const { pixelRatio: dpr } = this.data._windowInfo
@@ -65,6 +94,9 @@ Component({
             const ctx = canvas.getContext('2d')
             ctx.scale(dpr, dpr)
 
+            this.data.width = res[0].width
+            this.data.height = res[0].height
+            this.data.canvas = canvas
             this.data.ctx = ctx
             resolve()
           })
@@ -91,7 +123,7 @@ Component({
      * 绘制段落
      */
     renderParagraph (paragraph) {
-      const { ctx } = this.data
+      const { ctx, height } = this.data
       const { windowWidth } = this.data._windowInfo
 
       for (const node of paragraph.content) {
@@ -100,9 +132,11 @@ Component({
           ctx.font = '16px system-ui';
 
           // 计算文字宽度 // todo: 处理双字符文字，例如 emoji
-          node.textArray = node.text.split('')
-          node.textWidth = node.textArray.map(str => ctx.measureText(str).width)
-          node.total = node.textArray.length
+          if (!scrolling) {
+            node.textArray = node.text.split('')
+            node.textWidth = node.textArray.map(str => ctx.measureText(str).width)
+            node.total = node.textArray.length
+          }
 
           // 绘制文字 // todo: 获取段落开始的 y 坐标
           for (let i = 0; i < node.total; i += 1) {
@@ -111,8 +145,11 @@ Component({
               ry += 26
             }
 
-            // console.log('fillText', node.textArray[i], rx, ry + 21); // 26 - (26 - 16) / 2 = 21
-            ctx.fillText(node.textArray[i], rx, ry + 21); // 26 - (26 - 16) / 2 = 21
+            // 在画布区域内时，才绘制
+            if (ry + 26 > 0 && ry < height) {
+              // console.log('fillText', node.textArray[i], rx, ry + 21); // 26 - (26 - 16) / 2 = 21
+              ctx.fillText(node.textArray[i], rx, ry + 21); // 26 - (26 - 16) / 2 = 21
+            }
 
             rx += node.textWidth[i]
           }
@@ -121,6 +158,13 @@ Component({
 
       rx = 0
       ry += 26
+    },
+
+    /**
+     * 动画函数
+     */
+    anim () {
+      requestAnimationFrame(this.anim)
     }
   }
 })
