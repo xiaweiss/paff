@@ -7,6 +7,7 @@ let rx = 0
 let ry = 0
 let scrolling = false
 let scrollY = 0
+let requestId = 0
 
 Component({
   options: {
@@ -36,33 +37,43 @@ Component({
       touchstart(e)
     },
     touchmove (e) {
-      touchmove(e)
+      const { canvas, ctx, width, height } = this.data
+      const { type, dy } = touchmove(e)
+
+      switch (type) {
+        case 'scroll':
+          scrolling = true
+          canvas.cancelAnimationFrame(requestId)
+          requestId = canvas.requestAnimationFrame(() => {
+            rx = 0
+            ry = dy
+            ctx.clearRect(0, 0, width, height)
+            this.render()
+          })
+          break
+      }
     },
     touchend (e) {
       touchend(e)
+      scrolling = false
     },
     onTap (e) {
-      // const x = Math.round(e.detail.x)
-      // const y = Math.round(e.detail.y)
+      return
 
-      // wx.showToast({
-      //   icon: 'none',
-      //   title: `tap: x=${x}, y=${y}`,
-      // })
-      // const { canvas, ctx, width, height } = this.data
-      // let y = 0
-      // const scroll = () => {
-      //   scrolling = true
-      //   y -= 1
-      //   rx = 0
-      //   ry = y
+      const { canvas, ctx, width, height } = this.data
+      let y = 0
+      const scroll = () => {
+        scrolling = true
+        y -= 2
+        rx = 0
+        ry = y
 
-      //   ctx.clearRect(0, 0, width, height)
-      //   this.render()
-      //   canvas.requestAnimationFrame(scroll)
-      // }
+        ctx.clearRect(0, 0, width, height)
+        this.render()
+        canvas.requestAnimationFrame(scroll)
+      }
 
-      // canvas.requestAnimationFrame(scroll)
+      canvas.requestAnimationFrame(scroll)
     },
     async createCanvas () {
       const { pixelRatio: dpr } = this.data._windowInfo
@@ -116,7 +127,7 @@ Component({
         }
       }
 
-      console.log('render time', Date.now() - start)
+      // console.log('render time', Date.now() - start)
     },
 
     /**
@@ -134,7 +145,15 @@ Component({
           // 计算文字宽度 // todo: 处理双字符文字，例如 emoji
           if (!scrolling) {
             node.textArray = node.text.split('')
-            node.textWidth = node.textArray.map(str => ctx.measureText(str).width)
+            node.textWidth = node.textArray.map(str => {
+              // 双字节字符，宽度为 16
+              if (/[^\x00-\xff]/.test(str)) {
+                return 16
+              // 其它字符，获取宽度
+              } else {
+                return ctx.measureText(str).width
+              }
+            })
             node.total = node.textArray.length
           }
 
@@ -158,13 +177,6 @@ Component({
 
       rx = 0
       ry += 26
-    },
-
-    /**
-     * 动画函数
-     */
-    anim () {
-      requestAnimationFrame(this.anim)
     }
   }
 })
