@@ -6,7 +6,8 @@ const app = getApp()
 let rx = 0
 let ry = 0
 let scrolling = false
-let scrollY = 0
+let scrollTop = 0
+let scrollHeight = 0
 let requestId = 0
 
 Component({
@@ -34,19 +35,23 @@ Component({
   methods: {
     noop () {},
     touchstart (e) {
-      touchstart(e)
+      const { height } = this.data
+      touchstart({e, scrollTop, scrollHeight, height})
     },
     touchmove (e) {
       const { canvas, ctx, width, height } = this.data
-      const { type, dy } = touchmove(e)
+      const { type, rx: _rx, ry: _ry } = touchmove({e})
 
       switch (type) {
         case 'scroll':
           scrolling = true
+          rx = _rx
+          ry = _ry
+
           canvas.cancelAnimationFrame(requestId)
           requestId = canvas.requestAnimationFrame(() => {
-            rx = 0
-            ry = dy
+            // 使用绘制起点计算 scrollTop
+            scrollTop = -ry
             ctx.clearRect(0, 0, width, height)
             this.render()
           })
@@ -54,7 +59,7 @@ Component({
       }
     },
     touchend (e) {
-      touchend(e)
+      touchend({e})
       scrolling = false
     },
     onTap (e) {
@@ -76,6 +81,7 @@ Component({
       canvas.requestAnimationFrame(scroll)
     },
     async createCanvas () {
+      // todo: 避让底部安全区、工具栏位置
       const { pixelRatio: dpr } = this.data._windowInfo
 
       /**
@@ -119,7 +125,7 @@ Component({
     render () {
       const { ctx, doc } = this.data
 
-      const start = Date.now()
+      const ryStart = ry
 
       for (const node of doc) {
         if (node.type === 'paragraph') {
@@ -127,7 +133,7 @@ Component({
         }
       }
 
-      // console.log('render time', Date.now() - start)
+      scrollHeight = ry - ryStart + 5 // 文字底部距离 （26 - 16） / 2
     },
 
     /**
