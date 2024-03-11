@@ -40,27 +40,77 @@ Component({
     },
     touchmove (e) {
       const { canvas, ctx, width, height } = this.data
-      const { type, rx: _rx, ry: _ry } = touchmove({e})
+      const res = touchmove({e})
 
-      switch (type) {
+      switch (res.type) {
         case 'scroll':
           scrolling = true
-          rx = _rx
-          ry = _ry
+          scrollTop = res.scrollTop
 
           canvas.cancelAnimationFrame(requestId)
           requestId = canvas.requestAnimationFrame(() => {
-            // 使用绘制起点计算 scrollTop
-            scrollTop = -ry
-            ctx.clearRect(0, 0, width, height)
+            ry = -scrollTop
+            this.clear()
             this.render()
           })
           break
       }
     },
     touchend (e) {
-      touchend({e})
-      scrolling = false
+      const { canvas, ctx, width, height } = this.data
+      const res = touchend({e, scrollTop, scrollHeight, height})
+
+      console.log('touchend 2')
+
+      this.scrollTo(res.scrollTop, 300)
+    },
+    scrollTo (targetY, duration) {
+      const startTime = Date.now()
+      const startScrollTop = scrollTop
+      let msPassed = 0
+      let oldTimeStamp = 0
+      let movingSpeed = (targetY - scrollTop) / duration
+
+      console.log('movingSpeed', movingSpeed)
+      console.log('scrollTop', scrollTop)
+
+      const { canvas } = this.data
+      const step = (timeStamp) => {
+        // 计算过去的时间
+        // if (oldTimeStamp) {
+        //   msPassed = (timeStamp - oldTimeStamp)
+        // }
+        // 使用时间计算新位置
+        // scrollTop += Math.round(movingSpeed * msPassed)
+
+        msPassed = Date.now() - startTime
+        scrollTop = startScrollTop + easeOutCubic(msPassed / duration) * (targetY - startScrollTop)
+
+        // 向上滚动
+        if (movingSpeed >=0) {
+          if (scrollTop > targetY) scrollTop = targetY
+
+        // 向下滚动
+        } else {
+          if (scrollTop < targetY) scrollTop = targetY
+        }
+
+        ry = -scrollTop
+
+        this.clear()
+        this.render()
+
+
+        if (scrollTop === targetY) {
+          console.log('scrollTo done', Date.now() - startTime)
+          return
+        }
+
+        oldTimeStamp = timeStamp
+        canvas.requestAnimationFrame(step)
+      }
+
+      canvas.requestAnimationFrame(step)
     },
     onTap (e) {
       return
@@ -118,6 +168,13 @@ Component({
             resolve()
           })
       })
+    },
+    /**
+     * 清空画布
+     */
+    clear () {
+      const { ctx, width, height } = this.data
+      ctx.clearRect(0, 0, width, height)
     },
     /**
      * 全量绘制
@@ -186,3 +243,11 @@ Component({
     }
   }
 })
+
+/**
+ * 缓动函数
+ * @see https://easings.net/#easeOutCubic
+ */
+function easeOutCubic(x) {
+  return 1 - Math.pow(1 - x, 3);
+}
