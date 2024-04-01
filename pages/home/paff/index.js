@@ -1,4 +1,4 @@
-import { doc } from './doc'
+import { doc } from './docLong'
 import { touchstart, touchmove, touchend } from './touch'
 
 const app = getApp()
@@ -77,17 +77,13 @@ Component({
       const { canvas } = this.data
       const step = (timeStamp) => {
         // 计算过去的时间
-        // if (oldTimeStamp) {
-        //   msPassed = (timeStamp - oldTimeStamp)
-        // }
-        // 使用时间计算新位置
-        // scrollTop += Math.round(movingSpeed * msPassed)
-
         msPassed = Date.now() - startTime
+
+        // 使用进度计算新位置
         scrollTop = startScrollTop + easeOutCubic(msPassed / duration) * (targetY - startScrollTop)
 
         // 向上滚动
-        if (movingSpeed >=0) {
+        if (movingSpeed >= 0) {
           if (scrollTop > targetY) scrollTop = targetY
 
         // 向下滚动

@@ -33,14 +33,22 @@ export const touchmove = ({e}) => {
 }
 
 export const touchend = ({e, scrollTop: _scrollTop, scrollHeight, height}) => {
-  console.log('touchend', e)
-
   let scrollTop
-  // 超出边界时，需要重置位置
-  if (_scrollTop < 0) {
+
+  // 内容不够一屏幕时
+  if (scrollHeight <= height) {
     scrollTop = 0
+
+  // 下拉超出边界时
+  } else if (_scrollTop < 0) {
+    scrollTop = 0
+
+  // 上拉超出边界时
   } else if (_scrollTop > scrollHeight - height) {
     scrollTop = scrollHeight - height
+
+  } else {
+    scrollTop = _scrollTop
   }
 
   type = ''
