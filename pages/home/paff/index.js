@@ -71,9 +71,6 @@ Component({
       let oldTimeStamp = 0
       let movingSpeed = (targetY - scrollTop) / duration
 
-      console.log('movingSpeed', movingSpeed)
-      console.log('scrollTop', scrollTop)
-
       const { canvas } = this.data
       const step = (timeStamp) => {
         // 计算过去的时间

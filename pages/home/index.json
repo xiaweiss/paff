@@ -2,7 +2,6 @@
   "navigationStyle": "custom",
   "disableScroll": true,
   "usingComponents": {
-    "paff": "./paff"
-  },
-  "renderer": "skyline"
+    "paff": "././paff-render-by-view-back-up"
+  }
 }

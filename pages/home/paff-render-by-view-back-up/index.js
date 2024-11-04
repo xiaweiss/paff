@@ -178,7 +178,7 @@ Component({
         measureText: text || ''
       })
 
-      const width = await new Promise<number>((resolve) => {
+      const width = await new Promise((resolve) => {
         this.data._measureTextNode.boundingClientRect((rect) => {
           resolve(rect.width)
         }).exec()
