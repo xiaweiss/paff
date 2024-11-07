@@ -14,28 +14,26 @@
       <view id="measure-text" class="measure-text paragraph">{{measureText}}</view>
     </view>
 
-    <view bind:touchstart="noop">
-      <textarea
-        class="input"
-        value="{{value}}"
-        maxlength="{{-1}}"
-        focus="{{focus}}"
-        auto-height
-        show-confirm-bar
-        adjust-position="{{false}}"
-        hold-keyboard
-        confirm-type="return"
-        bind:focus="onFocus"
-        bind:blur="onBlur"
-        bind:linechange="onLineChange"
-        bind:input="onInput"
-        bind:keyboardheightchange="onKeyboardHeightChange"
-        bind:keyboardcompositionstart="onKeyboardCompositionStart"
-        bind:keyboardcompositionupdate="onKeyboardCompositionUpdate"
-        bind:keyboardcompositionend="onKeyboardCompositionEnd"
-      />
-    </view>
   </view>
+
+  <textarea
+    class="input"
+    value="{{value}}"
+    maxlength="{{-1}}"
+    focus="{{focus}}"
+    show-confirm-bar
+    adjust-position="{{false}}"
+    hold-keyboard
+    confirm-type="return"
+    bind:focus="onFocus"
+    bind:blur="onBlur"
+    bind:linechange="onLineChange"
+    bind:input="onInput"
+    bind:keyboardheightchange="onKeyboardHeightChange"
+    bind:keyboardcompositionstart="onKeyboardCompositionStart"
+    bind:keyboardcompositionupdate="onKeyboardCompositionUpdate"
+    bind:keyboardcompositionend="onKeyboardCompositionEnd"
+  />
 </view>
 
 <view class="button-container">

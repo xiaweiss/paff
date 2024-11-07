@@ -7,7 +7,6 @@ Component({
   },
   data: {
     width: 0,
-    canvas: wx.createOffscreenCanvas({type: '2d'}),
     composition: '',
     cursorX: 0,
     cursorY: 0,

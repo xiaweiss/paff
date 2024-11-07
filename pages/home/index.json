@@ -2,6 +2,6 @@
   "navigationStyle": "custom",
   "disableScroll": true,
   "usingComponents": {
-    "paff": "././paff-render-by-view-back-up"
+    "paff": "./paff"
   }
 }

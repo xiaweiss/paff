@@ -1,16 +1,21 @@
-<!-- <view class="intro">编辑器区域：</view> -->
-<view
-  class="paff"
-  bind:tap="onTap"
-  capture-bind:touchstart="touchstart"
-  capture-bind:touchmove="touchmove"
-  capture-bind:touchend="touchend"
-  capture-bind:touchcancel="touchend"
->
-  <canvas
-    id="canvas"
-    class="canvas"
-    type="2d"
-  />
-  <!-- <textarea class="input" /> -->
+<view class="default">{{text}}</view>
+<canvas id="canvas" class="canvas" style="width:{{width}}px;" type="2d" />
+<view class="paff" style="height:{{height}}px;font-family:{{fontFamily}};" bind:tap="onTap">
+  {{text}}
+</view>
+
+<view class="measure-text" style="font-family:{{fontFamily}};"><text space="nbsp">{{measureText}}</text></view>
+
+<view class="test">
+  <view class="button" bind:tap="textWidth">测量文本宽度</view>
+  <view class="button" bind:tap="textWidthCanvas">测量文本宽度 canvas</view>
+</view>
+
+<view class="width">
+  <view>
+    <view wx:for="{{widthList}}" wx:key="index">{{item}}</view>
+  </view>
+  <view>
+    <view wx:for="{{widthListCanvas}}" wx:key="index">{{item}}</view>
+  </view>
 </view>

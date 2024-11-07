@@ -4,5 +4,6 @@
     "urlCheck": false,
     "skylineRenderEnable": false
   },
-  "libVersion": "3.3.1"
+  "libVersion": "3.3.1",
+  "projectname": "paff"
 }
