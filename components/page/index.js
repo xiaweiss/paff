@@ -19,7 +19,6 @@ Component({
      */
     scrollY: { type: Boolean, value: true },
     bounces: { type: Boolean, value: true },
-    loaded: { type: Boolean, value: true },
     lowerThreshold: { type: Number, value: 50 },
     navigationBarBackgroundColor: { type: String, value: 'transparent' },
     navigationBarTitleText: { type: String, value: '墨问便签' },
@@ -35,8 +34,11 @@ Component({
     scrollWithAnimation: { type: Boolean, value: false },
     /** 是否启用 bottom slot */
     enableBottom: { type: Boolean, value: false },
+    enableCustom: { type: Boolean, value: false },
     /** 上边内边距 */
     paddingTop: { type: Number, value: 0 },
+    /** 下边内边距 */
+    paddingBottom: { type: Number, value: 0 },
   },
   data: {
     /** 是否需要下拉刷新 */

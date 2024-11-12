@@ -1,21 +1,31 @@
-<view class="default">{{text}}</view>
-<canvas id="canvas" class="canvas" style="width:{{width}}px;" type="2d" />
-<view class="paff" style="height:{{height}}px;font-family:{{fontFamily}};" bind:tap="onTap">
-  {{text}}
-</view>
+<scroll-view
+  class="paff"
+  scroll-y
+  bind:tap="onTap"
+>
+  <!-- <selection bind:selectionchange="selectionChangeHandler" disable-context-menu> -->
+    <block wx:for="{{content}}" wx:key="index">
+      <view wx:if="{{item.type === 'P'}}" class="P"
+        bind:touchstart="onTouchStart"
+        bind:touchmove="onTouchMove"
+        catch:touchend="onTouchEnd"
+      >
+        <text wx:for="{{item.line}}" wx:key="index" class="line" user-select>{{item}}</text>
+      </view>
+    </block>
+  <!-- </selection> -->
+  <!-- <textarea class="input" /> -->
 
-<view class="measure-text" style="font-family:{{fontFamily}};"><text space="nbsp">{{measureText}}</text></view>
+  <view class="safe-area-bottom" />
+</scroll-view>
 
-<view class="test">
-  <view class="button" bind:tap="textWidth">测量文本宽度</view>
-  <view class="button" bind:tap="textWidthCanvas">测量文本宽度 canvas</view>
-</view>
-
-<view class="width">
-  <view>
-    <view wx:for="{{widthList}}" wx:key="index">{{item}}</view>
-  </view>
-  <view>
-    <view wx:for="{{widthListCanvas}}" wx:key="index">{{item}}</view>
-  </view>
-</view>
+<editor
+  id="editor"
+  class="editor"
+  enable-formats="{{['bold']}}"
+  bind:ready="onEditorReady"
+  bind:focus="onFocus"
+  bind:blur="onBlur"
+  bind:input="onInput"
+  bind:statuschange="onStatusChange"
+/>

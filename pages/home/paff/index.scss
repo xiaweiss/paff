@@ -1,28 +1,25 @@
 .paff {
   position: relative;
   width: 100%;
-  height: 26px;
-  background: pink;
+  height: 0;
+  flex: 1;
+  // background: pink;
+}
+
+.safe-area-bottom {
+  flex-shrink: 0;
+  height: env(safe-area-inset-bottom);
+}
+
+.P {
   font-size: 16px;
-  font-family: system-ui;
-  line-height: 26px;
+  font-family: MiSansLatin,Arial,system-ui;
+  line-height: 25.6px;
   color: #222;
 }
 
-.default {
-  font-size: 16px;
-  line-height: 26px;
-  color: #222;
-}
-
-.measure-text {
-  width: fit-content;
-  height: 26px;
-  font-size: 16px;
-  font-family: system-ui;
-  line-height: 26px;
-  color: #222;
-  background: skyblue;
+.line {
+  display: block;
 }
 
 .input {
@@ -35,24 +32,12 @@
   background: skyblue;
 }
 
-.test {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.button {
-  padding: 10px;
-  margin: 10px;
-  background: #ececec;
-  border-radius: 3px;
-  font-size: 14px;
-}
-
-.canvas {
-  height: 26px;
+.editor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100px;
   background: skyblue;
-}
-
-.width {
-  display: flex;
+  opacity: 0.5;
 }

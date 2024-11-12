@@ -1,13 +1,7 @@
 import { isAndroid } from '../../../utils/index'
-
-// const fontFamily = "Menlo-Regular-2"
-const fontFamily = "MiSansLatin,'PingFang SC',system-ui"
-// const fontFamily = "Arial"
-// iOS：Arial Menlo
-// Android：sans-serif-condensed sans-serif-medium serif monospace
-
-// Menlo, Monaco, 'Courier New', monospace
-// -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif
+import { measureTextWidth } from './measureTextWidth'
+import { longText as text } from './longText'
+// import { shortText } from './shortText'
 
 Component({
   options: {
@@ -15,113 +9,111 @@ Component({
     virtualHost: true,
   },
   data: {
-    width: 0,
-    height: 26,
-    fontFamily,
-    // text: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-    text: '😂 正·abcdefghijklmnopqrstuvwxyz',
-    measureText: '',
-    widthList: [],
-    widthListCanvas: []
+    isFocus: false,
+    editor: null,
+    width: wx.getWindowInfo().windowWidth,
+    content: '',
   },
   lifetimes: {
     async attached () {
-      if (isAndroid() || true) {
+      // 加载字体
+      if (isAndroid()) {
         await new Promise((resolve) => {
           wx.loadFontFace({
             family: 'MiSansLatin',
-            source: 'url("https://xiaweiss.oss-cn-beijing.aliyuncs.com/MiSansLatin-Normal.woff")',
+            source: 'url("https://dev-pub-sdn-001.mowen.cn/fe/assets/font/MiSansLatin-Normal.woff")',
             scopes: ['webview', 'native'],
-            success: (res) => {
-              console.log('loadFontFace success', res)
-              resolve()
-            },
+            success: () => resolve()
           })
         })
       }
 
-      // 获取窗口尺寸信息
-      const { windowWidth } = wx.getWindowInfo()
-      this.setData({
-        width: windowWidth,
-      })
-      this.createSelectorQuery()
-        .select('#canvas')
-        .fields({ node: true, size: true })
-        .exec((res) => {
-          const canvas = res[0].node
-
-          const dpr = wx.getWindowInfo().pixelRatio
-          canvas.width = res[0].width * dpr
-          canvas.height = res[0].height * dpr
-
-
-          const ctx = canvas.getContext('2d')
-          ctx.scale(dpr, dpr)
-
-          ctx.clearRect(0, 0, canvas.width, canvas.height)
-          ctx.font = '16px ' + fontFamily
-          ctx.fillText(this.data.text, 0, 19)
-        })
+      this.setContent(text)
     }
   },
   methods: {
-    async textWidth () {
-      const query = this.createSelectorQuery()
-      const dom = query.select('.measure-text')
-
-      let total = 0
-      const widthList = []
-      const { text } = this.data
-      const list = [...text]
-      for (const item of list) {
-        this.setData({
-          measureText: item
-        })
-
-        const width = await new Promise((resolve) => {
-          dom.boundingClientRect(rect => {
-            console.log('rect', rect)
-            resolve(rect.width)
-          }).exec()
-        })
-        widthList.push(+width.toFixed(2))
-        total += +width.toFixed(2)
-      }
-
-      widthList.push(total)
-
-      this.setData({
-        widthList
+    onTap () {
+      console.log('onTap')
+      this.focus()
+    },
+    onEditorReady () {
+      this.createSelectorQuery().select('#editor').context((res) => {
+        this.setData({ editor: res.context })
+      }).exec()
+    },
+    onFocus () {
+      console.log('onFocus')
+      this.setData({ isFocus: true })
+    },
+    onBlur () {
+      console.log('onBlur')
+      this.setData({ isFocus: false })
+    },
+    onInput (e) {
+      console.log('onInput', e)
+    },
+    onStatusChange (e) {
+      console.log('onStatusChange', e)
+    },
+    onTouchStart (e) {
+      console.log('touchstart', e)
+      // this.focus()
+    },
+    onTouchMove (e) {
+      console.log('touchmove', e)
+    },
+    onTouchEnd (e) {
+      console.log('touchend', e)
+    },
+    focus () {
+      if (this.data.isFocus) return
+      const { editor } = this.data
+      editor.insertText({text: ''})
+      editor.getContents({
+        success: (res) => {
+          console.log('getContents', res)
+        }
       })
     },
-    async textWidthCanvas () {
-      const canvas = wx.createOffscreenCanvas({type: '2d', width: 50, height: 26})
-      const ctx = canvas.getContext('2d')
-      /* font-size/line height font-family */
-      ctx.font = '16px ' + fontFamily
+    setContent (value) {
+      const start = Date.now()
+      const type = 'P'
+      const line = []
+      const text = []
+      const width = []
 
-      let total = 0
-      const widthListCanvas = []
-      const { text } = this.data
-      const list = [...text]
+      let lineIndex = 0
+      let lineWidth = 0
+      for (const item of [...value]) {
+        text.push(item)
+        const _width = measureTextWidth(item)
+        width.push(_width)
 
-      for (const item of list) {
-        ctx.clearRect(0, 0, canvas.width,canvas.height)
-        ctx.fillText(item, 0, 19)
-        const TextMetrics = ctx.measureText(item)
-        console.log('TextMetrics', TextMetrics)
+        lineWidth += _width
 
-        const { width } = TextMetrics
-        widthListCanvas.push(+width.toFixed(2))
-        total += +width.toFixed(2)
+        if (lineWidth <= this.data.width) {
+          line[lineIndex] = (line[lineIndex] || '') + item
+        } else {
+          line.push(item)
+          lineWidth = _width
+          lineIndex += 1
+        }
       }
+      const content = [{
+        type,
+        line,
+        text,
+        width
+      }]
 
-      widthListCanvas.push(total)
-
-      this.setData({
-        widthListCanvas
+      this.setData({ content }, () => {
+        const end = Date.now()
+        console.log('setContent time', end - start)
+        console.log('content', content[0])
       })
+    },
+    selectionChangeHandler (e) {
+      console.log('selectionChangeHandler', e)
     }
-  },
+  }
 })

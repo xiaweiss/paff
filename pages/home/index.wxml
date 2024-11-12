@@ -1,7 +1,8 @@
 <page
   navigationBarTitleText="Paff Editor"
   enableBottom
-  scrollY="{{false}}"
+  enableCustom
 >
   <paff />
+  <!-- <paff-wx-editor /> -->
 </page>
