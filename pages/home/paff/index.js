@@ -13,6 +13,8 @@ Component({
     editor: null,
     width: wx.getWindowInfo().windowWidth,
     content: '',
+    cursorX: 0,
+    cursorY: 0,
   },
   lifetimes: {
     async attached () {
@@ -32,9 +34,28 @@ Component({
     }
   },
   methods: {
-    onTap () {
-      console.log('onTap')
+    onTap (e) {
+      console.log('onTap', e)
       this.focus()
+      let cursorX = 0
+      let cursorY = 0
+
+      const { content } = this.data
+      const { x } = e.detail
+      const { offsetTop: y } = e.target
+
+      const { lineTop } = content[0]
+
+      console.log('====y', y)
+
+      for (let i = 0; i < lineTop.length; i++) {
+        if (y === lineTop[i]) {
+          cursorY = lineTop[i]
+          break
+        }
+      }
+
+      this.setData({ cursorX: x, cursorY })
     },
     onEditorReady () {
       this.createSelectorQuery().select('#editor').context((res) => {
@@ -79,6 +100,7 @@ Component({
       const start = Date.now()
       const type = 'P'
       const line = []
+      const lineTop = []
       const text = []
       const width = []
 
@@ -97,11 +119,13 @@ Component({
           line.push(item)
           lineWidth = _width
           lineIndex += 1
+          lineTop.push(lineIndex * 260 / 10)
         }
       }
       const content = [{
         type,
         line,
+        lineTop,
         text,
         width
       }]
@@ -109,7 +133,7 @@ Component({
       this.setData({ content }, () => {
         const end = Date.now()
         console.log('setContent time', end - start)
-        console.log('content', content[0])
+        console.log('====content', content[0])
       })
     },
     selectionChangeHandler (e) {

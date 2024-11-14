@@ -11,15 +11,38 @@
   height: env(safe-area-inset-bottom);
 }
 
+.cursor {
+  position: absolute;
+  width: 2px;
+  height: 18px;
+  background: #1456f0;
+  animation: blink 1s infinite;
+  transform: translate(-50%, 4px);
+}
+
+//  光标闪烁动画
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .P {
   font-size: 16px;
   font-family: MiSansLatin,Arial,system-ui;
-  line-height: 25.6px;
+  line-height: 26px;
   color: #222;
 }
 
 .line {
   display: block;
+  min-height: 26px;
 }
 
 .input {
@@ -34,7 +57,7 @@
 
 .editor {
   position: absolute;
-  left: 0;
+  left: -100vw;
   top: 0;
   width: 100vw;
   height: 100px;

@@ -13,6 +13,7 @@
         <text wx:for="{{item.line}}" wx:key="index" class="line" user-select>{{item}}</text>
       </view>
     </block>
+    <view class="cursor" style="left:{{cursorX}}px;top:{{cursorY}}px;" />
   <!-- </selection> -->
   <!-- <textarea class="input" /> -->
 
