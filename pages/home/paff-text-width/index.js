@@ -2,7 +2,7 @@ import { isAndroid } from '../../../utils/index'
 
 // const fontFamily = "Menlo-Regular-2"
 // const fontFamily = "MiSansLatin,'PingFang SC','Arial',system-ui"
-const fontFamily = "MiSansLatin,Arial,system-ui"
+// const fontFamily = "MiSansLatin,Arial,system-ui"
 // iOS：Arial Menlo
 // Android：sans-serif-condensed sans-serif-medium serif monospace
 
@@ -17,9 +17,8 @@ Component({
   data: {
     width: 0,
     height: 26,
-    fontFamily,
-    // text: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-    text: '😂 正·abcdefghijklmnopqrstuvwxyz',
+    text: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+    // text: 'abcdefghijklmnopqrstuvwxyz1234567890',
     measureText: '',
     widthList: [],
     widthListCanvas: []

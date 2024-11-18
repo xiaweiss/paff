@@ -1,7 +1,6 @@
-import { isAndroid } from '../../../utils/index'
-import { measureTextWidth } from './measureTextWidth'
-import { longText as text } from './longText'
-// import { shortText } from './shortText'
+// import { isAndroid } from '../../../utils/index'
+// import { longText as text } from './longText'
+import { shortText as text } from './shortText'
 
 Component({
   options: {
@@ -15,21 +14,10 @@ Component({
     content: '',
     cursorX: 0,
     cursorY: 0,
+    measureText: '',
   },
   lifetimes: {
     async attached () {
-      // 加载字体
-      if (isAndroid()) {
-        await new Promise((resolve) => {
-          wx.loadFontFace({
-            family: 'MiSansLatin',
-            source: 'url("https://dev-pub-sdn-001.mowen.cn/fe/assets/font/MiSansLatin-Normal.woff")',
-            scopes: ['webview', 'native'],
-            success: () => resolve()
-          })
-        })
-      }
-
       this.setContent(text)
     }
   },
@@ -43,19 +31,41 @@ Component({
       const { content } = this.data
       const { x } = e.detail
       const { offsetTop: y } = e.target
+      const p = content[0]
+      const { line } = p
 
-      const { lineTop } = content[0]
+      for (let i = 0; i < line.length; i++) {
+        if (y === line[i].top) {
+          cursorY = line[i].top
 
-      console.log('====y', y)
+          console.log('===start', line[i].textIndex)
 
-      for (let i = 0; i < lineTop.length; i++) {
-        if (y === lineTop[i]) {
-          cursorY = lineTop[i]
+          let left = 0
+          for (let j = line[i].textIndex; j < p.width.length; j++) {
+            const right = left + p.width[j]
+            const center = (left + right) / 2
+
+            console.log('x', x)
+            console.log('left', left, 'center', center, 'right', right)
+
+            if (x >= left && x < center) {
+              cursorX = left
+              break
+            }
+            if (x >= center && x < right) {
+              cursorX = right
+              break
+            }
+
+            left = right
+          }
           break
         }
       }
 
-      this.setData({ cursorX: x, cursorY })
+      console.log('====cursorX', cursorX),
+
+      this.setData({ cursorX, cursorY })
     },
     onEditorReady () {
       this.createSelectorQuery().select('#editor').context((res) => {
@@ -96,36 +106,45 @@ Component({
         }
       })
     },
-    setContent (value) {
+    measureTextWidth (text) {
+      return new Promise((resolve) => {
+        this.setData({ measureText: text }, () => {
+          const query = this.createSelectorQuery()
+          query.select('.measure-text').boundingClientRect((rect) => {
+            resolve(rect.width)
+          }).exec()
+        })
+      })
+    },
+    async setContent (value) {
       const start = Date.now()
       const type = 'P'
-      const line = []
-      const lineTop = []
+      const line = [{text: '', textIndex: 0, top: 0}]
       const text = []
       const width = []
 
+      let textIndex = 0
       let lineIndex = 0
       let lineWidth = 0
       for (const item of [...value]) {
         text.push(item)
-        const _width = measureTextWidth(item)
+        const _width = await this.measureTextWidth(item)
         width.push(_width)
 
         lineWidth += _width
 
         if (lineWidth <= this.data.width) {
-          line[lineIndex] = (line[lineIndex] || '') + item
+          line[lineIndex].text = line[lineIndex].text + item
         } else {
-          line.push(item)
           lineWidth = _width
           lineIndex += 1
-          lineTop.push(lineIndex * 260 / 10)
+          line.push({text: item, textIndex, top: lineIndex * 260 / 10})
         }
+        textIndex += 1
       }
       const content = [{
         type,
         line,
-        lineTop,
         text,
         width
       }]

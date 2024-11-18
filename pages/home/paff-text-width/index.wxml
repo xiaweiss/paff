@@ -1,10 +1,10 @@
 <view class="default">{{text}}</view>
 <canvas id="canvas" class="canvas" style="width:{{width}}px;" type="2d" />
-<view class="paff" style="height:{{height}}px;font-family:{{fontFamily}};" bind:tap="onTap">
+<view class="paff" style="height:{{height}}px;" bind:tap="onTap">
   {{text}}
 </view>
 
-<view class="measure-text" style="font-family:{{fontFamily}};"><text space="nbsp">{{measureText}}</text></view>
+<view class="measure-text"><text space="nbsp">{{measureText}}</text></view>
 
 <view class="test">
   <view class="button" bind:tap="textWidth">测量文本宽度</view>

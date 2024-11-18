@@ -6,6 +6,16 @@
   // background: pink;
 }
 
+.pink {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 112px;
+  height: 26px;
+  background: pink;
+  opacity: 0.5;
+}
+
 .safe-area-bottom {
   flex-shrink: 0;
   height: env(safe-area-inset-bottom);
@@ -35,7 +45,7 @@
 
 .P {
   font-size: 16px;
-  font-family: MiSansLatin,Arial,system-ui;
+  font-family: system-ui;
   line-height: 26px;
   color: #222;
 }
@@ -43,6 +53,16 @@
 .line {
   display: block;
   min-height: 26px;
+}
+
+.measure-text {
+  width: fit-content;
+  height: 26px;
+  font-size: 16px;
+  font-family: system-ui;
+  line-height: 26px;
+  color: #222;
+  background: skyblue;
 }
 
 .input {

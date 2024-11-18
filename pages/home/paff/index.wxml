@@ -10,12 +10,15 @@
         bind:touchmove="onTouchMove"
         catch:touchend="onTouchEnd"
       >
-        <text wx:for="{{item.line}}" wx:key="index" class="line" user-select>{{item}}</text>
+        <text wx:for="{{item.line}}" wx:key="index" class="line" user-select>{{item.text}}</text>
       </view>
     </block>
+    <view class="pink" />
     <view class="cursor" style="left:{{cursorX}}px;top:{{cursorY}}px;" />
   <!-- </selection> -->
   <!-- <textarea class="input" /> -->
+
+  <view class="measure-text"><text space="nbsp">{{measureText}}</text></view>
 
   <view class="safe-area-bottom" />
 </scroll-view>
