@@ -8,6 +8,7 @@ Component({
     virtualHost: true,
   },
   data: {
+    _chineseWidth: 0,
     isFocus: false,
     editor: null,
     width: wx.getWindowInfo().windowWidth,
@@ -108,9 +109,18 @@ Component({
     },
     measureTextWidth (text) {
       return new Promise((resolve) => {
+        const isChinese = (new RegExp("[\\u4E00-\\u9FFF]+","g")).test(text)
+
+        // 中文字符是固定宽度，无需重复测量
+        if (isChinese && this.data._chineseWidth) {
+          resolve(this.data._chineseWidth)
+          return
+        }
+
         this.setData({ measureText: text }, () => {
           const query = this.createSelectorQuery()
           query.select('.measure-text').boundingClientRect((rect) => {
+            if (isChinese) this.data._chineseWidth = rect.width
             resolve(rect.width)
           }).exec()
         })
