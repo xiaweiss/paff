@@ -1,5 +1,6 @@
 export * from './emitter'
 export * from './getPage'
+export * from './grapheme'
 export * from './isAndroid'
 export * from './isCustomNavigation'
 export * from './isIOS'

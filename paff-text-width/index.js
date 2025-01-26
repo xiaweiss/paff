@@ -1,4 +1,4 @@
-import { isAndroid } from '../../../utils/index'
+import { isAndroid } from '../utils/index'
 
 // const fontFamily = "Menlo-Regular-2"
 // const fontFamily = "MiSansLatin,'PingFang SC','Arial',system-ui"

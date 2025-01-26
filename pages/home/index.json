@@ -1,7 +1,6 @@
 {
-  "navigationStyle": "custom",
-  "disableScroll": true,
   "usingComponents": {
-    "paff": "./paff"
+    "page": "../../components/page",
+    "paff": "../../paff"
   }
 }

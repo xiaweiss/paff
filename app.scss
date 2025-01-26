@@ -1,23 +1,52 @@
+/**
+ * 修改 PC 端默认文字选中颜色
+ */
+::selection {
+  background-color: #f5dddd;
+}
+
 page {
   position: relative;
   box-sizing: border-box;
   /** 最小高度填充满视口，方便设置页面背景色 */
   min-height: 100vh;
-  /** 默认字体 */
-  font-family: system-ui, -apple-system;
-  /** 移动端按钮按下时，去除高亮 */
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  /** 默认行高 */
-  line-height: 1;
 }
 
 /**
  * bug: root-portal 在 webview 模式，无法继承全局 page 的样式
  * @see https://github.com/xiaweiss/miniprogram-bug-report/issues/40
  */
+page,
 view {
-  font-family: system-ui, -apple-system;
+  /**
+   * @bug: [skyline ios] font-weight 中文字重样式不支持 500
+   * @see: https://github.com/xiaweiss/miniprogram-bug-report/issues/207
+   * @hack: 设置字体 PingFang SC
+   */
+
+  /** 默认字体（用于输入框占位符） */
+  --font-family: 'Pingfang SC', system-ui, -apple-system;
+  /** 等宽字体 ios-Menlo android-Monaco mac-Menlo pc-Consolas */
+  --font-family-mono: 'Menlo', 'Monaco', 'Consolas', system-ui, -apple-system;
+
+  /** 默认字体 */
+  font-family: var(--font-family);
+  /** 移动端按钮按下时，去除高亮 */
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  /** 默认行高 */
+  line-height: 1;
+
+  /** 输入框占位符颜色（背景白） */
+  --input-placeholder-color: #B2B2B2;
+  /** 输入框占位符颜色（背景灰） */
+  --input-placeholder-color-gray: #6C7684;
+
+  /** 夜间模式配色 */
+  --theme-black-color-primary: #888;
+  --theme-black-color-secondary: #666;
+  --theme-black-background-primary: #1A1A1A;
+  --theme-black-background-secondary: #292929;
+  --theme-black-background-tertiary: #353535;
 }
 
 view,
@@ -27,6 +56,10 @@ input {
 
 image {
   display: block;
+}
+
+text {
+  cursor: inherit;
 }
 
 /** 分享按钮等默认样式重置，使用时需要设置 size="mini" */
@@ -39,5 +72,48 @@ image {
    * hack 重置 margin 样式
    */
   margin: 0!important;
+  font-size: inherit;
+  font-weight: 400;
+  color: inherit;
   line-height: 1!important;
+}
+
+/**
+ * 主题色设置
+ */
+.theme-white {
+  --theme-color-primary: #353535;
+  --theme-color-secondary: #888;
+  --theme-background-primary: #fff;
+  --theme-background-secondary: #F5F6F8;
+  --theme-background-tertiary: #C0C0C0;
+  --theme-box-shadow-primary: 0 -3px 4px 0 rgba(228,229,231,0.5);
+}
+
+.theme-yellow {
+  --theme-color-primary: #353535;
+  --theme-color-secondary: #888;
+  --theme-background-primary: #E9E8E3;
+  --theme-background-secondary: #E0E0DA;
+  --theme-background-tertiary: #CECEC5;
+  --theme-box-shadow-primary: 0 -3px 4px 0 rgba(207,207,200,0.5);
+
+}
+
+.theme-pink {
+  --theme-color-primary: #353535;
+  --theme-color-secondary: #888;
+  --theme-background-primary: #F5EAEE;
+  --theme-background-secondary: #ECDDE3;
+  --theme-background-tertiary: #DCCAD1;
+  --theme-box-shadow-primary: 0 -3px 4px 0 rgba(230,206,216,0.5);
+}
+
+.theme-black {
+  --theme-color-primary: #9F9F9F;
+  --theme-color-secondary: #666;
+  --theme-background-primary: #1A1A1A;
+  --theme-background-secondary: #292929;
+  --theme-background-tertiary: #353535;
+  --theme-box-shadow-primary: none;
 }

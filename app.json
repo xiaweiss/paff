@@ -1,5 +1,4 @@
 {
-  "entryPagePath": "pages/home/index",
   "pages": [
     "pages/home/index"
   ],
@@ -7,27 +6,24 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "Paff Editor",
-    "backgroundColor": "#fff"
+    "backgroundColor": "#fff",
+    "navigationStyle": "custom",
+    "disableScroll": true
   },
   "debug": false,
   "resizable": true,
   "usingComponents": {
-    "page": "components/page/index"
+    "hover-view": "components/hover-view/index"
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2",
   "lazyCodeLoading": "requiredComponents",
-  "componentFramework": "glass-easel",
   "rendererOptions": {
     "skyline": {
       "defaultDisplayBlock": true,
-      "disableABTest": true,
-      "sdkVersionBegin": "3.0.0",
-      "sdkVersionEnd": "15.255.255",
-      "iosVersionBegin": "8.0.40",
-      "iosVersionEnd": "15.255.255",
-      "androidVersionBegin": "8.0.40",
-      "androidVersionEnd": "15.255.255"
+      "enableScrollViewAutoSize": true,
+      "tagNameStyleIsolation": "legacy"
     }
-  }
+  },
+  "componentFramework": "glass-easel"
 }
