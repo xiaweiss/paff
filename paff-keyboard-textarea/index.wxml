@@ -1,0 +1,37 @@
+<view>测试键盘</view>
+
+<view class="row">
+  <view class="button" bind:tap="focus">focus</view>
+
+  <view class="button" bind:tap="blur">blur</view>
+</view>
+
+<view class="container" catch:touchmove="noop">
+<scroll-view scroll-y="true" style="height: 300px;">
+  <view class="box">
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <textarea
+      class="textarea"
+      focus="{{isFocus}}"
+      placeholder="textarea"
+      show-confirm-bar="{{false}}"
+      fixed
+      adjust-position="{{false}}"
+      hold-keyboard
+      confirm-type="return"
+      bind:focus="onFocus"
+      bind:blur="onBlur"
+      bind:keyboardheightchange="onKeyboardHeightChange"
+    />
+  </view>
+</scroll-view>
+</view>
+
+<root-portal>
+  <view
+    class="toolbar"
+    style="{{keyboardHeight === 0 ? ('height:'+(safeAreaBottom + 50)+'px;padding-bottom:'+safeAreaBottom+'px;') : ('bottom:'+keyboardHeight+'px;')}}"
+  >工具栏</view>
+</root-portal>

@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "page": "../../components/page",
-    "paff": "../../paff"
-  }
+    "paff": "../../paff-keyboard"
+  },
+  "renderer": "skyline"
 }
