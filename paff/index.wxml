@@ -1,35 +1,27 @@
 <scroll-view
   class="paff"
   scroll-y
+  scroll-top="{{scrollTop}}"
+  scroll-with-animation="{{isIOS}}"
   bind:tap="onTap"
+  bind:scroll="onScroll"
+  bind:touchstart="onTouchStart"
+  catch:touchend="noop"
 >
-  <!-- <selection bind:selectionchange="selectionChangeHandler" disable-context-menu> -->
-    <block wx:for="{{content}}" wx:key="index">
-      <view wx:if="{{item.type === 'P'}}" class="P"
-        bind:touchstart="onTouchStart"
-        bind:touchmove="onTouchMove"
-        catch:touchend="onTouchEnd"
-      >
-        <text wx:for="{{item.line}}" wx:key="index" class="line" user-select>{{item.text}}</text>
-      </view>
-    </block>
-    <view class="pink" />
-    <view class="cursor" style="left:{{cursorX}}px;top:{{cursorY}}px;" />
-  <!-- </selection> -->
-  <!-- <textarea class="input" /> -->
+  <block wx:for="{{content}}" wx:key="index">
+    <view wx:if="{{item.type === 'P'}}" class="P">
+      <text wx:for="{{item.line}}" wx:key="index" class="line" user-select>{{item.text}}</text>
+    </view>
+  </block>
+  <view class="pink" />
+  <view class="cursor" style="left:{{cursorX}}px;top:{{cursorY}}px;" />
 
-  <view class="measure-text"><text space="nbsp">{{measureText}}</text></view>
-
-  <view class="safe-area-bottom" />
+    <!-- <view class="measure-text"><text space="nbsp">{{measureText}}</text></view> -->
 </scroll-view>
 
-<editor
-  id="editor"
-  class="editor"
-  enable-formats="{{['bold']}}"
-  bind:ready="onEditorReady"
-  bind:focus="onFocus"
-  bind:blur="onBlur"
-  bind:input="onInput"
-  bind:statuschange="onStatusChange"
+<keyboard focus="{{focus}}" />
+
+<tool-bar
+  bind:test="test"
+  bind:blur="blur"
 />

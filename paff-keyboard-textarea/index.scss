@@ -33,6 +33,17 @@
   opacity: 0;
 }
 
+// .toolbar {
+//   position: fixed;
+//   left: 0;
+//   bottom: 0;
+//   display: flex;
+//   align-items: center;
+//   width: 100vw;
+//   height: 50px;
+//   background: #ececec;
+// }
+
 .toolbar {
   position: fixed;
   left: 0;
@@ -40,6 +51,12 @@
   display: flex;
   align-items: center;
   width: 100vw;
-  height: 50px;
+  height: calc(50px + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  background: #ececec;
+}
+
+.keyboard-accessory {
+  height: 100%;
   background: #ececec;
 }

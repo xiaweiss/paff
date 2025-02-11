@@ -1,0 +1,17 @@
+.tool-bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 50px;
+  padding: 0 20px;
+  background: #ececec;
+}
+
+.tool-bar-placeholder {
+  background: #ececec;
+}
+

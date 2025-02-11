@@ -1,7 +1,9 @@
 {
   "usingComponents": {
     "page": "../../components/page",
-    "paff": "../../paff-keyboard"
+    "paff": "../../paff",
+    "paff-bak": "../../paff-bak",
+    "paff-keyboard-textarea": "../../paff-keyboard-textarea"
   },
   "renderer": "skyline"
 }

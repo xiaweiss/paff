@@ -1,0 +1,15 @@
+<editor
+  class="keyboard"
+  enable-formats="{{['']}}"
+  bind:ready="onReady"
+  bind:focus="onFocus"
+  bind:blur="onBlur"
+  bind:input="onInput"
+  bind:statuschange="onStatusChange"
+/>
+
+<view
+  wx:if="{{isIOS}}"
+  class="keyboard-placeholder"
+  style="height:{{keyboardHeight ? (keyboardHeight - safeAreaBottom) : 0}}px;"
+/>

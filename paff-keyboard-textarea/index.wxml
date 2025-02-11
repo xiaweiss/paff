@@ -24,14 +24,20 @@
       bind:focus="onFocus"
       bind:blur="onBlur"
       bind:keyboardheightchange="onKeyboardHeightChange"
-    />
+    >
+      <keyboard-accessory style="height: 50px;">
+        <cover-view class="keyboard-accessory">工具栏</cover-view>
+      </keyboard-accessory>
+    </textarea>
   </view>
 </scroll-view>
 </view>
 
 <root-portal>
-  <view
+  <!-- <view
     class="toolbar"
     style="{{keyboardHeight === 0 ? ('height:'+(safeAreaBottom + 50)+'px;padding-bottom:'+safeAreaBottom+'px;') : ('bottom:'+keyboardHeight+'px;')}}"
-  >工具栏</view>
+  >工具栏</view> -->
+
+  <view class="toolbar">工具栏</view>
 </root-portal>

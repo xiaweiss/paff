@@ -1,8 +1,6 @@
-import { emitter, isAndroid, isIOS, sleep } from '../utils/index'
+// import { isAndroid } from '../../../utils/index'
 // import { longText as text } from './longText'
 import { shortText as text } from './shortText'
-
-const app = getApp()
 
 Component({
   options: {
@@ -10,59 +8,23 @@ Component({
     virtualHost: true,
   },
   data: {
-    _editor: null,
     _chineseWidth: 0,
-    _scrollTop: 0,
-    isAndroid: isAndroid(),
-    isIOS: isIOS(),
     isFocus: false,
-    focus: false,
     editor: null,
-    scrollTop: 0,
     width: wx.getWindowInfo().windowWidth,
     content: '',
     cursorX: 0,
     cursorY: 0,
     measureText: '',
-    keyboardHeight: 0,
-    safeAreaBottom: 0,
   },
   lifetimes: {
-    attached () {
-      this.setData({ safeAreaBottom: app.globalData.safeAreaBottom })
-      this.onKeyboardHeightChange = this.onKeyboardHeightChange.bind(this)
-      emitter.on('keyboardHeightChange', this.onKeyboardHeightChange)
+    async attached () {
       this.setContent(text)
-    },
-    detached () {
-      emitter.off('keyboardHeightChange', this.onKeyboardHeightChange)
     }
   },
   methods: {
-    noop () {},
-    async test () {
-      this.focus()
-      this.setData({ scrollTop: 10000 })
-      // this.setData({ keyboardHeight: 300 })
-    },
-    onTouchStart (e) {
-      console.log('onTouchStart', e)
-    },
-    onScroll (e) {
-      this.data._scrollTop = e.detail.scrollTop
-    },
-    onKeyboardHeightChange (res) {
-      const { isAndroid, _scrollTop } = this.data
-      console.log('onKeyboardHeightChange', res.height)
-
-      this.setData({ keyboardHeight: res.height })
-    },
-    onEditorReady () {
-      this.createSelectorQuery().select('.editor').context((res) => {
-        this.data._editor = res.context
-      }).exec()
-    },
     onTap (e) {
+      console.log('onTap', e)
       this.focus()
       let cursorX = 0
       let cursorY = 0
@@ -77,15 +39,15 @@ Component({
         if (y === line[i].top) {
           cursorY = line[i].top
 
-          // console.log('===start', line[i].textIndex)
+          console.log('===start', line[i].textIndex)
 
           let left = 0
           for (let j = line[i].textIndex; j < p.width.length; j++) {
             const right = left + p.width[j]
             const center = (left + right) / 2
 
-            // console.log('x', x)
-            // console.log('left', left, 'center', center, 'right', right)
+            console.log('x', x)
+            console.log('left', left, 'center', center, 'right', right)
 
             if (x >= left && x < center) {
               cursorX = left
@@ -106,8 +68,13 @@ Component({
 
       this.setData({ cursorX, cursorY })
     },
-    onFocus (e) {
-      console.log('onFocus', e)
+    onEditorReady () {
+      this.createSelectorQuery().select('#editor').context((res) => {
+        this.setData({ editor: res.context })
+      }).exec()
+    },
+    onFocus () {
+      console.log('onFocus')
       this.setData({ isFocus: true })
     },
     onBlur () {
@@ -131,14 +98,16 @@ Component({
       console.log('touchend', e)
     },
     focus () {
-      this.setData({ focus: true })
-    },
-    blur () {
-      this.setData({ focus: false })
+      if (this.data.isFocus) return
+      const { editor } = this.data
+      editor.insertText({text: ''})
+      editor.getContents({
+        success: (res) => {
+          console.log('getContents', res)
+        }
+      })
     },
     measureTextWidth (text) {
-      return Promise.resolve(16)
-
       return new Promise((resolve) => {
         const isChinese = (new RegExp("[\\u4E00-\\u9FFF]+","g")).test(text)
 
