@@ -4,14 +4,38 @@
   <view class="button" bind:tap="focus">focus</view>
 
   <view class="button" bind:tap="blur">blur</view>
+
+  <view class="button" bind:tap="test">test</view>
 </view>
 
 <view class="container" catch:touchmove="noop">
-<scroll-view scroll-y="true" style="height: 300px;">
+<scroll-view class="scroller" scroll-y scrollTop="{{scrollTop}}" scroll-with-animation>
   <view class="box">
     <view class="text">文字区域</view>
     <view class="text">文字区域</view>
     <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+    <view class="text">文字区域</view>
+
     <textarea
       class="textarea"
       focus="{{isFocus}}"
@@ -31,6 +55,10 @@
     </textarea>
   </view>
 </scroll-view>
+<view
+  class="keyboard-placeholder"
+  style="height:{{keyboardHeight}}px;"
+/>
 </view>
 
 <root-portal>

@@ -1,12 +1,17 @@
-import { emitter } from '../utils/emitter'
+import { isIOS, sleep } from '../utils/index'
 
 const app = getApp()
 
 Component({
+  options: {
+    pureDataPattern: /^_/,
+    virtualHost: true,
+  },
   data: {
     isFocus: false,
     keyboardHeight: 0,
     safeAreaBottom: 0,
+    scrollTop: 0,
   },
   lifetimes: {
     attached() {
@@ -25,14 +30,19 @@ Component({
       console.log('========onKeyboardHeightChange', e.detail.height)
       this.setData({keyboardHeight: e.detail.height})
     },
+    test () {
+      this.setData({isFocus: true})
+      this.setData({scrollTop: 10000})
+    },
     focus() {
       this.setData({isFocus: true})
     },
     blur() {
       this.setData({isFocus: false})
     },
-    onFocus () {
+    async onFocus () {
       console.log('====onFocus', app.globalData.keyboardHeight)
+      // this.setData({scrollTop: 10000})
     },
     onBlur () {
       console.log('====onBlur', app.globalData.keyboardHeight)

@@ -20,6 +20,22 @@
   background: powderblue;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 0;
+}
+
+.scroller {
+  flex: 1;
+  height: 0;
+}
+
+.keyboard-placeholder {
+  flex-shrink: 0;
+}
+
 .text {
   line-height: 2;
 }
