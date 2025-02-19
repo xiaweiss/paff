@@ -1,6 +1,6 @@
 <view
   class="tool-bar"
-  style="transform: translateY({{keyboardHeight ? (isAndroid ? 0 : -keyboardHeight) : -safeAreaBottom}}px);"
+  style="transform: translateY({{keyboardHeight ? -keyboardHeight : -safeAreaBottom}}px);"
   catch:touchend="noop"
 >
   <view class="tool" bind:tap="test">工具栏</view>

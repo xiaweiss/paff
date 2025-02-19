@@ -5,17 +5,10 @@ Component({
     pureDataPattern: /^_/,
     virtualHost: true,
   },
-  properties: {
-    focus: Boolean,
-  },
-  observers: {
-    focus (focus) {
-      if (focus === this.data.isFocus) return
-      focus ? this.focus() : this.blur()
-    }
-  },
   data: {
     _editor: null,
+    value: '',
+    focus: false,
     isHide: false,
     isFocus: false,
     isIOS: isIOS(),
@@ -28,7 +21,6 @@ Component({
       this.setData({ isHide: false })
     },
     hide () {
-      console.log('=====keyboard hide')
       this.setData({ isHide: true })
     }
   },
@@ -43,11 +35,6 @@ Component({
     }
   },
   methods: {
-    onReady (e) {
-      this.createSelectorQuery().select('.keyboard').context((res) => {
-        this.setData({ _editor: res.context })
-      }).exec()
-    },
     onKeyboardHeightChange (res) {
       if (this.data.isHide) return
       this.setData({ keyboardHeight: res.height })
@@ -61,15 +48,27 @@ Component({
       this.triggerEvent('blur')
 
       // hack: 屏幕左滑收起键盘时，需要额外调用一次 blur，下次才能正常 focus
-      if (isIOS()) this.blur()
+      // if (isIOS()) this.blur()
     },
     focus () {
-      const { _editor } = this.data
-      if (_editor) _editor.insertText({text: ''})
+      if (this.data.isFocus) return
+      this.setData({ focus: true })
     },
     blur () {
-      const { _editor } = this.data
-      if (_editor) _editor.blur()
-    }
+      if (!this.data.isFocus) return
+      this.setData({ focus: false })
+    },
+    onLineChange (e) {
+      const { height, lineCount } = e.detail
+      console.log('=====onLineChange', height, lineCount)
+    },
+    onInput (e) {
+      const { value, cursor, keyCode } = e.detail
+      console.log('=====onInput', value, cursor, keyCode)
+    },
+    onConfirm (e) {
+      const { value } = e.detail
+      console.log('=====onConfirm', value)
+    },
   }
 })

@@ -3,23 +3,36 @@
   scroll-y
   scroll-top="{{scrollTop}}"
   scroll-with-animation="{{isIOS}}"
-  bind:tap="onTap"
   bind:scroll="onScroll"
-  bind:touchstart="onTouchStart"
-  catch:touchend="noop"
 >
-  <block wx:for="{{content}}" wx:key="index">
-    <view wx:if="{{item.type === 'P'}}" class="P">
-      <text wx:for="{{item.line}}" wx:key="index" class="line" user-select>{{item.text}}</text>
-    </view>
-  </block>
-  <view class="pink" />
-  <view class="cursor" style="left:{{cursorX}}px;top:{{cursorY}}px;" />
+  <view
+    class="paff-container"
+    bind:tap="onTap"
+    bind:touchstart="onTouchStart"
+    bind:touchmove="onTouchMove"
+    bind:touchend="onTouchEnd"
+    bind:touchcancel="onTouchEnd"
+  >
+    <block wx:for="{{content}}" wx:key="index">
+      <view wx:if="{{item.type === 'P'}}" class="P">
+        <text wx:for="{{item.line}}" wx:key="index" class="line" user-select>{{item.text}}</text>
+      </view>
+    </block>
+    <view class="pink" />
+
+    <keyboard
+      id="keyboard"
+      bind:focus="onFocus"
+      bind:blur="onBlur"
+    />
+
+    <!-- <view class="cursor" style="left:{{cursorX}}px;top:{{cursorY}}px;" /> -->
+  </view>
 
     <!-- <view class="measure-text"><text space="nbsp">{{measureText}}</text></view> -->
 </scroll-view>
 
-<keyboard focus="{{focus}}" />
+<keyboard-area />
 
 <tool-bar
   bind:test="test"

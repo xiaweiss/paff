@@ -16,7 +16,6 @@ Component({
     isAndroid: isAndroid(),
     isIOS: isIOS(),
     isFocus: false,
-    focus: false,
     editor: null,
     scrollTop: 0,
     width: wx.getWindowInfo().windowWidth,
@@ -40,9 +39,16 @@ Component({
   },
   methods: {
     noop () {},
+    onFocus () {
+      this.setData({ isFocus: true })
+    },
+    onBlur () {
+      this.setData({ isFocus: false })
+    },
     async test () {
+      console.log('test')
       this.focus()
-      this.setData({ scrollTop: 10000 })
+      // this.setData({ scrollTop: 10000 })
       // this.setData({ keyboardHeight: 300 })
     },
     onTouchStart (e) {
@@ -52,9 +58,6 @@ Component({
       this.data._scrollTop = e.detail.scrollTop
     },
     onKeyboardHeightChange (res) {
-      const { isAndroid, _scrollTop } = this.data
-      console.log('onKeyboardHeightChange', res.height)
-
       this.setData({ keyboardHeight: res.height })
     },
     onEditorReady () {
@@ -63,7 +66,6 @@ Component({
       }).exec()
     },
     onTap (e) {
-      this.focus()
       let cursorX = 0
       let cursorY = 0
 
@@ -106,14 +108,6 @@ Component({
 
       this.setData({ cursorX, cursorY })
     },
-    onFocus (e) {
-      console.log('onFocus', e)
-      this.setData({ isFocus: true })
-    },
-    onBlur () {
-      console.log('onBlur')
-      this.setData({ isFocus: false })
-    },
     onInput (e) {
       console.log('onInput', e)
     },
@@ -122,7 +116,6 @@ Component({
     },
     onTouchStart (e) {
       console.log('touchstart', e)
-      // this.focus()
     },
     onTouchMove (e) {
       console.log('touchmove', e)
@@ -131,10 +124,11 @@ Component({
       console.log('touchend', e)
     },
     focus () {
-      this.setData({ focus: true })
+      console.log('index focus')
+      this.selectComponent('#keyboard').focus()
     },
     blur () {
-      this.setData({ focus: false })
+      this.selectComponent('#keyboard').blur()
     },
     measureTextWidth (text) {
       return Promise.resolve(16)

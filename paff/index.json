@@ -2,6 +2,7 @@
   "component": true,
   "usingComponents": {
     "tool-bar": "./tool-bar",
-    "keyboard": "./keyboard"
+    "keyboard": "./keyboard",
+    "keyboard-area": "./keyboard-area"
   }
 }

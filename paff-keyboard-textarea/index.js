@@ -27,7 +27,6 @@ Component({
   methods: {
     noop () {},
     onKeyboardHeightChange (e) {
-      console.log('========onKeyboardHeightChange', e.detail.height)
       this.setData({keyboardHeight: e.detail.height})
     },
     test () {

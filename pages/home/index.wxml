@@ -3,7 +3,7 @@
   enableBottom
   enableCustom
 >
-  <!-- <paff /> -->
+  <paff />
   <!-- <paff-bak /> -->
-  <paff-keyboard-textarea />
+  <!-- <paff-keyboard-textarea /> -->
 </page>

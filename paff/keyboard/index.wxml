@@ -1,15 +1,14 @@
-<editor
+<textarea
   class="keyboard"
-  enable-formats="{{['']}}"
-  bind:ready="onReady"
+  focus="{{focus}}"
+  value="{{value}}"
+  show-confirm-bar="{{false}}"
+  adjust-position="{{false}}"
+  hold-keyboard="{{true}}"
+  confirm-type="return"
   bind:focus="onFocus"
   bind:blur="onBlur"
+  bind:linechange="onLineChange"
   bind:input="onInput"
-  bind:statuschange="onStatusChange"
-/>
-
-<view
-  wx:if="{{isIOS}}"
-  class="keyboard-placeholder"
-  style="height:{{keyboardHeight ? (keyboardHeight - safeAreaBottom) : 0}}px;"
+  bind:confirm="onConfirm"
 />
