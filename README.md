@@ -4,9 +4,21 @@ wechat miniprogram editor 小程序编辑器
 
 🔨 [RoadMap](https://github.com/xiaweiss/paff/issues/10)
 
+开发过程记录：
+https://biji.com/topic/OVGE59NALYbZ0jmewRlq3BadM4gej1
+
+<br>
+
+代码片段：
+https://developers.weixin.qq.com/s/Ow70F6mU7cYa  渲染 wxml
+
+<br>
+
 扫码联系作者
 
 <img width="200" src="https://github.com/xiaweiss/paff/assets/17960084/7f225936-4e8e-466d-b884-2e7618b26c1d" />
+<br>
+<br>
 
 体验版二维码
 
