@@ -3,22 +3,11 @@
   scroll-y
   scroll-top="{{scrollTop}}"
   scroll-with-animation="{{isIOS}}"
-  bind:scroll="onScroll"
 >
   <view
     class="paff-container"
-    bind:tap="onTap"
-    bind:touchstart="onTouchStart"
-    bind:touchmove="onTouchMove"
-    bind:touchend="onTouchEnd"
-    bind:touchcancel="onTouchEnd"
   >
-    <block wx:for="{{content}}" wx:key="index">
-      <view wx:if="{{item.type === 'P'}}" class="P">
-        <text wx:for="{{item.line}}" wx:key="index" class="line" user-select>{{item.text}}</text>
-      </view>
-    </block>
-    <view class="pink" />
+    <node node="{{node}}" />
 
     <keyboard
       id="keyboard"

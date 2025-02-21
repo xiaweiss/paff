@@ -2,8 +2,7 @@ import { emitter } from '../../utils/index'
 
 Component({
   options: {
-    pureDataPattern: /^_/,
-    virtualHost: true,
+    virtualHost: true
   },
   data: {
     safeAreaBottom: 0,

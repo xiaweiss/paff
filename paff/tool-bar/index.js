@@ -2,7 +2,6 @@ import { emitter, isAndroid } from '../../utils/index'
 
 Component({
   options: {
-    pureDataPattern: /^_/,
     virtualHost: true,
   },
   properties: {

@@ -2,11 +2,9 @@ import { emitter, isIOS } from '../../utils/index'
 
 Component({
   options: {
-    pureDataPattern: /^_/,
-    virtualHost: true,
+    virtualHost: true
   },
   data: {
-    _editor: null,
     value: '',
     focus: false,
     isHide: false,

@@ -1,0 +1,7 @@
+.image {
+  margin: 20px 0;
+}
+
+.image-preview {
+  border-radius: 8px;
+}

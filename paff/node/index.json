@@ -1,0 +1,10 @@
+{
+  "component": true,
+  "usingComponents": {
+    "node": "./index",
+    "doc": "../node-doc",
+    "paragraph": "../node-paragraph",
+    "image": "../node-image",
+    "text": "../node-text"
+  }
+}

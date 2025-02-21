@@ -1,0 +1,7 @@
+<view class="image">
+  <image
+    class="image-preview"
+    src="{{node.attrs.url}}"
+    style="width:{{node.attrs.width}}px;height:{{node.attrs.height}}px"
+  />
+</view>

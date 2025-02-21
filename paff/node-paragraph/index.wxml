@@ -1,0 +1,3 @@
+<view class="paragraph">
+  <slot />
+</view>

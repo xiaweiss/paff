@@ -1,0 +1,21 @@
+<template name="content">
+  <block wx:if="{{content}}">
+    <block wx:for="{{content}}" wx:key="index">
+      <node node="{{item}}" />
+    </block>
+  </block>
+</template>
+
+<doc wx:if="{{node.type === 'doc'}}" node="{{node}}">
+  <template is="content" data="{{content: node.content}}" />
+</doc>
+
+<paragraph wx:elif="{{node.type === 'paragraph'}}" node="{{node}}">
+  <template is="content" data="{{content: node.content}}" />
+</paragraph>
+
+<image wx:elif="{{node.type === 'image'}}" node="{{node}}" />
+
+<text wx:elif="{{node.type === 'text'}}" node="{{node}}">
+  <template is="content" data="{{content: node.content}}" />
+</text>

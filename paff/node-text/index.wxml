@@ -1,0 +1,3 @@
+<wxs module="markClass" src="../wxs/markClass.wxs" />
+
+<text class="text {{markClass(node.marks)}}">{{node.text}}</text>

@@ -1,0 +1,7 @@
+.bold {
+  font-weight: bolder;
+}
+
+.highlight {
+  background: #fdeb29;
+}

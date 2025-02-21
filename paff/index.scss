@@ -2,101 +2,11 @@
   flex: 1;
   width: 100%;
   height: 0;
+  border-top: 0.5px solid #ececec;
 }
 
 .paff-container {
   position: relative;
   width: 100%;
   min-height: 100%;
-}
-
-.keyboard-placeholder {
-  // transition: height 0.3s;
-
-  &.focus {
-    transition: none;
-  }
-}
-
-cover-view {
-  box-sizing: border-box;
-}
-
-.pink {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 112px;
-  height: 26px;
-  background: pink;
-  opacity: 0.5;
-}
-
-.safe-area-bottom {
-  flex-shrink: 0;
-  height: env(safe-area-inset-bottom);
-}
-
-.cursor {
-  position: absolute;
-  width: 2px;
-  height: 18px;
-  background: #1456f0;
-  animation: blink 1s infinite;
-  transform: translate(-50%, 4px);
-}
-
-//  光标闪烁动画
-@keyframes blink {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.P {
-  font-size: 16px;
-  font-family: system-ui;
-  line-height: 26px;
-  color: #222;
-}
-
-.line {
-  display: block;
-  min-height: 26px;
-}
-
-.measure-text {
-  width: fit-content;
-  height: 26px;
-  font-size: 16px;
-  font-family: system-ui;
-  line-height: 26px;
-  color: #222;
-  background: skyblue;
-}
-
-.input {
-  position: absolute;
-  left: -100%;
-  top: 0;
-  width: 200%;
-  height: 100%;
-  opacity: 0;
-  background: skyblue;
-}
-
-.editor {
-  position: absolute;
-  left: -100vw;
-  top: 0;
-  width: 100vw;
-  height: 100px;
-  background: skyblue;
-  opacity: 0.5;
 }
