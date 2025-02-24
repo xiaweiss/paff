@@ -3,8 +3,9 @@
   style="transform: translateY({{keyboardHeight ? -keyboardHeight : -safeAreaBottom}}px);"
   catch:touchend="noop"
 >
-  <view class="tool" bind:tap="test">工具栏</view>
-  <view class="blur" bind:tap="blur">完成</view>
+  <view class="item" bind:tap="test">工具栏</view>
+  <view class="item" bind:tap="poster">生成海报</view>
+  <view class="item" bind:tap="blur">完成</view>
 </view>
 
 <view class="tool-bar-placeholder" style="height:{{toolBarHeight + safeAreaBottom}}px;" />

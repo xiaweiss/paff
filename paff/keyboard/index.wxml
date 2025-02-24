@@ -2,7 +2,7 @@
   class="keyboard"
   focus="{{focus}}"
   value="{{value}}"
-  show-confirm-bar="{{false}}"
+  show-confirm-bar="{{true}}"
   adjust-position="{{false}}"
   hold-keyboard="{{true}}"
   confirm-type="return"
@@ -11,4 +11,5 @@
   bind:linechange="onLineChange"
   bind:input="onInput"
   bind:confirm="onConfirm"
+  bind:keyboardheightchange="textareaKeyboardHeightChange"
 />

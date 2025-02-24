@@ -31,6 +31,9 @@ Component({
     test () {
       this.triggerEvent('test')
     },
+    poster () {
+      this.triggerEvent('poster')
+    },
     blur () {
       this.triggerEvent('blur')
     }

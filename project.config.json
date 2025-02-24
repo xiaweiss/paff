@@ -42,7 +42,7 @@
     "showES6CompileOption": false,
     "compileWorklet": true
   },
-  "libVersion": "3.7.7",
+  "libVersion": "3.7.9",
   "appid": "wx06b82492baf0d5ef",
   "projectname": "paff",
   "packOptions": {
