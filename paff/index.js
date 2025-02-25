@@ -1,5 +1,7 @@
-import { isAndroid, isIOS, isPC } from '../utils/index'
+import { isAndroid, isIOS } from '../utils/index'
 import { dataDoc } from './dataDoc'
+import { paragraphLine } from './utils/paragraphLine'
+import { isUnihan } from './utils/isUnihan'
 
 Component({
   options: {
@@ -7,10 +9,19 @@ Component({
     virtualHost: true,
   },
   data: {
+    _measureTextNode: null,
     isAndroid: isAndroid(),
     isIOS: isIOS(),
     scrollTop: 0,
-    node: dataDoc
+    node: {type: 'doc'},
+    measureText: ''
+  },
+  lifetimes: {
+    async attached () {
+      const { windowWidth } = getApp().globalData.systemInfo
+      const node = await paragraphLine(dataDoc, windowWidth - 56, this)
+      this.setData({ node })
+    }
   },
   methods: {
     noop () {},
@@ -24,6 +35,26 @@ Component({
     },
     blur () {
       this.selectComponent('#keyboard').blur()
+    },
+    async measureText (text) {
+      const { _measureTextNode } = this.data
+      if (!_measureTextNode) {
+        this.data._measureTextNode = this.createSelectorQuery().select('.measure-text').boundingClientRect()
+      }
+
+      if (isUnihan(text)) return 16
+
+      // todo: 处理下emoji，参考下 unicode 字符列表 https://en.wikipedia.org/wiki/List_of_Unicode_characters
+      // todo: 处理标点符号
+
+      return await new Promise((resolve) => {
+        this.setData({ measureText: text }, () => {
+          this.data._measureTextNode.exec((res) => {
+            console.log('measureText', text, res[0].width)
+            resolve(res[0].width)
+          })
+        })
+      })
     },
     async poster () {
       const { systemInfo } = getApp().globalData

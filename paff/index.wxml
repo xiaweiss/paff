@@ -12,16 +12,16 @@
       node="{{node}}"
     />
 
-    <keyboard
+    <!-- <keyboard
       id="keyboard"
       bind:focus="onFocus"
       bind:blur="onBlur"
-    />
+    /> -->
 
     <!-- <view class="cursor" style="left:{{cursorX}}px;top:{{cursorY}}px;" /> -->
   </view>
 
-    <!-- <view class="measure-text"><text space="nbsp">{{measureText}}</text></view> -->
+  <view class="measure-text"><text space="nbsp">{{measureText}}</text></view>
 </scroll-view>
 
 <keyboard-area />

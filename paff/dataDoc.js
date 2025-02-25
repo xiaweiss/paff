@@ -1,3 +1,18 @@
+// export const dataDoc = {
+//   type: 'doc',
+//   content: [
+//     {
+//       type: 'paragraph',
+//       content: [
+//         {
+//           type: 'text',
+//           text: '铁饭碗指的是：端着这个碗，不管到哪里都，有饭吃而不是在这里吃一辈子的饭！'
+//         }
+//       ]
+//     }
+//   ]
+// }
+
 export const dataDoc = {
   type: 'doc',
   content: [
@@ -7,6 +22,15 @@ export const dataDoc = {
         {
           type: 'text',
           text: '图文笔记'
+        }
+      ]
+    },
+    {
+      type: 'paragraph',
+      content: [
+        {
+          type: 'text',
+          text: '铁饭碗指的是：端着这个碗，不管到哪里都有饭吃而不是在这里吃一辈子的饭！'
         }
       ]
     },

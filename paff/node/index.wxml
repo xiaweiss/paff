@@ -11,7 +11,13 @@
 </doc>
 
 <paragraph wx:elif="{{node.type === 'paragraph'}}" node="{{node}}">
-  <template is="content" data="{{content: node.content}}" />
+  <view
+    wx:for="{{node.line}}" wx:key="index"
+    class="row"
+    style="letter-spacing:{{item.letterSpacing}}px;"
+  >
+    <template is="content" data="{{content: item.content}}" />
+  </view>
 </paragraph>
 
 <image wx:elif="{{node.type === 'image'}}" node="{{node}}" />
