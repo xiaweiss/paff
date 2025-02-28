@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "minicode-editor": "../../minicode-editor",
     "page": "../../components/page",
     "paff": "../../paff",
     "paff-bak": "../../paff-bak",

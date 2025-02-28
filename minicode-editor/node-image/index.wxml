@@ -1,0 +1,15 @@
+<view class="image">
+  <img
+    class="image-preview"
+    src="{{node.attrs.url}}"
+    width="{{node.attrs.width}}"
+    height="{{node.attrs.height}}"
+    max-width="{{windowWidth - 56}}"
+  />
+  <image
+    class="del-btn"
+    src="../icon/del-btn.svg"
+    data-command="del"
+    bind:tap="command"
+  />
+</view>

@@ -1,0 +1,18 @@
+<editor
+  id="editor"
+  class="ql-container"
+  style="height:{{editorHeight}}px;"
+  placeholder="记录你的想法..."
+  bind:statuschange="onStatusChange"
+  bind:ready="onEditorReady"
+  bind:input="onEditorInput"
+/>
+
+<block wx:for="{{customBlockList}}" wx:key="blockId">
+  <teleport to="#{{item.blockId}}" enable="{{true}}">
+    <node-image node="{{item}}" windowWidth="{{windowWidth}}" bind:command="command" />
+  </teleport>
+</block>
+
+
+<tool-bar status="{{status}}" bind:command="command" />

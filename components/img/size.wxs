@@ -1,0 +1,13 @@
+module.exports = function (width, height, maxWidth) {
+  if (width && height) {
+    // 宽度超出最大宽度时，缩放
+    if (maxWidth && width > maxWidth) {
+      height = Math.floor(height * maxWidth / width)
+      width = maxWidth
+    }
+
+    return 'width: ' + width + 'px; height: ' + height + 'px;'
+  }
+
+  return ''
+}
