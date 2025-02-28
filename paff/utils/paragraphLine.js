@@ -1,3 +1,5 @@
+import { splitGraphemes } from 'unicode-segmenter';
+
 export const paragraphLine = async (doc, lineWidth, component) => {
 
   for (const node of doc.content) {
@@ -10,8 +12,7 @@ export const paragraphLine = async (doc, lineWidth, component) => {
         if (node1.type === 'text') {
           node1.width = []
 
-          // todo: split 方法区分 emoji、微信表情
-          for (const text of node1.text.split('')) {
+          for (const text of splitGraphemes(node1.text)) {
             // console.log('measureText')
             const textWidth = await component.measureText(text)
             node1.width.push(textWidth)

@@ -6,6 +6,7 @@
     "preinstall": "npx only-allow npm"
   },
   "dependencies": {
-    "mitt": "^3.0.1"
+    "mitt": "^3.0.1",
+    "unicode-segmenter": "^0.11.3"
   }
 }
