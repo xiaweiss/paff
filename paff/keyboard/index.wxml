@@ -1,15 +1,14 @@
-<textarea
+<input
   class="keyboard"
   focus="{{focus}}"
   value="{{value}}"
-  show-confirm-bar="{{true}}"
+  show-confirm-bar="{{false}}"
   adjust-position="{{false}}"
   hold-keyboard="{{true}}"
   confirm-type="return"
   bind:focus="onFocus"
   bind:blur="onBlur"
-  bind:linechange="onLineChange"
   bind:input="onInput"
+  bind:linechange="onLineChange"
   bind:confirm="onConfirm"
-  bind:keyboardheightchange="textareaKeyboardHeightChange"
 />

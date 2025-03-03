@@ -2,11 +2,15 @@ import { isAndroid, isIOS } from '../utils/index'
 import { dataDoc } from './dataDoc'
 import { paragraphLine } from './utils/paragraphLine'
 import { isUnihan } from './utils/isUnihan'
+import { clearContent } from './command/clearContent'
 
 Component({
   options: {
     pureDataPattern: /^_/,
     virtualHost: true,
+  },
+  properties: {
+    padding: { type: Array, value: [20, 28, 20, 28] }
   },
   data: {
     _measureTextNode: null,
@@ -18,8 +22,9 @@ Component({
   },
   lifetimes: {
     async attached () {
-      const { windowWidth } = getApp().globalData.systemInfo
-      const node = await paragraphLine(dataDoc, windowWidth - 56, this)
+      const { windowWidth } = getApp().globalData
+      const { padding } = this.properties
+      const node = await paragraphLine(dataDoc, windowWidth - padding[1] - padding[3], this)
       this.setData({ node })
     }
   },
@@ -35,6 +40,16 @@ Component({
     },
     blur () {
       this.selectComponent('#keyboard').blur()
+    },
+    command (e) {
+      console.log('command', e)
+      // todo: 实现一个管理器，可以 chain 调用
+      const { command, value } = e.detail
+      switch (command) {
+        case 'blur': { this.blur(); break }
+        case 'poster': { this.poster(); break }
+        case 'clearContent': { clearContent(); break }
+      }
     },
     async measureText (text) {
       const { _measureTextNode } = this.data

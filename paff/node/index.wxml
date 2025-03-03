@@ -14,7 +14,7 @@
   <view
     wx:for="{{node.line}}" wx:key="index"
     class="row"
-    style="letter-spacing:{{item.letterSpacing}}px;"
+    style="{{item.letterSpacing > 0 ? ('letter-spacing:'+ item.letterSpacing +'px') : ''}}"
   >
     <template is="content" data="{{content: item.content}}" />
   </view>

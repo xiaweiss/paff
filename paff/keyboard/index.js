@@ -62,7 +62,7 @@ Component({
     },
     onInput (e) {
       const { value, cursor, keyCode } = e.detail
-      console.log('=====onInput', value, cursor, keyCode)
+      console.log('=====onInput', e.detail)
     },
     onConfirm (e) {
       const { value } = e.detail

@@ -58,6 +58,7 @@ App({
     const { navBarHeight } = this.globalData
     const { windowHeight } = systemInfo
     this.globalData.windowHeight = isCustomNavigation(systemInfo, this) ? windowHeight : (windowHeight + navBarHeight)
+    this.globalData.windowWidth = systemInfo.windowWidth
 
     console.log('systemInfo', this.globalData.systemInfo)
   },
@@ -110,6 +111,7 @@ App({
         const { systemInfo } = this.globalData
         // 包含自定义导航栏的窗口高度
         this.globalData.windowHeight = isCustomNavigation(systemInfo, this) ?  windowHeight : (windowHeight + navBarHeight)
+        this.globalData.windowWidth = windowWidth
 
         // 事件触发器，去广播给页面
         emitter.emit('windowResize')

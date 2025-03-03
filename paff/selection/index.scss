@@ -1,0 +1,20 @@
+.cursor {
+  position: absolute;
+  width: 2px;
+  height: 18px;
+  background: #CC5656;
+  animation: blink 1s infinite;
+  transform: translate(-50%, 4px);
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

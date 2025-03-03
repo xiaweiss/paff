@@ -1,3 +1,5 @@
+<wxs module="paddingStyle" src="./wxs/paddingStyle.wxs" />
+
 <scroll-view
   class="paff"
   scroll-y
@@ -6,19 +8,20 @@
 >
   <view
     class="paff-container"
+    style="{{paddingStyle(padding)}}"
   >
     <node
       id="node"
       node="{{node}}"
     />
 
-    <!-- <keyboard
+    <keyboard
       id="keyboard"
       bind:focus="onFocus"
       bind:blur="onBlur"
-    /> -->
+    />
 
-    <!-- <view class="cursor" style="left:{{cursorX}}px;top:{{cursorY}}px;" /> -->
+    <selection padding="{{padding}}" />
   </view>
 
   <view class="measure-text"><text space="nbsp">{{measureText}}</text></view>
@@ -27,6 +30,7 @@
 <keyboard-area />
 
 <tool-bar
+  bind:command="command"
   bind:test="test"
   bind:poster="poster"
   bind:blur="blur"

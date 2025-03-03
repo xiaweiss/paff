@@ -1,0 +1,13 @@
+function isArray (arr) { return arr.constructor === 'Array' }
+
+module.exports = function paddingStyle (value) {
+  if (typeof value === 'number') {
+    return 'padding:' + value + 'px;'
+  }
+
+  if (isArray(value) && value.length === 4) {
+    return 'padding:' + value[0] + 'px ' + value[1] + 'px ' + value[2] + 'px ' + value[3] + 'px;'
+  }
+
+  return ''
+}
