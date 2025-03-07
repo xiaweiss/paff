@@ -1,0 +1,7 @@
+module.exports = function (position) {
+  var left = position[0]
+  var top = position[1]
+  var width = position[2]
+  var height = position[3]
+  return 'left: ' + left + 'px; top: ' + top + 'px; width: ' + width + 'px; height: ' + height + 'px;'
+}

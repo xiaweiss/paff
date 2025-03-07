@@ -48,7 +48,7 @@ Component({
       switch (command) {
         case 'blur': { this.blur(); break }
         case 'poster': { this.poster(); break }
-        case 'clearContent': { clearContent(); break }
+        case 'clearContent': { clearContent(this); break }
       }
     },
     async measureText (text) {

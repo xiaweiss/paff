@@ -4,6 +4,7 @@
     "node": "./node",
     "tool-bar": "./tool-bar",
     "keyboard": "./keyboard",
-    "keyboard-area": "./keyboard-area"
+    "keyboard-area": "./keyboard-area",
+    "selection": "./selection"
   }
 }
