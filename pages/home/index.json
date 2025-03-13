@@ -3,7 +3,8 @@
     "page": "../../components/page",
     "paff": "../../paff",
     "paff-bak": "../../paff-bak",
-    "paff-keyboard-textarea": "../../paff-keyboard-textarea"
+    "paff-keyboard-textarea": "../../paff-keyboard-textarea",
+    "minicode-editor": "../../minicode-editor"
   },
   "renderer": "skyline"
 }

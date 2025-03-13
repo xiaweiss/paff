@@ -6,13 +6,12 @@
   bind:statuschange="onStatusChange"
   bind:ready="onEditorReady"
   bind:input="onEditorInput"
-/>
-
-<block wx:for="{{customBlockList}}" wx:key="blockId">
-  <teleport to="#{{item.blockId}}" enable="{{true}}">
-    <node-image node="{{item}}" windowWidth="{{windowWidth}}" bind:command="command" />
-  </teleport>
-</block>
-
+>
+  <block wx:for="{{customBlockList}}" wx:key="blockId">
+    <editor-portal key="{{item.blockId}}">
+      <node-image node="{{item}}" windowWidth="{{windowWidth}}" bind:command="command" />
+    </editor-portal>
+  </block>
+</editor>
 
 <tool-bar status="{{status}}" bind:command="command" />

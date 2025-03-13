@@ -3,7 +3,8 @@
   enableBottom
   enableCustom
 >
-  <paff />
+  <!-- <paff /> -->
   <!-- <paff-bak /> -->
   <!-- <paff-keyboard-textarea /> -->
+  <minicode-editor />
 </page>
