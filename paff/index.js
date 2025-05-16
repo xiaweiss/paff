@@ -1,8 +1,12 @@
 import { isAndroid, isIOS } from '../utils/index'
 import { dataDoc } from './dataDoc'
-import { paragraphLine } from './utils/paragraphLine'
 import { isUnihan } from './utils/isUnihan'
-import { clearContent } from './command/clearContent'
+import {
+  clearContent,
+  getEditor,
+  getPadding,
+  setContent
+} from './command/index'
 
 Component({
   options: {
@@ -22,17 +26,34 @@ Component({
   },
   lifetimes: {
     async attached () {
-      const { windowWidth } = getApp().globalData
-      const { padding } = this.properties
-      const node = await paragraphLine(dataDoc, windowWidth - padding[1] - padding[3], this)
-      this.setData({ node })
+      // 初始化数据
+      getEditor(this)
+      getPadding(this.properties.padding)
+
+      // 设置笔记内容
+      await setContent(dataDoc)
     }
   },
   methods: {
     noop () {},
-    async test () {
-      console.log('test')
-      this.focus()
+    async test (e) {
+      const dataDoc = {
+        type: 'doc',
+        content: [
+          {
+            type: 'paragraph',
+            content: [
+              {
+                type: 'text',
+                text: '11111'
+              }
+            ]
+          }
+        ]
+      }
+      await setContent(dataDoc)
+
+      // this.focus()
       // this.setData({ scrollTop: 10000 })
     },
     focus () {
@@ -46,6 +67,7 @@ Component({
       // todo: 实现一个管理器，可以 chain 调用
       const { command, value } = e.detail
       switch (command) {
+        case 'test': { this.test(e); break }
         case 'blur': { this.blur(); break }
         case 'poster': { this.poster(); break }
         case 'clearContent': { clearContent(this); break }

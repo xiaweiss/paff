@@ -1,4 +1,5 @@
 import { emitter, isIOS } from '../../utils/index'
+import { insertText } from '../command/index'
 
 Component({
   options: {
@@ -63,6 +64,7 @@ Component({
     onInput (e) {
       const { value, cursor, keyCode } = e.detail
       console.log('=====onInput', e.detail)
+      insertText(value)
     },
     onConfirm (e) {
       const { value } = e.detail

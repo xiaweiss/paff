@@ -31,7 +31,4 @@
 
 <tool-bar
   bind:command="command"
-  bind:test="test"
-  bind:poster="poster"
-  bind:blur="blur"
 />
