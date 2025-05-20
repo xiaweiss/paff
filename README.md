@@ -13,6 +13,7 @@ https://biji.com/topic/OVGE59NALYbZ0jmewRlq3BadM4gej1
 
 https://developers.weixin.qq.com/s/Ow70F6mU7cYa  渲染 wxml
 https://developers.weixin.qq.com/s/iLyP37mc7zYw  生成快照图片（还需要做换行）
+https://developers.weixin.qq.com/s/5gTHLhmd8s0g  测试不同类型输入框事件
 
 <br>
 
