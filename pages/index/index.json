@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "nav-bar": "./nav-bar",
-    "paff": "../../paff"
-  }
-}

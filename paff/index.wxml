@@ -1,4 +1,11 @@
-  <text class="content" user-select>
+<nav-bar title="Paff Editor" />
+
+<scroll-view
+  class="scroll-view"
+  type="custom"
+  scroll-y
+>
+  <text class="content">
     <block>{{content}}</block>
     <text class="composition">{{composition}}</text>
   </text>
@@ -31,15 +38,5 @@
     />
   </view>
 
-  <view>position: {{position}}</view>
-  <view class="row">
-    <button
-      wx:for="{{[0,1,2,3,4]}}"
-      bind:tap="test"
-      data-item="{{item}}"
-    >
-      {{item}}
-    </button>
-  </view>
-
   <view class="placeholder" />
+</scroll-view>
