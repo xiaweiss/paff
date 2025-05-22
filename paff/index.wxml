@@ -1,34 +1,45 @@
-<wxs module="paddingStyle" src="./wxs/paddingStyle.wxs" />
+  <text class="content" user-select>
+    <block>{{content}}</block>
+    <text class="composition">{{composition}}</text>
+  </text>
+  <view class="container">
+    <view>textarea</view>
+    <textarea
+      class="input"
+      value="{{value}}"
+      maxlength="{{-1}}"
+      adjust-position="{{false}}"
+      hold-keyboard="{{true}}"
+      confirm-type="return"
+      confirm-hold="{{true}}"
+      focus="{{isFocus}}"
+      selection-start="{{start}}"
+      selection-end="{{end}}"
+      bind:focus="focus"
+      bind:blur="blur"
+      bind:change="change"
+      bind:input="input"
+      bind:confirm="confirm"
+      bind:keyboardheightchange="keyboardheightchange"
 
-<scroll-view
-  class="paff"
-  scroll-y
-  scroll-top="{{scrollTop}}"
-  scroll-with-animation="{{isIOS}}"
->
-  <view
-    class="paff-container"
-    style="{{paddingStyle(padding)}}"
-  >
-    <node
-      id="node"
-      node="{{node}}"
+      bind:selectionchange="selectionchange"
+      bind:keyboardcompositionstart="keyboardcompositionstart"
+      bind:keyboardcompositionupdate="keyboardcompositionupdate"
+      bind:keyboardcompositionend="keyboardcompositionend"
+
+      show-confirm-bar="{{false}}"
     />
-
-    <keyboard
-      id="keyboard"
-      bind:focus="onFocus"
-      bind:blur="onBlur"
-    />
-
-    <selection padding="{{padding}}" />
   </view>
 
-  <view class="measure-text"><text space="nbsp">{{measureText}}</text></view>
-</scroll-view>
+  <view>position: {{position}}</view>
+  <view class="row">
+    <button
+      wx:for="{{[0,1,2,3,4]}}"
+      bind:tap="test"
+      data-item="{{item}}"
+    >
+      {{item}}
+    </button>
+  </view>
 
-<keyboard-area />
-
-<tool-bar
-  bind:command="command"
-/>
+  <view class="placeholder" />

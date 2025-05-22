@@ -1,0 +1,43 @@
+<view
+  wx:if="{{!isPC}}"
+  id="nav-bar"
+  class="nav-bar"
+  style="height:{{navbarHeight + navbarPaddingTop}}px;padding-top:{{navbarPaddingTop}}px;padding-right:{{navbarPaddingRight}}px;background:{{background}};{{style}}"
+>
+  <!-- 自定义导航栏内容 -->
+  <block wx:if="{{custom}}">
+    <block wx:if="{{isHome}}" />
+    <view wx:elif="{{isBack}}" class="back" bind:tap="back">
+      <image wx:if="{{frontColor === '#ffffff'}}" class="icon-back" src="../../assets/icon/nav-bar-back-white.svg" />
+      <image wx:else class="icon-back" src="../../assets/icon/nav-bar-back.svg" />
+    </view>
+    <view wx:else class="home" bind:tap="home">
+      <image wx:if="{{frontColor === '#ffffff'}}" class="icon-home" src="../../assets/icon/nav-bar-home-white.svg" />
+      <image wx:else class="icon-home" src="../../assets/icon/nav-bar-home.svg" />
+    </view>
+    <slot name="navigationBarCustom" />
+  </block>
+
+  <!-- 左中右布局 -->
+  <block wx:else>
+    <view class="nav-bar-left" style="width:{{navbarPaddingRight}}px;height:{{capsuleHeight}}px">
+      <block wx:if="{{isHome}}" />
+      <view wx:elif="{{isBack}}" class="back" bind:tap="back">
+        <image wx:if="{{frontColor === '#ffffff'}}" class="icon-back" src="../../assets/icon/nav-bar-back-white.svg" />
+        <image wx:else class="icon-back" src="../../assets/icon/nav-bar-back.svg" />
+      </view>
+      <view wx:else class="home" bind:tap="home">
+        <image wx:if="{{frontColor === '#ffffff'}}" class="icon-home" src="../../assets/icon/nav-bar-home-white.svg" />
+        <image wx:else class="icon-home" src="../../assets/icon/nav-bar-home.svg" />
+      </view>
+      <slot name="navigationBarLeft" />
+    </view>
+
+    <text wx:if="{{title}}" class="nav-bar-title" style="color:{{frontColor}};">{{title}}</text>
+    <view wx:else
+      class="nav-bar-center"
+    >
+      <slot name="navigationBarCenter" />
+    </view>
+  </block>
+</view>

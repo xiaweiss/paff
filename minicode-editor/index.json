@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "tool-bar": "./tool-bar",
-    "node-image": "./node-image"
-  }
-}

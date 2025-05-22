@@ -1,5 +1,0 @@
-.paragraph {
-  min-height: 25.6px;
-  font-size: 16px;
-  line-height: 1.6;
-}

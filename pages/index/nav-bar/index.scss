@@ -1,0 +1,84 @@
+.nav-bar,
+.nav-bar-left,
+.back,
+.home {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-bar {
+  flex-shrink: 0;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: transparent;
+}
+
+.nav-bar-left {
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.back {
+  flex-shrink: 0;
+  align-items: center;
+  height: 100%;
+  padding-left: 16px;
+  padding-right: 12px;
+}
+
+.icon-back {
+  width: 12px;
+  height: 24px;
+}
+
+.home {
+  flex-shrink: 0;
+  align-items: center;
+  height: 100%;
+  padding-left: 18px;
+  padding-right: 12px;
+}
+
+.icon-home {
+  width: 20px;
+  height: 20px;
+}
+
+.nav-bar-center {
+  flex: 1;
+  width: 0;
+}
+
+.nav-bar-title {
+  flex: 1;
+  display: block;
+  width: 0;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.skyline {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 14px;
+  padding: 0 3px 2px;
+  background: #EFF0F2;
+  border: 0.5px solid #E0E1E3;
+  border-radius: 7px;
+  font-size: 10px;
+  color: #57708C;
+}

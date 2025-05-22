@@ -1,21 +1,40 @@
-.paff {
-  flex: 1;
-  width: 100%;
-  height: 0;
-  border-top: 0.5px solid #ececec;
+.intro {
+  padding: 30px;
+  text-align: center;
 }
 
-.paff-container {
+.container {
   position: relative;
-  width: 100%;
-  min-height: 100%;
 }
 
-.measure-text {
-  position: absolute;
+.row {
+  display: flex;
+}
+
+.input {
+  width: 100%;
+  height: 50px;
+  background: pink;
+
+  /* position: fixed;
   left: 0;
-  bottom: 0;
-  width: fit-content;
-  font-size: 16px;
-  background: skyblue;
+  top: 240px;
+  height: calc(100vh - 240px);
+  opacity: 0.5; */
+}
+
+.content {
+  display: block;
+  height: 100px;
+  padding: 20px;
+  background: pink;
+}
+
+.placeholder {
+  height: 100vh;
+  background: linear-gradient(to bottom, skyblue, blue);
+}
+
+.composition {
+  text-decoration: underline;
 }

@@ -1,7 +1,0 @@
-module.exports = function markClass (marks) {
-  if (!marks) return ''
-
-  return marks.map(function (item) {
-    return item.type
-  }).join(' ')
-}

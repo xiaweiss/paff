@@ -1,6 +1,0 @@
-<view
-  class="keyboard-area"
-  style="height:{{keyboardHeight ? (keyboardHeight - safeAreaBottom) : 0}}px;"
->
-  <slot />
-</view>
