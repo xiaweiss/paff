@@ -1,0 +1,65 @@
+.tool-bar {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  height: 50px;
+
+  border-top: 0.5px solid #ddd;
+  background: #f5f6f8;
+  transform: translateY(0);
+
+  // 拉起键盘时不加动画，以免发生上推抖动
+}
+
+.tool-bar-safe-area {
+  height: env(safe-area-inset-bottom);
+  background: #f5f6f8;
+}
+
+.scroll-view {
+  flex: 1;
+  display: flex;
+  width: 0;
+  height: 100%;
+}
+
+.item {
+  white-space: nowrap;
+}
+
+.hr {
+  position: relative;
+  height: 40px;
+}
+
+.hr-shadow {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 15px;
+  height: 40px;
+}
+
+.save {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 66px;
+  height: 32px;
+  margin-left: 18px;
+  margin-right: 20px;
+  border-radius: 16px;
+  color: #fff;
+  background: #CC5656;
+
+  &.disabled {
+    background: #C0C0C0;
+  }
+}
+
+.save-icon {
+  width: 16px;
+  height: 16px;
+}

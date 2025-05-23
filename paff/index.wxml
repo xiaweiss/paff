@@ -1,42 +1,61 @@
 <nav-bar title="Paff Editor" />
 
+<textarea
+  class="input"
+  value="{{value}}"
+  maxlength="{{-1}}"
+  adjust-position="{{false}}"
+  hold-keyboard="{{true}}"
+  confirm-type="return"
+  confirm-hold="{{true}}"
+  focus="{{isFocus}}"
+  selection-start="{{start}}"
+  selection-end="{{end}}"
+  bind:focus="focus"
+  bind:blur="blur"
+  bind:change="change"
+  bind:input="input"
+  bind:confirm="confirm"
+  bind:keyboardheightchange="keyboardheightchange"
+
+  bind:selectionchange="selectionchange"
+  bind:keyboardcompositionstart="keyboardcompositionstart"
+  bind:keyboardcompositionupdate="keyboardcompositionupdate"
+  bind:keyboardcompositionend="keyboardcompositionend"
+
+  show-confirm-bar="{{false}}"
+/>
+
+<vertical-drag-gesture-handler
+  native-view="scroll-view"
+  worklet:should-response-on-move="workletShouldResponseOnMove"
+  worklet:should-accept-gesture="workletShouldAcceptGesture"
+>
 <scroll-view
   class="scroll-view"
   type="custom"
   scroll-y
+  scroll-top="{{scrollTop}}"
+  scroll-with-animation
+  bind:tap="tap"
+  worklet:onscrollstart="workletOnscrollstart"
+  worklet:onscrollupdate="workletOnscrollupdate"
+  worklet:onscrollend="workletOnscrollend"
 >
-  <text class="content">
-    <block>{{content}}</block>
-    <text class="composition">{{composition}}</text>
-  </text>
-  <view class="container">
-    <view>textarea</view>
-    <textarea
-      class="input"
-      value="{{value}}"
-      maxlength="{{-1}}"
-      adjust-position="{{false}}"
-      hold-keyboard="{{true}}"
-      confirm-type="return"
-      confirm-hold="{{true}}"
-      focus="{{isFocus}}"
-      selection-start="{{start}}"
-      selection-end="{{end}}"
-      bind:focus="focus"
-      bind:blur="blur"
-      bind:change="change"
-      bind:input="input"
-      bind:confirm="confirm"
-      bind:keyboardheightchange="keyboardheightchange"
-
-      bind:selectionchange="selectionchange"
-      bind:keyboardcompositionstart="keyboardcompositionstart"
-      bind:keyboardcompositionupdate="keyboardcompositionupdate"
-      bind:keyboardcompositionend="keyboardcompositionend"
-
-      show-confirm-bar="{{false}}"
-    />
-  </view>
+    <button catch:tap="test">test</button>
+    <text
+      class="content"
+    >
+      <block>{{content}}</block>
+      <text class="composition">{{composition}}</text>
+    </text>
 
   <view class="placeholder" />
 </scroll-view>
+</vertical-drag-gesture-handler>
+
+<tool-bar
+  isFocus="{{isFocus}}"
+  keyboardHeight="{{keyboardHeight}}"
+  safeAreaBottom="{{safeAreaBottom}}"
+/>
