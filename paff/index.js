@@ -3,6 +3,8 @@ import { getEditor } from './command/index'
 
 const { shared, runOnJS } = wx.worklet
 
+let time = 0
+
 Component({
   options: {
     pureDataPattern: /^_/
@@ -24,6 +26,9 @@ Component({
     end: 1
   },
   lifetimes: {
+    created () {
+      this.scrollTo = this.scrollTo.bind(this)
+    },
     attached () {
       // 初始化编辑器
       getEditor(this)
@@ -53,40 +58,38 @@ Component({
     noop () {},
 
     test () {
-      this.scrollTo(100)
-      this.scrollTo(101)
-      this.scrollTo(102)
-      this.scrollTo(103)
-      this.scrollTo(104)
-      this.scrollTo(105)
-      this.scrollTo(106)
-      this.scrollTo(107)
-      this.scrollTo(108)
-      this.scrollTo(109)
-      this.scrollTo(110)
-      this.scrollTo(111)
-      this.scrollTo(112)
-      this.scrollTo(113)
-      this.scrollTo(114)
+      wx.showToast({
+        title: 'toast',
+      })
     },
 
-    workletShouldResponseOnMove() {
+    workletShouldResponseOnMovePan () {
       'worklet'
-      return !this.data._isFocus.value
+      return true
     },
 
-    workletShouldAcceptGesture() {
+    workletShouldAcceptGesturePan () {
       'worklet'
-
-      return !this.data._isFocus.value
+      return true
     },
 
-    workletOnGesture (e) {
+    workletOngesturePan (e) {
       'worklet'
+      // 聚焦时，使用手势带动 scroll-view 滚动，可以保持聚焦
       if (this.data._isFocus.value) {
-        console.log('runOnJS')
-        // runOnJS(this.scrollTo, this.data._scrollTop.value - e.deltaY)
+        this.data._scrollTop.value -= e.deltaY
+        runOnJS(this.scrollTo)(this.data._scrollTop.value)
       }
+    },
+
+    workletShouldResponseOnMoveScroll () {
+      'worklet'
+      return !this.data._isFocus.value
+    },
+
+    workletShouldAcceptGestureScroll () {
+      'worklet'
+      return !this.data._isFocus.value
     },
 
     workletOnscrollstart (e) {
@@ -103,12 +106,14 @@ Component({
 
     workletOnscrollend (e) {
       'worklet'
-      // console.log('end', e.detail.scrollTop)
       this.data._scrollTop.value = e.detail.scrollTop
     },
 
     scrollTo (value) {
-      console.log('scrollTo', value)
+      const now = Date.now()
+      if (now - time < 16) return
+      time = now
+
       if (value > 0) this.setData({scrollTop: value})
     },
 
