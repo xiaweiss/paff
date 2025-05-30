@@ -1,0 +1,29 @@
+<vertical-drag-gesture-handler
+  tag="vertical"
+  simultaneous-handlers="{{['scroll']}}"
+  worklet:should-response-on-move="vertical_should_response_on_move"
+  worklet:should-accept-gesture="vertical_should_accept_gesture"
+  worklet:ongesture="vertical_on_gesture"
+>
+  <vertical-drag-gesture-handler
+    tag="scroll"
+    native-view="scroll-view"
+    simultaneous-handlers="{{['vertical']}}"
+    worklet:should-response-on-move="scroll_should_response_on_move"
+    worklet:should-accept-gesture="scroll_should_accept_gesture"
+  >
+    <scroll-view
+      class="scroll-view"
+      type="custom"
+      scroll-y
+      scroll-top="{{scrollTop}}"
+      scroll-with-animation="{{false}}"
+      bind:tap="tap"
+      worklet:onscrollstart=on_scroll_start"
+      worklet:onscrollupdate="on_scroll_update"
+      worklet:onscrollend="on_scroll_end"
+    >
+      <slot></slot>
+    </scroll-view>
+  </vertical-drag-gesture-handler>
+</vertical-drag-gesture-handler>

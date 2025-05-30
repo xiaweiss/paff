@@ -26,43 +26,22 @@
   show-confirm-bar="{{false}}"
 />
 
-<vertical-drag-gesture-handler
-  tag="vertical"
-  simultaneousHandlers="{{['scroll']}}"
-  worklet:should-response-on-move="workletShouldResponseOnMoveVertical"
-  worklet:should-accept-gesture="workletShouldAcceptGestureVertical"
-  worklet:ongesture="workletOngestureVertical"
+<scroll
+  id="scroll"
+  isFocus="{{isFocus}}"
 >
-  <vertical-drag-gesture-handler
-    tag="scroll"
-    native-view="scroll-view"
-    simultaneousHandlers="{{['vertical']}}"
-    worklet:should-response-on-move="workletShouldResponseOnMoveScroll"
-    worklet:should-accept-gesture="workletShouldAcceptGestureScroll"
+  <button catch:tap="test">test</button>
+  <text
+    class="content"
+    bind:tap="tap"
   >
-    <scroll-view
-      class="scroll-view"
-      type="custom"
-      scroll-y
-      scroll-top="{{scrollTop}}"
-      scroll-with-animation="{{false}}"
-      bind:tap="tap"
-      worklet:onscrollstart="workletOnscrollstart"
-      worklet:onscrollupdate="workletOnscrollupdate"
-      worklet:onscrollend="workletOnscrollend"
-    >
-        <button catch:tap="test">test</button>
-        <text
-          class="content"
-        >
-          <block>{{content}}</block>
-          <text class="composition">{{composition}}</text>
-        </text>
+    <block>{{content}}</block>
+    <text class="composition">{{composition}}</text>
+  </text>
 
-      <view class="placeholder" />
-    </scroll-view>
-  </vertical-drag-gesture-handler>
-</vertical-drag-gesture-handler>
+  <view class="placeholder" />
+</scroll>
+
 
 <tool-bar
   isFocus="{{isFocus}}"
