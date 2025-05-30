@@ -19,7 +19,7 @@
     "lazyloadPlaceholderEnable": false,
     "useStaticServer": false,
     "bigPackageSizeSupport": false,
-    "skylineRenderEnable": false,
+    "skylineRenderEnable": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],

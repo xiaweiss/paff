@@ -26,17 +26,17 @@
   show-confirm-bar="{{false}}"
 />
 
-<pan-gesture-handler
-  tag="pan"
+<vertical-drag-gesture-handler
+  tag="vertical"
   simultaneousHandlers="{{['scroll']}}"
-  worklet:should-response-on-move="workletShouldResponseOnMovePan"
-  worklet:should-accept-gesture="workletShouldAcceptGesturePan"
-  worklet:ongesture="workletOngesturePan"
+  worklet:should-response-on-move="workletShouldResponseOnMoveVertical"
+  worklet:should-accept-gesture="workletShouldAcceptGestureVertical"
+  worklet:ongesture="workletOngestureVertical"
 >
   <vertical-drag-gesture-handler
     tag="scroll"
     native-view="scroll-view"
-    simultaneousHandlers="{{['pan']}}"
+    simultaneousHandlers="{{['vertical']}}"
     worklet:should-response-on-move="workletShouldResponseOnMoveScroll"
     worklet:should-accept-gesture="workletShouldAcceptGestureScroll"
   >
@@ -62,7 +62,7 @@
       <view class="placeholder" />
     </scroll-view>
   </vertical-drag-gesture-handler>
-</pan-gesture-handler>
+</vertical-drag-gesture-handler>
 
 <tool-bar
   isFocus="{{isFocus}}"
