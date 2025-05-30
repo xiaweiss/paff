@@ -18,8 +18,14 @@
 
 
   <!-- right -->
-  <view class="save">
-    <image class="save-icon" src="../../icon/save.svg" />
+  <view class="right">
+    <view wx:if="{{isFocus}}" class="fold-keyboard" bind:tap="blur">
+      <image class="fold-keyboard-icon" src="../../icon/fold-keyboard.svg" />
+    </view>
+
+    <view wx:else class="save">
+      <image class="save-icon" src="../../icon/save.svg" />
+    </view>
   </view>
 </view>
 

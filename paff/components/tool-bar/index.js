@@ -22,6 +22,9 @@ Component({
         })
       }
     },
+    blur () {
+      this.triggerEvent('blur')
+    },
     command (e) {
       const { command } = e.currentTarget.dataset
       this.triggerEvent('command', { command })

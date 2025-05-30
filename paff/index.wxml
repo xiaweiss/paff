@@ -47,4 +47,5 @@
   isFocus="{{isFocus}}"
   keyboardHeight="{{keyboardHeight}}"
   safeAreaBottom="{{safeAreaBottom}}"
+  bind:blur="blur"
 />
