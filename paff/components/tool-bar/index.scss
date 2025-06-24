@@ -79,3 +79,23 @@
   width: 16px;
   height: 16px;
 }
+
+.list {
+  display: flex;
+  align-items: center;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+
+  &:first-child {
+    padding-left: 20px;
+  }
+}
+
+.icon {
+  width: 21px;
+  height: 21px;
+}

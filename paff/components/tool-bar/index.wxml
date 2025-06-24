@@ -2,18 +2,58 @@
   class="tool-bar"
   style="transform: translateY({{ (isFocus && keyboardHeight > 0 ? -(keyboardHeight - safeAreaBottom) : 0)}}px);"
 >
-  <!-- <scroll-view
-    class="scroll-view"
-    type="custom"
-    scroll-x
-    enable-flex
-    show-scrollbar="{{false}}"
-  >
-    <view class="item" data-command="bold" bind:tap="command">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</view>
-  </scroll-view> -->
-
   <scroll-x isFocus="{{isFocus}}">
-    <view class="item" data-command="bold" bind:tap="command">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</view>
+      <view class="item" data-command="bold" bind:tap="command">
+        <image class="icon" src="../../icon/bold.svg" />
+      </view>
+
+      <view class="item" data-command="bold" bind:tap="command">
+        <image class="icon" src="../../icon/bold.svg" />
+      </view>
+
+      <view class="item" data-command="bold" bind:tap="command">
+        <image class="icon" src="../../icon/bold.svg" />
+      </view>
+
+      <view class="item" data-command="bold" bind:tap="command">
+        <image class="icon" src="../../icon/bold.svg" />
+      </view>
+
+      <view class="item" data-command="bold" bind:tap="command">
+        <image class="icon" src="../../icon/bold.svg" />
+      </view>
+
+      <view class="item" data-command="bold" bind:tap="command">
+        <image class="icon" src="../../icon/bold.svg" />
+      </view>
+
+      <view class="item" data-command="bold" bind:tap="command">
+        <image class="icon" src="../../icon/bold.svg" />
+      </view>
+
+      <view class="item" data-command="bold" bind:tap="command">
+        <image class="icon" src="../../icon/bold.svg" />
+      </view>
+
+      <view class="item" data-command="bold" bind:tap="command">
+        <image class="icon" src="../../icon/bold.svg" />
+      </view>
+
+      <view class="item" data-command="bold" bind:tap="command">
+        <image class="icon" src="../../icon/bold.svg" />
+      </view>
+
+      <view class="item" data-command="bold" bind:tap="command">
+        <image class="icon" src="../../icon/bold.svg" />
+      </view>
+
+      <view class="item" data-command="bold" bind:tap="command">
+        <image class="icon" src="../../icon/bold.svg" />
+      </view>
+
+      <view class="item" data-command="bold" bind:tap="command">
+        <image class="icon" src="../../icon/bold.svg" />
+      </view>
   </scroll-x>
 
   <view class="hr">

@@ -26,6 +26,10 @@ Component({
       this.triggerEvent('blur')
     },
     command (e) {
+      wx.showToast({
+        title: 'bold',
+        icon: 'none',
+      })
       const { command } = e.currentTarget.dataset
       this.triggerEvent('command', { command })
     }

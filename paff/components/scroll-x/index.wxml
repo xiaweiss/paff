@@ -18,7 +18,8 @@
       scroll-x
       scroll-left="{{scrollLeft}}"
       scroll-with-animation="{{false}}"
-      show-scrollbar
+      show-scrollbar="{{false}}"
+      bounces="{{false}}"
       worklet:onscrollstart=on_scroll_start"
       worklet:onscrollupdate="on_scroll_update"
       worklet:onscrollend="on_scroll_end"
