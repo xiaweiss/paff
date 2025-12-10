@@ -14,16 +14,5 @@
   "sitemapLocation": "sitemap.json",
   "style": "v2",
   "lazyCodeLoading": "requiredComponents",
-  "renderer": "skyline",
-  "rendererOptions": {
-    "skyline": {
-      "disableABTest": true,
-      "sdkVersionBegin": "3.8.0",
-      "sdkVersionEnd": "15.255.255",
-      "defaultDisplayBlock": true,
-      "enableScrollViewAutoSize": true,
-      "tagNameStyleIsolation": "legacy"
-    }
-  },
   "componentFramework": "glass-easel"
 }

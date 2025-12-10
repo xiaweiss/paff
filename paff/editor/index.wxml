@@ -1,0 +1,8 @@
+<editor
+  id="editor"
+  class="ql-container"
+  placeholder="记录你的想法..."
+  bind:ready="onEditorReady"
+>
+
+</editor>

@@ -1,8 +1,7 @@
 {
-  "component": true,
+  "disableScroll": true,
   "usingComponents": {
     "nav-bar": "../nav-bar",
-    "scroll": "./components/scroll",
-    "tool-bar": "./components/tool-bar"
+    "editor": "./editor"
   }
 }
