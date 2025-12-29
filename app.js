@@ -1,4 +1,8 @@
-import { emitter } from './paff/utils/index'
+import { emitter } from './utils/index'
+import { component } from './component'
+
+/** 修改全局组件方法，注入一些功能 */
+component()
 
 App({
   onLaunch() {

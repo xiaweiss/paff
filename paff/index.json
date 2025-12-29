@@ -1,7 +1,6 @@
 {
-  "disableScroll": true,
+  "component": true,
   "usingComponents": {
-    "nav-bar": "../nav-bar",
-    "editor": "./editor"
+    "keyboard-area": "./keyboard-area"
   }
 }

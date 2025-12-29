@@ -1,6 +1,6 @@
 {
   "pages": [
-    "paff/index"
+    "pages/home/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#fff",

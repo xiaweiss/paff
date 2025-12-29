@@ -1,0 +1,7 @@
+{
+  "disableScroll": true,
+  "usingComponents": {
+    "nav-bar": "../../components/nav-bar",
+    "paff": "../../paff"
+  }
+}

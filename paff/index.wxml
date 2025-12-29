@@ -1,4 +1,12 @@
-<view class="page">
-  <nav-bar title="Paff Editor" />
-  <editor />
+<view class="editor">
+<editor
+  id="editor"
+  class="editor-content"
+  placeholder="记录你的想法..."
+  bind:touchstart="onTouchStart"
+  bind:ready="onEditorReady"
+  bind:focus="onFocus"
+  bind:blur="onBlur"
+>
+</editor>
 </view>
