@@ -1,12 +1,14 @@
 .editor {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
   height: 0;
   padding-bottom: env(safe-area-inset-bottom);
 }
 
 .editor-content {
-  height: calc(100% - 390px);
-  // height: 100%;
+  // height: calc(100% - 390px);
+  height: 100%;
   padding: 0 20px;
   background: pink;
 }

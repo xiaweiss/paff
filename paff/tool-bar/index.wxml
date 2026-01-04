@@ -1,0 +1,8 @@
+<view class="tool-bar" catch:touchend="noop">
+  <view class="item" bind:tap="func">Function 1</view>
+  <view class="item" bind:tap="func">Function 2</view>
+  <view class="item" bind:tap="func">Function 3</view>
+  <view class="item" bind:tap="func">Function 4</view>
+  <view class="item" bind:tap="func">Function 5</view>
+  <view class="item" bind:tap="func">Function 6</view>
+</view>

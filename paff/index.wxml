@@ -9,4 +9,12 @@
   bind:blur="onBlur"
 >
 </editor>
+
+<tool-bar></tool-bar>
+<keyboard-area
+  wx:if="{{isFocus}}"
+  keyboardHeight="{{keyboardHeight}}"
+  safeAreaBottom="{{safeAreaBottom}}"
+>
+</keyboard-area>
 </view>

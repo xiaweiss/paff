@@ -1,1 +1,5 @@
-<view>keyboard-area</view>
+<view
+  class="keyboard-area"
+  style="height: {{keyboardHeight - safeAreaBottom}}px;"
+>
+</view>

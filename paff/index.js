@@ -18,6 +18,9 @@ Component({
     },
   },
   methods: {
+    noop () {
+      return true
+    },
     onEditorReady() {
       const query = this.createSelectorQuery()
       query.select('#editor').context((res) => {
@@ -30,10 +33,21 @@ Component({
       console.log('onTouchStart', e)
     },
     onFocus (e) {
+      // setTimeout(() => {
+      //   wx.pageScrollTo({
+      //     scrollTop: 0,
+      //     duration: 0
+      //   })
+      // }, 100)
+
       console.log('onFocus', e)
+      this.setData({isFocus: true}, () => {
+        this.data._editor.scrollIntoView()
+      })
     },
     onBlur (e) {
       console.log('onBlur', e)
+      this.setData({isFocus: false})
     },
     async onKeyboardHeightChange (res) {
       const { height, duration } = res

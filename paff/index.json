@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-    "keyboard-area": "./keyboard-area"
+    "keyboard-area": "./keyboard-area",
+    "tool-bar": "./tool-bar"
   }
 }
