@@ -1,3 +1,9 @@
 .keyboard-area {
+  display: none;
   flex-shrink: 0;
+  background: #f5f6f8;
+
+  &.show {
+    display: block;
+  }
 }

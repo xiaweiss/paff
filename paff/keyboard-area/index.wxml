@@ -1,5 +1,5 @@
 <view
-  class="keyboard-area"
+  class="keyboard-area {{show ? 'show' : ''}}"
   style="height: {{keyboardHeight - safeAreaBottom}}px;"
 >
 </view>

@@ -11,7 +11,56 @@
   transform: translateY(0);
 }
 
+.list {
+  display: flex;
+  flex-grow: 1;
+  width: 0;
+  height: 30px;
+}
+
 .item {
-  margin: 0 10px;
-  white-space: nowrap;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+
+  &:first-child {
+    margin-left: 20px;
+  }
+}
+
+.icon {
+  width: 21px;
+  height: 21px;
+}
+
+.save-left {
+  position: relative;
+  height: 40px;
+}
+
+.save-left-shadow {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 15px;
+  height: 40px;
+}
+
+.save {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 66px;
+  height: 32px;
+  margin: 0 18px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background: #cc5656;
 }

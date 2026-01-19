@@ -10,9 +10,9 @@
 >
 </editor>
 
-<tool-bar></tool-bar>
+<tool-bar />
 <keyboard-area
-  wx:if="{{isFocus}}"
+  show="{{isFocus && isIOS}}"
   keyboardHeight="{{keyboardHeight}}"
   safeAreaBottom="{{safeAreaBottom}}"
 >

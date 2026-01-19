@@ -1,8 +1,51 @@
-<view class="tool-bar" catch:touchend="noop">
-  <view class="item" bind:tap="func">Function 1</view>
-  <view class="item" bind:tap="func">Function 2</view>
-  <view class="item" bind:tap="func">Function 3</view>
-  <view class="item" bind:tap="func">Function 4</view>
-  <view class="item" bind:tap="func">Function 5</view>
-  <view class="item" bind:tap="func">Function 6</view>
+<view class="tool-bar">
+  <scroll-view
+    class="list"
+    catch:touchend="noop"
+    scroll-x
+    enable-flex
+    enhanced
+    show-scrollbar="{{false}}"
+  >
+    <view class="item" bind:tap="func">
+      <image class="icon" src="../icon/bold.svg"/>
+    </view>
+    <view class="item" bind:tap="func">
+      <image class="icon" src="../icon/bold-active.svg"/>
+    </view>
+
+    <view class="item" bind:tap="func">
+      <image class="icon" src="../icon/bold-active.svg"/>
+    </view>
+    <view class="item" bind:tap="func">
+      <image class="icon" src="../icon/bold-active.svg"/>
+    </view>
+    <view class="item" bind:tap="func">
+      <image class="icon" src="../icon/bold-active.svg"/>
+    </view>
+    <view class="item" bind:tap="func">
+      <image class="icon" src="../icon/bold-active.svg"/>
+    </view>
+
+    <view class="item" bind:tap="func">
+      <image class="icon" src="../icon/bold-active.svg"/>
+    </view>
+    <view class="item" bind:tap="func">
+      <image class="icon" src="../icon/bold-active.svg"/>
+    </view>
+    <view class="item" bind:tap="func">
+      <image class="icon" src="../icon/bold-active.svg"/>
+    </view>
+    <view class="item" bind:tap="func">
+      <image class="icon" src="../icon/bold-active.svg"/>
+    </view>
+    <view class="item" bind:tap="func">
+      <image class="icon" src="../icon/bold-active.svg"/>
+    </view>
+  </scroll-view>
+
+  <view class="save-left">
+    <image class="save-left-shadow" src="../image/save-left-shadow.png" />
+  </view>
+  <view class="save">保存</view>
 </view>

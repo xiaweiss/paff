@@ -1,4 +1,4 @@
-import { emitter, sleep } from '../utils/index'
+import { emitter, sleep, isIOS } from '../utils/index'
 
 Component({
   options: {
@@ -8,6 +8,7 @@ Component({
   data: {
     _editor: null,
     isFocus: false,
+    isIOS: isIOS(),
     keyboardHeight: 300,
     safeAreaBottom: 0,
   },
