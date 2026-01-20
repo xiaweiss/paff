@@ -1,4 +1,4 @@
-<view class="tool-bar">
+<view class="tool-bar" catch:touchend="noop">
   <scroll-view
     class="list"
     catch:touchend="noop"
@@ -7,45 +7,14 @@
     enhanced
     show-scrollbar="{{false}}"
   >
-    <view class="item" bind:tap="func">
-      <image class="icon" src="../icon/bold.svg"/>
-    </view>
-    <view class="item" bind:tap="func">
-      <image class="icon" src="../icon/bold-active.svg"/>
-    </view>
-
-    <view class="item" bind:tap="func">
-      <image class="icon" src="../icon/bold-active.svg"/>
-    </view>
-    <view class="item" bind:tap="func">
-      <image class="icon" src="../icon/bold-active.svg"/>
-    </view>
-    <view class="item" bind:tap="func">
-      <image class="icon" src="../icon/bold-active.svg"/>
-    </view>
-    <view class="item" bind:tap="func">
-      <image class="icon" src="../icon/bold-active.svg"/>
-    </view>
-
-    <view class="item" bind:tap="func">
-      <image class="icon" src="../icon/bold-active.svg"/>
-    </view>
-    <view class="item" bind:tap="func">
-      <image class="icon" src="../icon/bold-active.svg"/>
-    </view>
-    <view class="item" bind:tap="func">
-      <image class="icon" src="../icon/bold-active.svg"/>
-    </view>
-    <view class="item" bind:tap="func">
-      <image class="icon" src="../icon/bold-active.svg"/>
-    </view>
-    <view class="item" bind:tap="func">
-      <image class="icon" src="../icon/bold-active.svg"/>
+    <view class="item" bind:tap="bold">
+      <image wx:if="{{formats.bold}}" class="icon" src="../icon/bold-active.svg"/>
+      <image wx:else class="icon" src="../icon/bold.svg"/>
     </view>
   </scroll-view>
 
   <view class="save-left">
     <image class="save-left-shadow" src="../image/save-left-shadow.png" />
   </view>
-  <view class="save">保存</view>
+  <view class="save" bind:tap="save">保存</view>
 </view>

@@ -1,22 +1,28 @@
 import { emitter, sleep, isIOS } from '../utils/index'
 
+// 编辑器实例，props 传给子组件无法调用
+let editor = null
+
 Component({
   options: {
     pureDataPattern: /^_/,
     virtualHost: true
   },
   data: {
-    _editor: null,
     isFocus: false,
     isIOS: isIOS(),
     keyboardHeight: 300,
     safeAreaBottom: 0,
+    formats: {}
   },
   lifetimes: {
     attached () {
       const windowInfo = wx.getWindowInfo()
       this.setData({safeAreaBottom: windowInfo.screenHeight - windowInfo.safeArea.bottom})
     },
+    detached () {
+      editor = null
+    }
   },
   methods: {
     noop () {
@@ -25,15 +31,20 @@ Component({
     onEditorReady() {
       const query = this.createSelectorQuery()
       query.select('#editor').context((res) => {
-        this.data._editor = res.context
+        editor = res.context
 
         this.setContent()
       }).exec()
+    },
+    onStatusChange(e) {
+      const formats = e.detail
+      this.setData({ formats })
     },
     onTouchStart (e) {
       console.log('onTouchStart', e)
     },
     onFocus (e) {
+      console.log('onFocus', e)
       // setTimeout(() => {
       //   wx.pageScrollTo({
       //     scrollTop: 0,
@@ -41,9 +52,8 @@ Component({
       //   })
       // }, 100)
 
-      console.log('onFocus', e)
       this.setData({isFocus: true}, () => {
-        this.data._editor.scrollIntoView()
+        editor.scrollIntoView()
       })
     },
     onBlur (e) {
@@ -76,7 +86,11 @@ Component({
         html += `<p>${i}</p>`
       }
 
-      this.data._editor.setContents({html})
+      editor.setContents({html})
     },
+
+    bold () {
+      editor.format('bold')
+    }
   }
 })

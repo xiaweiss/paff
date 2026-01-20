@@ -1,6 +1,6 @@
 Component({
   properties: {
-
+    formats: Object
   },
   data: {
 
@@ -21,9 +21,12 @@ Component({
   },
   methods: {
     noop () {},
-    func () {
+    bold () {
+      this.triggerEvent('bold')
+    },
+    save () {
       wx.showToast({
-        title: 'function'
+        title: 'save'
       })
     }
   },

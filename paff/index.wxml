@@ -3,6 +3,7 @@
   id="editor"
   class="editor-content"
   placeholder="记录你的想法..."
+  bind:statuschange="onStatusChange"
   bind:touchstart="onTouchStart"
   bind:ready="onEditorReady"
   bind:focus="onFocus"
@@ -10,7 +11,11 @@
 >
 </editor>
 
-<tool-bar />
+<tool-bar
+  formats="{{formats}}"
+  bind:bold="bold"
+/>
+
 <keyboard-area
   show="{{isFocus && isIOS}}"
   keyboardHeight="{{keyboardHeight}}"
