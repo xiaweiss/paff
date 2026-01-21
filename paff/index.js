@@ -82,6 +82,10 @@ Component({
     setContent () {
       let html = ''
 
+      html += `<p>这是一个富文本编辑器，长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长</p>`
+
+      html += `<a href="https://example.com">超链接</a>`
+
       for (let i = 0; i < 100; i++) {
         html += `<p>${i}</p>`
       }
@@ -91,6 +95,19 @@ Component({
 
     bold () {
       editor.format('bold')
+    },
+
+    save () {
+      console.log('save')
+      editor.blur()
+      editor.getContents({
+        success: (res) => {
+          console.log('getContents success', res)
+        },
+        fail: (err) => {
+          console.error('getContents fail', err)
+        }
+      })
     }
   }
 })

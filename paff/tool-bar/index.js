@@ -25,9 +25,7 @@ Component({
       this.triggerEvent('bold')
     },
     save () {
-      wx.showToast({
-        title: 'save'
-      })
+      this.triggerEvent('save')
     }
   },
 });

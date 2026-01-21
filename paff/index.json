@@ -3,5 +3,6 @@
   "usingComponents": {
     "keyboard-area": "./keyboard-area",
     "tool-bar": "./tool-bar"
-  }
+  },
+  "styleIsolation": "shared"
 }

@@ -6,7 +6,27 @@
   border-bottom: env(safe-area-inset-bottom) solid #f5f6f8;
 }
 
-.editor-content {
+.ql-container {
+  box-sizing: border-box;
   height: 100%;
   padding: 0 28px;
+}
+
+.ql-editor {
+  padding: 0 28px;
+  // background: pink;
+
+  font-size: 15.6px;
+  line-height: 25.3px;
+  color: #353535;
+  text-align: justify;
+
+  overflow-wrap: break-word;
+  white-space: break-spaces;
+}
+
+.ql-editor.ql-blank::before {
+  /* 此处设置 placeholder 样式 */
+  color: #B2B2B2;
+  font-style: normal;
 }

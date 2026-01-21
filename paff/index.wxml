@@ -1,7 +1,7 @@
 <view class="editor">
 <editor
   id="editor"
-  class="editor-content"
+  class="ql-container"
   placeholder="记录你的想法..."
   bind:statuschange="onStatusChange"
   bind:touchstart="onTouchStart"
@@ -14,6 +14,7 @@
 <tool-bar
   formats="{{formats}}"
   bind:bold="bold"
+  bind:save="save"
 />
 
 <keyboard-area
