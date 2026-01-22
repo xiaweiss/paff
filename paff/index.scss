@@ -27,16 +27,17 @@
   background: #f5f6f8;
 }
 
-.ql-editor {
-  padding: 0 28px!important;
-
+.ql-container {
   font-size: 15.6px;
   line-height: 25.3px;
   color: #353535;
-  text-align: justify;
+}
 
-  overflow-wrap: break-word;
-  white-space: break-spaces;
+.ql-editor {
+  padding: 0 28px!important;
+  text-align: justify!important;
+  overflow-wrap: break-word!important;
+  white-space: break-spaces!important;
 }
 
 .ql-editor.ql-blank::before {
