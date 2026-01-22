@@ -1,26 +1,34 @@
-<view class="editor">
-<editor
-  id="editor"
-  class="ql-container"
-  placeholder="记录你的想法..."
-  bind:statuschange="onStatusChange"
-  bind:touchstart="onTouchStart"
-  bind:ready="onEditorReady"
-  bind:focus="onFocus"
-  bind:blur="onBlur"
->
-</editor>
+<view class="paff {{isFocusing ? 'focusing' : ''}}" bind:touchstart="onTouchStart">
+  <view class="header">
+    <nav-bar title="Paff Editor" />
+  </view>
+  <editor
+    id="editor"
+    class="editor ql-container"
+    placeholder="记录你的想法..."
+    bind:ready="onEditorReady"
+    bind:statuschange="onEditorStatusChange"
+    bind:touchstart="onEditorTouchStart"
+    bind:touchend="onEditorTouchEnd"
+    bind:focus="onFocus"
+    bind:blur="onBlur"
+  >
+  </editor>
 
-<tool-bar
-  formats="{{formats}}"
-  bind:bold="bold"
-  bind:save="save"
-/>
+  <view class="editor-bottom">
+    <tool-bar
+      formats="{{formats}}"
+      bind:bold="bold"
+      bind:save="save"
+    />
 
-<keyboard-area
-  show="{{isFocus && isIOS}}"
-  keyboardHeight="{{keyboardHeight}}"
-  safeAreaBottom="{{safeAreaBottom}}"
->
-</keyboard-area>
+    <keyboard-area
+      show="{{isIOS && isFocus}}"
+      keyboardHeight="{{keyboardHeight}}"
+      safeAreaBottom="{{safeAreaBottom}}"
+    >
+    </keyboard-area>
+
+    <view class="safe-area-bottom" style="height: {{safeAreaBottom}}px;" />
+  </view>
 </view>

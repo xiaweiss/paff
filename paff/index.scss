@@ -1,14 +1,30 @@
-.editor {
-  flex-grow: 1;
+.paff {
   display: flex;
   flex-direction: column;
-  height: 0;
-  border-bottom: env(safe-area-inset-bottom) solid #f5f6f8;
+  height: 100vh;
 }
 
-.ql-container {
-  box-sizing: border-box;
-  height: 100%;
+.header {
+  flex-shrink: 0;
+  transition: opacity 0.3s;
+
+  .focusing & {
+    transition: none;
+    opacity: 0;
+  }
+}
+
+.editor {
+  flex-grow: 1;
+  height: fit-content;
+}
+
+.editor-bottom {
+  flex-shrink: 0;
+}
+
+.safe-area-bottom {
+  background: #f5f6f8;
 }
 
 .ql-editor {

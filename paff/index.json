@@ -1,8 +1,9 @@
 {
   "component": true,
   "usingComponents": {
-    "keyboard-area": "./keyboard-area",
-    "tool-bar": "./tool-bar"
+    "nav-bar": "../components/nav-bar",
+    "tool-bar": "./tool-bar",
+    "keyboard-area": "./keyboard-area"
   },
   "styleIsolation": "shared"
 }

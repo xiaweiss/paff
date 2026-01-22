@@ -1,4 +1,1 @@
-<view class="page">
-  <nav-bar title="Paff Editor" />
-  <paff />
-</view>
+<paff />

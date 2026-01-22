@@ -1,7 +1,9 @@
 import { emitter, sleep, isIOS } from '../utils/index'
 
-// 编辑器实例，props 传给子组件无法调用
+/** 编辑器实例（props 传给子组件无法调用） */
 let editor = null
+/** 是否点击了键盘区域 */
+let isClickingKeyboardArea = false
 
 Component({
   options: {
@@ -9,16 +11,21 @@ Component({
     virtualHost: true
   },
   data: {
+    isFocusingg: false,
     isFocus: false,
     isIOS: isIOS(),
-    keyboardHeight: 300,
+    windowHeight: 0,
+    keyboardHeight: 390,
     safeAreaBottom: 0,
     formats: {}
   },
   lifetimes: {
     attached () {
       const windowInfo = wx.getWindowInfo()
-      this.setData({safeAreaBottom: windowInfo.screenHeight - windowInfo.safeArea.bottom})
+      this.setData({
+        safeAreaBottom: windowInfo.windowHeight - windowInfo.safeArea.bottom,
+        windowHeight: windowInfo.windowHeight
+      })
     },
     detached () {
       editor = null
@@ -28,6 +35,14 @@ Component({
     noop () {
       return true
     },
+
+    onTouchStart (e) {
+      const { clientY } = e.touches[0]
+      const { windowHeight, keyboardHeight} = this.data
+
+      isClickingKeyboardArea = clientY > windowHeight - keyboardHeight
+    },
+
     onEditorReady() {
       const query = this.createSelectorQuery()
       query.select('#editor').context((res) => {
@@ -36,32 +51,47 @@ Component({
         this.setContent()
       }).exec()
     },
-    onStatusChange(e) {
+
+    onEditorStatusChange(e) {
       const formats = e.detail
       this.setData({ formats })
     },
-    onTouchStart (e) {
-      console.log('onTouchStart', e)
+
+    onEditorTouchStart (e) {
+      console.log('onEditorTouchStart', e)
     },
+
+    onEditorTouchEnd () {
+      this.resetPageTop()
+    },
+
     onFocus (e) {
       console.log('onFocus', e)
-      // setTimeout(() => {
-      //   wx.pageScrollTo({
-      //     scrollTop: 0,
-      //     duration: 0
-      //   })
-      // }, 100)
 
-      this.setData({isFocus: true}, () => {
+      // ios 点击键盘区域时，页面会上推
+      // 上推期间隐藏 header，快结束时再显示 header
+      if (this.data.isIOS && isClickingKeyboardArea) {
+        this.setData({isFocusing: true}, async () => {
+          this.resetPageTop()
+          this.setData({isFocus: true})
+          editor.scrollIntoView()
+
+          await sleep(160)
+          this.setData({isFocusing: false})
+        })
+      } else {
+        this.setData({isFocus: true})
         editor.scrollIntoView()
-      })
+      }
     },
+
     onBlur (e) {
       console.log('onBlur', e)
       this.setData({isFocus: false})
     },
+
     async onKeyboardHeightChange (res) {
-      const { height, duration } = res
+      const { height } = res
 
       console.log('onKeyboardHeightChange', res)
 
@@ -69,15 +99,12 @@ Component({
       if (height > 0 && height !== this.data.keyboardHeight) {
         this.setData({keyboardHeight: height})
       }
-
-      // 键盘弹起后，将上推的页面拉回来
-      if (height) {
-        await sleep(duration * 1000)
-        wx.pageScrollTo({
-          scrollTop: 0,
-          duration: 0
-        })
-      }
+    },
+    resetPageTop () {
+      wx.pageScrollTo({
+        scrollTop: 0,
+        duration: 0
+      })
     },
     setContent () {
       let html = ''
