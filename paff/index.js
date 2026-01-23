@@ -111,7 +111,7 @@ Component({
 
       html += `<p>这是一个富文本编辑器，a长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长</p>`
 
-      html += `<a href="https://example.com">超链接</a>`
+      html += `<p>文本<a foo="bar" style="color:#CC5656;" link="https://example.com" data-foo="https://example.com" data-custom="fooo">超链接</a></p>`
 
       for (let i = 0; i < 100; i++) {
         html += `<p>${i}</p>`
