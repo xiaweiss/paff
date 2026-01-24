@@ -1,7 +1,6 @@
 import { emitter, sleep, isIOS } from '../utils/index'
+import { editor, registerEditor, registerCommand, unReigsterEditor } from './helper/index'
 
-/** 编辑器实例（props 传给子组件无法调用） */
-let editor = null
 /** 是否点击了键盘区域 */
 let isClickingKeyboardArea = false
 
@@ -11,6 +10,7 @@ Component({
     virtualHost: true
   },
   data: {
+    ready: false,
     isFocusingg: false,
     isFocus: false,
     isIOS: isIOS(),
@@ -28,7 +28,7 @@ Component({
       })
     },
     detached () {
-      editor = null
+      unReigsterEditor()
     }
   },
   methods: {
@@ -45,14 +45,21 @@ Component({
 
     onEditorReady() {
       const query = this.createSelectorQuery()
-      query.select('#editor').context((res) => {
-        editor = res.context
+      query.select('#editor').context(({context: editor}) => {
+        registerEditor(editor)
+        registerCommand(editor)
+        this.setData({ ready: true })
 
         this.setContent()
       }).exec()
     },
 
+    onEditorInput (e) {
+      console.log('onEditorInput', e.detail)
+    },
+
     onEditorStatusChange(e) {
+      console.log('onStatusChange', e.detail)
       const formats = e.detail
       this.setData({ formats })
     },
@@ -118,10 +125,6 @@ Component({
       }
 
       editor.setContents({html})
-    },
-
-    bold () {
-      editor.format('bold')
     },
 
     save () {

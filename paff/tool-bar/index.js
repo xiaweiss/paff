@@ -1,3 +1,5 @@
+import { editor } from '../helper/index'
+
 Component({
   properties: {
     formats: Object
@@ -22,7 +24,7 @@ Component({
   methods: {
     noop () {},
     bold () {
-      this.triggerEvent('bold')
+      editor.command.bold()
     },
     save () {
       this.triggerEvent('save')

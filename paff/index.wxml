@@ -7,6 +7,7 @@
     class="editor ql-container"
     placeholder="记录你的想法..."
     bind:ready="onEditorReady"
+    bind:input="onEditorInput"
     bind:statuschange="onEditorStatusChange"
     bind:touchstart="onEditorTouchStart"
     bind:touchend="onEditorTouchEnd"
@@ -15,10 +16,9 @@
   >
   </editor>
 
-  <view class="editor-bottom">
+  <view wx:if="{{ready}}" class="editor-bottom">
     <tool-bar
       formats="{{formats}}"
-      bind:bold="bold"
       bind:save="save"
     />
 
