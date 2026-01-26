@@ -3,7 +3,8 @@
   "usingComponents": {
     "nav-bar": "../components/nav-bar",
     "tool-bar": "./tool-bar",
-    "keyboard-area": "./keyboard-area"
+    "keyboard-area": "./keyboard-area",
+    "block-image": "./block/image"
   },
   "styleIsolation": "shared"
 }

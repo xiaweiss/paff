@@ -1,3 +1,6 @@
 export * from './emitter'
 export * from './isIOS'
 export * from './sleep'
+export * from './updateData'
+export * from './updateList'
+export * from './wxToPromise'

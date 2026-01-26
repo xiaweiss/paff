@@ -26,6 +26,9 @@ Component({
     bold () {
       editor.command.bold()
     },
+    image () {
+      editor.command.insertImage()
+    },
     save () {
       this.triggerEvent('save')
     }

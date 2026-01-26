@@ -17,7 +17,8 @@ Component({
     windowHeight: 0,
     keyboardHeight: 390,
     safeAreaBottom: 0,
-    formats: {}
+    formats: {},
+    customBlockList: []
   },
   lifetimes: {
     attached () {
@@ -47,7 +48,7 @@ Component({
       const query = this.createSelectorQuery()
       query.select('#editor').context(({context: editor}) => {
         registerEditor(editor)
-        registerCommand(editor)
+        registerCommand(editor, this)
         this.setData({ ready: true })
 
         this.setContent()
@@ -116,9 +117,12 @@ Component({
     setContent () {
       let html = ''
 
+      // html += `<wx-editor-custom-block class="ecb_T4ZHHa"></wx-editor-custom-block>`
+
       html += `<p>这是一个富文本编辑器，a长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长</p>`
 
       html += `<p>文本<a foo="bar" style="color:#CC5656;" link="https://example.com" data-foo="https://example.com" data-custom="fooo">超链接</a></p>`
+
 
       for (let i = 0; i < 100; i++) {
         html += `<p>${i}</p>`

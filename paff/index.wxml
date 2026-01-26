@@ -14,6 +14,11 @@
     bind:focus="onFocus"
     bind:blur="onBlur"
   >
+    <block wx:for="{{customBlockList}}" wx:key="blockId">
+      <editor-portal key="{{item.blockId}}">
+        <block-image node="{{item}}" />
+      </editor-portal>
+    </block>
   </editor>
 
   <view wx:if="{{ready}}" class="editor-bottom">
