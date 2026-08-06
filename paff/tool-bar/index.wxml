@@ -7,6 +7,9 @@
     enhanced
     show-scrollbar="{{false}}"
   >
+    <view class="item">
+      <image class="icon" src="../icon/image.svg" bind:tap="chooseImage" />
+    </view>
     <view class="item" bind:tap="bold">
       <image wx:if="{{formats.bold}}" class="icon" src="../icon/bold-active.svg"/>
       <image wx:else class="icon" src="../icon/bold.svg"/>

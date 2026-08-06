@@ -5,7 +5,7 @@ export const registerCommand = (editor) => {
 
   for (const key in command) {
     editor.command[key] = (...args) => {
-      command[key](args)({editor})
+      command[key](...args)({editor})
     }
   }
 
