@@ -1,3 +1,3 @@
-export const insertImage = (data) => ({editor}) => {
-  editor.insertImage(data)
+export const insertImage = ({src}) => ({editor}) => {
+  editor.command.insertCustomBlock({type: 'image', src})
 }

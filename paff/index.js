@@ -17,7 +17,8 @@ Component({
     windowHeight: 0,
     keyboardHeight: 390,
     safeAreaBottom: 0,
-    formats: {}
+    formats: {},
+    customBlockList: []
   },
   lifetimes: {
     attached () {
@@ -26,6 +27,9 @@ Component({
         safeAreaBottom: windowInfo.windowHeight - windowInfo.safeArea.bottom,
         windowHeight: windowInfo.windowHeight
       })
+
+      this.onInsertCustomBlock = this.onInsertCustomBlock.bind(this)
+      emitter.on('insertCustomBlock', this.onInsertCustomBlock)
     },
     detached () {
       unReigsterEditor()
@@ -52,6 +56,12 @@ Component({
 
         this.setContent()
       }).exec()
+    },
+
+    onInsertCustomBlock (data) {
+      const { customBlockList } = this.data
+      customBlockList.push(data)
+      this.setData({customBlockList})
     },
 
     onEditorInput (e) {
