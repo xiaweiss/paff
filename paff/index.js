@@ -1,4 +1,4 @@
-import { emitter, sleep, isIOS } from '../utils/index'
+import { emitter, sleep, isIOS, isPC, isWechatDevTools } from '../utils/index'
 import { editor, registerEditor, registerCommand, unReigsterEditor } from './helper/index'
 
 /** 是否点击了键盘区域 */
@@ -14,6 +14,8 @@ Component({
     isFocusingg: false,
     isFocus: false,
     isIOS: isIOS(),
+    isPC: isPC(),
+    isWechatDevTools: isWechatDevTools(),
     windowHeight: 0,
     keyboardHeight: 390,
     safeAreaBottom: 0,

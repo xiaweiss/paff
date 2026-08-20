@@ -31,7 +31,7 @@
     />
 
     <keyboard-area
-      show="{{isIOS && isFocus}}"
+      show="{{isIOS && isFocus && !isPC && !isWechatDevTools}}"
       keyboardHeight="{{keyboardHeight}}"
       safeAreaBottom="{{safeAreaBottom}}"
     >
