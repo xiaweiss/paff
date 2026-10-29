@@ -1,8 +1,11 @@
-import { emitter, sleep, isIOS } from '../utils/index'
+import { emitter, sleep, isIOS, isDevtools } from '../utils/index'
 import { editor, registerEditor, registerCommand, unReigsterEditor } from './helper/index'
 
 /** 是否点击了键盘区域 */
 let isClickingKeyboardArea = false
+
+/** 工具内 onKeyboardHeightChange 不会触发，键盘高度用固定的更低值，避免占位区域过高 */
+const DEVTOOLS_KEYBOARD_HEIGHT = 100
 
 Component({
   options: {
@@ -27,6 +30,10 @@ Component({
         safeAreaBottom: windowInfo.windowHeight - windowInfo.safeArea.bottom,
         windowHeight: windowInfo.windowHeight
       })
+
+      if (isDevtools()) {
+        this.setData({keyboardHeight: DEVTOOLS_KEYBOARD_HEIGHT})
+      }
 
       this.onInsertCustomBlock = this.onInsertCustomBlock.bind(this)
       emitter.on('insertCustomBlock', this.onInsertCustomBlock)

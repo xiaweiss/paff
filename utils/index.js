@@ -1,4 +1,5 @@
 export * from './emitter'
+export * from './isDevtools'
 export * from './isIOS'
 export * from './sleep'
 export * from './wxToPromise'
